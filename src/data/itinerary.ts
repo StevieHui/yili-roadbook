@@ -1,0 +1,165 @@
+import type { Stop, TripDay } from '../types';
+
+export const tripMeta = {
+  title: '向天山深处',
+  subtitle: '伊犁七日公路旅行',
+  dateRange: '2026.07.15 — 07.22',
+  people: 7,
+  cars: 2,
+  distanceKm: 1198,
+  drivingDays: 7,
+} as const;
+
+export const arrivalDay = {
+  date: '2026-07-15',
+  title: '抵达伊宁 · 取车与休整',
+  stay: '伊宁市区',
+  tasks: ['核对租车保险与随车证件', '检查轮胎、备胎、刹车与随车工具', '采购饮水、路餐和常用药', '下载高德离线地图'],
+} as const;
+
+const stops = {
+  yining: { id: 'yining', name: '伊宁市', coordinates: [81.277715, 43.908021], kind: 'start' },
+  sayramEast: { id: 'sayram-east', name: '赛里木湖东门', coordinates: [81.386542, 44.617077], kind: 'scenic' },
+  sayramMoon: { id: 'sayram-moon', name: '月亮湾', coordinates: [81.4246, 44.6046], kind: 'photo' },
+  sayramSouth: { id: 'sayram-south', name: '松树头', coordinates: [81.1669, 44.5245], kind: 'stay' },
+  guozigou: { id: 'guozigou', name: '果子沟大桥', coordinates: [81.140191, 44.475984], kind: 'photo' },
+  lavender: { id: 'lavender', name: '解忧公主薰衣草园', coordinates: [80.75656, 44.169989], kind: 'scenic' },
+  kalajun: { id: 'kalajun', name: '喀拉峻景区游客中心', coordinates: [81.901518, 43.120403], kind: 'scenic' },
+  tekes: { id: 'tekes', name: '特克斯八卦城', coordinates: [81.839833, 43.214965], kind: 'stay' },
+  kuerdening: { id: 'kuerdening', name: '库尔德宁景区', coordinates: [82.663906, 43.283534], kind: 'stay' },
+  nalati: { id: 'nalati', name: '那拉提旅游风景区', coordinates: [84.023757, 43.239725], kind: 'stay' },
+  jorma: { id: 'jorma', name: '乔尔玛烈士陵园', coordinates: [84.358403, 43.652044], kind: 'scenic' },
+  tangbula: { id: 'tangbula', name: '唐布拉百里画廊', coordinates: [83.720523, 43.678158], kind: 'photo' },
+  nilka: { id: 'nilka', name: '尼勒克县', coordinates: [82.511884, 43.798627], kind: 'stay' },
+} satisfies Record<string, Stop>;
+
+export const tripDays: readonly TripDay[] = [
+  {
+    id: 'day-1', date: '2026-07-16', weekday: '周四', title: '伊宁 → 赛里木湖',
+    summary: '从河谷城市驶向大西洋最后一滴眼泪，把半天和日落完整留给湖。',
+    distanceKm: 153, driveMinutes: 142, stay: '赛里木湖景区内或东门附近', intensity: '适中',
+    route: [stops.yining, stops.sayramEast, stops.sayramMoon, stops.sayramSouth],
+    timeline: [
+      { time: '09:00', activity: '伊宁出发', detail: '加满油，早餐后经 G30 向赛里木湖。' },
+      { time: '12:00', activity: '东门入园', detail: '先月亮湾，再按现场交通规则环湖。' },
+      { time: '16:30', activity: '湖岸慢游', detail: '克勒涌珠、亲水滩之间按光线择优。' },
+      { time: '20:30', activity: '日落拍摄', detail: '提前 60–90 分钟到安全机位。' },
+    ],
+    highlights: ['高山湖泊', '雪山草甸', '环湖公路', '赛湖日落'],
+    photoSpots: [
+      { name: '月亮湾', bestTime: '午后顺光', shot: '湖岸弧线 + 雪山倒影', note: '用人物做比例，避开正午死白天空。' },
+      { name: '松树头公路', bestTime: '日落前 1 小时', shot: 'S 弯 + 逆光草甸', note: '只在正式停车区下车。' },
+    ],
+    reminders: ['赛湖自驾名额与住宿提前预约', '湖区风大温差高，冲锋衣放在手边'],
+  },
+  {
+    id: 'day-2', date: '2026-07-17', weekday: '周五', title: '赛里木湖 → 果子沟 → 霍城 → 伊宁',
+    summary: '清晨湖光、峡谷桥梁与伊犁人文同框；薰衣草根据当天花况弹性处理。',
+    distanceKm: 238, driveMinutes: 258, stay: '伊宁市区', intensity: '较满',
+    route: [stops.sayramSouth, stops.guozigou, stops.lavender, stops.yining],
+    timeline: [
+      { time: '07:30', activity: '赛湖晨拍', detail: '优先湖岸晨雾和低角度草甸。' },
+      { time: '10:30', activity: '果子沟', detail: '在官方观景台拍桥梁与峡谷。' },
+      { time: '14:30', activity: '霍城花田', detail: '前一晚确认花况；不好则切换人文备选。' },
+      { time: '20:00', activity: '六星街', detail: '蓝调时刻拍彩色街巷与夜市。' },
+    ],
+    highlights: ['赛湖晨光', '果子沟大桥', '薰衣草', '六星街'],
+    photoSpots: [
+      { name: '果子沟安全观景台', bestTime: '上午', shot: '桥梁纵深 + 山谷云影', note: '禁止在高速应急车道停车。' },
+      { name: '六星街', bestTime: '日落后 20 分钟', shot: '彩色门窗 + 街头人物', note: '征得近距离人物同意。' },
+    ],
+    reminders: ['7 月中旬大田可能已收割，准备漫心忘忧谷或惠远古城备选', '当天驾驶较长，下午安排换驾'],
+  },
+  {
+    id: 'day-3', date: '2026-07-18', weekday: '周六', title: '伊宁 → 喀拉峻 → 特克斯',
+    summary: '进入立体草原，把时间留给鲜花台、猎鹰台与侧光下的草坡肌理。',
+    distanceKm: 148, driveMinutes: 183, stay: '特克斯八卦城', intensity: '较满',
+    route: [stops.yining, stops.kalajun, stops.tekes],
+    timeline: [
+      { time: '07:30', activity: '伊宁出发', detail: '周末提前出城，车上解决简餐。' },
+      { time: '10:30', activity: '喀拉峻入园', detail: '主走草原线，不硬塞全部阔克苏项目。' },
+      { time: '17:30', activity: '侧光拍摄', detail: '鲜花台或猎鹰台按天气择一守光。' },
+      { time: '21:00', activity: '入住特克斯', detail: '晚餐后只做短距离城市散步。' },
+    ],
+    highlights: ['立体草原', '雪岭', '牧群', '八卦城'],
+    photoSpots: [
+      { name: '鲜花台', bestTime: '下午', shot: '层叠草坡 + 雪山', note: '中长焦比纯广角更能压缩层次。' },
+      { name: '猎鹰台', bestTime: '日落前', shot: '人体草原侧光', note: '不进入未开放草场。' },
+    ],
+    reminders: ['喀拉峻自驾或区间车提前预约', '草原风强，帽子需要防风绳'],
+  },
+  {
+    id: 'day-4', date: '2026-07-19', weekday: '周日', title: '特克斯 → 库尔德宁',
+    summary: '从开阔草原切换到雪岭云杉，用溪流和森林光束做一天的主角。',
+    distanceKm: 92, driveMinutes: 116, stay: '库尔德宁镇或景区周边', intensity: '轻松',
+    route: [stops.tekes, stops.kuerdening],
+    timeline: [
+      { time: '09:00', activity: '特克斯出发', detail: '睡足后走河谷道路前往巩留。' },
+      { time: '12:00', activity: '库尔德宁', detail: '午餐后进入云杉林核心游线。' },
+      { time: '16:00', activity: '森林拍摄', detail: '在十里画廊与溪流按光线慢走。' },
+      { time: '20:30', activity: '山谷晚餐', detail: '为次日长距离转场早休息。' },
+    ],
+    highlights: ['雪岭云杉', '森林溪流', '十里画廊', '山谷慢生活'],
+    photoSpots: [
+      { name: '十里画廊', bestTime: '下午斜光', shot: '云杉纵深 + 人物背影', note: '人物穿米白或橙色更突出。' },
+      { name: '山谷溪流', bestTime: '阴天或日落前', shot: '低机位水流慢门', note: '注意湿滑，设备不放裸石边缘。' },
+    ],
+    reminders: ['林区天气变化快，雨具和擦镜布随身', '住宿条件较分散，提前确认热水与停车'],
+  },
+  {
+    id: 'day-5', date: '2026-07-20', weekday: '周一', title: '库尔德宁 → 那拉提',
+    summary: '穿越伊犁河谷抵达空中草原，用下午侧光拍草坡、毡房与雪山。',
+    distanceKm: 159, driveMinutes: 194, stay: '那拉提镇', intensity: '适中',
+    route: [stops.kuerdening, stops.nalati],
+    timeline: [
+      { time: '08:30', activity: '库尔德宁出发', detail: '早餐后沿河谷向新源、那拉提。' },
+      { time: '13:30', activity: '那拉提入园', detail: '主选空中草原，不重复购买多条线路。' },
+      { time: '17:30', activity: '天界台', detail: '等侧光勾勒草坡与道路。' },
+      { time: '21:00', activity: '加油补给', detail: '为独库日加满油、备好早餐和水。' },
+    ],
+    highlights: ['空中草原', '毡房牧场', '雪山草坡', '河谷日落'],
+    photoSpots: [
+      { name: '天界台', bestTime: '下午侧光', shot: '草坡曲线 + 盘山路', note: '用偏振镜时注意天空色差。' },
+      { name: '游牧人家附近', bestTime: '日落前', shot: '毡房 + 马群 + 雪山', note: '与马匹保持安全距离。' },
+    ],
+    reminders: ['独库预约、天气和车辆名单当晚二次确认', '只购买当天能完成的景区线路'],
+  },
+  {
+    id: 'day-6', date: '2026-07-21', weekday: '周二', title: '那拉提 → 独库北段 → 乔尔玛 → 唐布拉 → 尼勒克',
+    summary: '全程最重的一天：高山垭口、盘山公路与百里画廊连续切换。',
+    distanceKm: 290, driveMinutes: 420, stay: '尼勒克县城', intensity: '高强度',
+    route: [stops.nalati, { ...stops.jorma, kind: 'warning' }, stops.tangbula, stops.nilka],
+    timeline: [
+      { time: '07:00', activity: '加油早餐', detail: '两车对讲、油量、预约码和路况全部确认。' },
+      { time: '08:00', activity: '进入独库', detail: '按预约入口和时段进入，不抢行。' },
+      { time: '12:00', activity: '乔尔玛', detail: '纪念地短停、午餐与驾驶员轮换。' },
+      { time: '15:00', activity: '百里画廊', detail: '只在正式停车带选择 2–3 个机位。' },
+      { time: '20:30', activity: '抵达尼勒克', detail: '不增加仙女湖徒步或夜间山路。' },
+    ],
+    highlights: ['独库北段', '高山垭口', '乔尔玛', '唐布拉百里画廊'],
+    photoSpots: [
+      { name: '独库正式停车区', bestTime: '上午', shot: 'S 弯 + 雪线 + 车队', note: '绝不站在道路中央或弯道外侧。' },
+      { name: '唐布拉河谷', bestTime: '傍晚', shot: '河流 + 云杉 + 草地', note: '只选可安全驶入驶出的停车带。' },
+    ],
+    reminders: ['2026 独库北段 08:00–19:00 分时预约，两辆车分别预约', '当日不安排仙女湖徒步', '任何落石、暴雨或封路提示都优先执行现场管制'],
+  },
+  {
+    id: 'day-7', date: '2026-07-22', weekday: '周三', title: '尼勒克 → 伊宁',
+    summary: '沿喀什河谷收束旅程，为洗车、还车和航班留出完整机动时间。',
+    distanceKm: 118, driveMinutes: 106, stay: '伊宁市区（仅 7 月 23 日返航时）', intensity: '轻松',
+    route: [stops.nilka, stops.yining],
+    timeline: [
+      { time: '09:30', activity: '尼勒克出发', detail: '睡足后返程，不额外绕远。' },
+      { time: '12:00', activity: '河谷短停', detail: '在合规观景点完成车队合影。' },
+      { time: '15:00', activity: '抵达伊宁', detail: '洗车、整理行李、检查遗落物。' },
+      { time: '18:00', activity: '还车或自由活动', detail: '当天航班以还车时间为硬节点。' },
+    ],
+    highlights: ['喀什河谷', '车队合影', '伊犁河', '旅程收束'],
+    photoSpots: [
+      { name: '喀什河谷合规观景点', bestTime: '上午', shot: '两车 + 河谷公路', note: '相机放路外，拍摄者不站车道。' },
+      { name: '伊犁河', bestTime: '日落', shot: '桥影 + 河面晚霞', note: '仅 23 日返航时安排。' },
+    ],
+    reminders: ['当天返航则取消伊犁河日落', '还车前拍摄车况、油表和里程'],
+  },
+] as const;
+
