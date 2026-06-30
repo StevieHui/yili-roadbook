@@ -1071,6 +1071,60 @@ body,
   background: #f8f5ec;
 }
 
+/* Final hero/header adjustment for the standalone roadbook site. */
+.site-header {
+  color: rgba(246,242,231,.92);
+  background: rgba(20,38,34,.95);
+  border-color: rgba(246,242,231,.12);
+}
+.site-header nav button::after {
+  background: var(--sunwash);
+}
+.brand-mark {
+  border-color: rgba(246,242,231,.34);
+  background: rgba(255,255,255,.08);
+}
+.dashboard-cover {
+  color: white;
+  background:
+    linear-gradient(180deg, rgba(20,38,34,.03) 0%, rgba(20,38,34,.08) 42%, rgba(20,38,34,.66) 84%, rgba(20,38,34,.94) 100%),
+    url('/images/yili-hero.webp') center / cover no-repeat,
+    var(--pine);
+}
+.dashboard-cover::before {
+  background: linear-gradient(180deg, rgba(20,38,34,0), rgba(20,38,34,.58) 58%, rgba(20,38,34,.9));
+}
+.dashboard-cover::after {
+  background: linear-gradient(90deg, rgba(20,38,34,.16), rgba(20,38,34,0) 46%);
+}
+.dashboard-cover .section-kicker {
+  color: rgba(246,242,231,.72);
+}
+.dashboard-cover h1 {
+  max-width: 680px;
+  color: #fff;
+  font-size: clamp(38px, 5.5vw, 70px);
+  line-height: 1.02;
+  text-shadow: 0 14px 38px rgba(0,0,0,.28);
+}
+.dashboard-subtitle {
+  margin: 12px 0 22px;
+  color: rgba(246,242,231,.78);
+  font-size: clamp(16px, 1.65vw, 21px);
+}
+.dashboard-glass-grid article {
+  min-height: 78px;
+  border-color: rgba(246,242,231,.28);
+  background: rgba(246,242,231,.14);
+  box-shadow: 0 18px 55px rgba(0,0,0,.18);
+}
+.dashboard-glass-grid span {
+  color: rgba(246,242,231,.62);
+}
+.dashboard-glass-grid strong {
+  color: rgba(255,255,255,.9);
+}
+
 @media (max-width: 980px) {
   .dashboard-glass-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
