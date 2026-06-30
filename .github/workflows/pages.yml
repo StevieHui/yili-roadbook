@@ -17,6 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      VITE_AMAP_KEY: ${{ vars.VITE_AMAP_KEY }}
+      VITE_AMAP_SECURITY_CODE: ${{ vars.VITE_AMAP_SECURITY_CODE }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
