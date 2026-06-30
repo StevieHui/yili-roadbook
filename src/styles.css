@@ -98,6 +98,24 @@ a { color: inherit; }
 .section-number { font: 76px Georgia, serif; color: transparent; -webkit-text-stroke: 1px currentColor; opacity: .28; }
 .pending-section p:last-child { max-width: 560px; color: currentColor; opacity: .65; line-height: 1.8; }
 
+.map-section { display: grid; grid-template-columns: minmax(320px, .75fr) 1.55fr; min-height: 760px; color: var(--paper); background: #0d2925; }
+.map-copy { align-self: center; padding: clamp(64px, 8vw, 124px) clamp(28px, 5vw, 80px); }
+.map-copy h2 { margin: 0; font: clamp(38px, 4.2vw, 66px)/1.07 "Songti SC", serif; letter-spacing: -.04em; }
+.map-copy > p:not(.section-kicker) { margin: 28px 0 40px; color: rgba(255,255,255,.58); line-height: 1.9; }
+.map-legend { display: flex; flex-wrap: wrap; gap: 10px; }
+.map-legend span { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 9px; border: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.55); font: 10px Georgia, serif; }
+.map-legend span.is-active { color: white; border-color: rgba(255,255,255,.75); }
+.map-legend i { width: 8px; height: 8px; border-radius: 50%; }
+.map-frame { position: relative; min-height: 620px; overflow: hidden; background: #dce7d5; }
+.amap-canvas { position: absolute; inset: 0; }
+.map-status, .map-fallback { position: absolute; z-index: 3; inset: auto 24px 24px; padding: 16px 20px; color: var(--paper); background: rgba(18,53,47,.92); backdrop-filter: blur(9px); }
+.map-status { right: auto; font-size: 12px; letter-spacing: .08em; }
+.map-fallback { inset: 24px; overflow: auto; }
+.map-fallback strong { font: 30px "Songti SC", serif; }
+.map-fallback > p { color: rgba(255,255,255,.64); }
+.map-fallback ol { margin: 24px 0 0; padding-left: 22px; color: rgba(255,255,255,.78); line-height: 1.9; }
+.amap-trip-marker { width: 28px; height: 28px; display: grid; place-items: center; border: 2px solid white; border-radius: 50%; color: white; background: var(--marker-color); box-shadow: 0 3px 12px rgba(0,0,0,.26); font: 10px Georgia, serif; }
+
 .calendar-section { padding: clamp(90px, 11vw, 150px) 0; color: var(--paper); background: var(--pine); }
 .compact-heading { margin-bottom: 54px; }
 .calendar-strip { display: grid; grid-template-columns: repeat(7, 1fr); border-block: 1px solid rgba(255,255,255,.32); }
@@ -174,6 +192,8 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   .hero-caption { display: none; }
   .section-heading { grid-template-columns: 1fr; gap: 24px; }
   .calendar-strip { grid-template-columns: repeat(4, 1fr); }
+  .map-section { grid-template-columns: 1fr; }
+  .map-frame { min-height: 640px; }
   .calendar-strip button:nth-child(5) { border-left: 0; }
   .day-main > header, .photo-guide-heading { grid-template-columns: 1fr; }
   .day-metrics { margin-top: 30px; }
@@ -207,6 +227,8 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   .pending-section:nth-of-type(even) { padding-inline: 16px; }
   .section-number { font-size: 54px; }
   .calendar-strip { grid-template-columns: repeat(2, 1fr); }
+  .map-frame { min-height: 520px; }
+  .map-copy { padding: 80px 24px 56px; }
   .calendar-strip button { min-height: 175px; }
   .calendar-strip button:nth-child(odd) { border-left: 0; }
   .day-roadbook { width: calc(100% - 32px); grid-template-columns: 1fr; padding: 70px 0; }
