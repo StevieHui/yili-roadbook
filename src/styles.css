@@ -97,6 +97,73 @@ a { color: inherit; }
 .pending-section:nth-of-type(even) { color: var(--paper); background: var(--pine); width: 100%; max-width: none; padding-inline: max(24px, calc((100vw - 1180px) / 2)); }
 .section-number { font: 76px Georgia, serif; color: transparent; -webkit-text-stroke: 1px currentColor; opacity: .28; }
 .pending-section p:last-child { max-width: 560px; color: currentColor; opacity: .65; line-height: 1.8; }
+
+.calendar-section { padding: clamp(90px, 11vw, 150px) 0; color: var(--paper); background: var(--pine); }
+.compact-heading { margin-bottom: 54px; }
+.calendar-strip { display: grid; grid-template-columns: repeat(7, 1fr); border-block: 1px solid rgba(255,255,255,.32); }
+.calendar-strip button { position: relative; min-width: 0; min-height: 210px; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; padding: 20px 14px; border: 0; border-left: 1px solid rgba(255,255,255,.16); color: inherit; background: transparent; cursor: pointer; text-align: left; transition: background .25s ease, color .25s ease; }
+.calendar-strip button:first-child { border-left: 0; }
+.calendar-strip button:hover { background: rgba(255,255,255,.08); }
+.calendar-strip button.is-active { color: var(--ink); background: var(--sunset); }
+.calendar-strip button span, .calendar-strip button small { font-size: 10px; letter-spacing: .12em; }
+.calendar-strip button strong { font: 50px Georgia, serif; }
+.calendar-strip button em { max-width: 100%; overflow: hidden; font-style: normal; font-size: 12px; white-space: nowrap; text-overflow: ellipsis; }
+
+.roadbook { padding: clamp(110px, 13vw, 180px) 0 0; }
+.roadbook-heading { margin-bottom: 80px; }
+.roadbook-heading h2 { margin: 0; font: clamp(52px, 8vw, 112px)/.9 "Songti SC", serif; letter-spacing: -.06em; }
+.day-roadbook { width: min(1280px, calc(100% - 48px)); margin: 0 auto; display: grid; grid-template-columns: 130px 1fr; padding: 90px 0; border-top: 1px solid var(--line); scroll-margin-top: 70px; transition: background .25s ease; }
+.day-roadbook.is-selected { background: linear-gradient(90deg, rgba(61,141,158,.08), transparent 55%); }
+.day-rail { display: flex; flex-direction: column; align-items: flex-start; padding-left: 10px; }
+.day-rail span, .day-rail small { font-size: 10px; letter-spacing: .16em; }
+.day-rail strong { margin-top: 5px; font: 68px/.9 Georgia, serif; color: var(--sunset); }
+.day-rail i { width: 1px; height: 100px; margin: 24px 0; background: var(--ink); opacity: .24; }
+.day-main { min-width: 0; }
+.day-main > header { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 6vw; align-items: end; }
+.route-string { margin: 0 0 12px; color: var(--lake); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+.day-main h3 { margin: 0; font: clamp(38px, 5vw, 72px)/1.08 "Songti SC", serif; letter-spacing: -.04em; }
+.day-summary { max-width: 700px; margin: 20px 0 0; color: rgba(23,32,29,.68); line-height: 1.9; }
+.day-metrics { display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--ink); }
+.day-metrics span { min-width: 0; display: flex; flex-direction: column; padding: 12px 10px; border-left: 1px solid var(--line); }
+.day-metrics span:first-child { border-left: 0; }
+.day-metrics small { margin-bottom: 10px; color: rgba(23,32,29,.5); font-size: 10px; }
+.day-metrics strong { font: 18px Georgia, "Songti SC", serif; white-space: nowrap; }
+.intensity-高强度 { color: #b83827; }
+.day-content-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(36px, 7vw, 100px); margin-top: 64px; }
+.timeline h4, .photo-callout > .section-kicker { margin: 0 0 28px; }
+.timeline ol { margin: 0; padding: 0; list-style: none; }
+.timeline li { display: grid; grid-template-columns: 72px 1fr; position: relative; padding: 0 0 34px; }
+.timeline li::before { content: ""; position: absolute; left: 54px; top: 7px; width: 7px; height: 7px; border: 2px solid var(--sunset); border-radius: 50%; background: var(--paper); }
+.timeline li::after { content: ""; position: absolute; left: 58px; top: 18px; bottom: -2px; width: 1px; background: var(--line); }
+.timeline li:last-child::after { display: none; }
+.timeline time { font: 12px Georgia, serif; color: var(--sunset); }
+.timeline li > div { padding-left: 18px; }
+.timeline p { margin: 7px 0 0; color: rgba(23,32,29,.62); line-height: 1.7; }
+.photo-callout { padding: 36px; color: var(--paper); background: var(--pine); }
+.photo-note + .photo-note { margin-top: 30px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.2); }
+.photo-note span { color: #8ec2ca; font-size: 10px; letter-spacing: .12em; }
+.photo-note h4 { margin: 8px 0; font: 26px "Songti SC", serif; }
+.photo-note p { margin: 0 0 8px; }
+.photo-note small { color: rgba(255,255,255,.55); line-height: 1.6; }
+.day-footer { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 28px; }
+.day-footer > p { font: 24px "Songti SC", serif; }
+.day-footer > p span { margin-right: 14px; color: var(--sunset); font: 10px sans-serif; letter-spacing: .14em; }
+.day-footer ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0; padding: 0; list-style: none; }
+.day-footer li { padding: 7px 12px; border: 1px solid var(--line); font-size: 12px; }
+.day-reminders { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 32px; color: rgba(23,32,29,.65); font-size: 12px; }
+.day-reminders p { margin: 0; }
+
+.photo-guide { padding: clamp(100px, 12vw, 170px) 0; color: var(--paper); background: #0d2925; }
+.photo-guide-heading { display: grid; grid-template-columns: 1fr .7fr; gap: 8vw; align-items: end; }
+.photo-guide h2 { margin: 0; font: clamp(42px, 6vw, 84px)/1.04 "Songti SC", serif; letter-spacing: -.04em; }
+.photo-guide-heading > p { color: rgba(255,255,255,.58); line-height: 1.9; }
+.scene-ledger { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 80px; border-top: 1px solid rgba(255,255,255,.26); }
+.scene-ledger article { min-height: 250px; padding: 28px 24px 24px 0; border-bottom: 1px solid rgba(255,255,255,.26); }
+.scene-ledger article:not(:nth-child(3n + 1)) { padding-left: 24px; border-left: 1px solid rgba(255,255,255,.18); }
+.scene-ledger span { color: var(--sunset); font: 12px Georgia, serif; }
+.scene-ledger h3 { margin: 38px 0 18px; font: 48px "Songti SC", serif; }
+.scene-ledger p { margin: 0 0 30px; }
+.scene-ledger small { color: rgba(255,255,255,.5); }
 footer { display: flex; justify-content: space-between; padding: 34px 4vw; border-top: 1px solid var(--line); font-size: 12px; letter-spacing: .12em; }
 
 @media (max-width: 860px) {
@@ -106,6 +173,14 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   .hero-index { display: none; }
   .hero-caption { display: none; }
   .section-heading { grid-template-columns: 1fr; gap: 24px; }
+  .calendar-strip { grid-template-columns: repeat(4, 1fr); }
+  .calendar-strip button:nth-child(5) { border-left: 0; }
+  .day-main > header, .photo-guide-heading { grid-template-columns: 1fr; }
+  .day-metrics { margin-top: 30px; }
+  .day-content-grid { grid-template-columns: 1fr; }
+  .scene-ledger { grid-template-columns: repeat(2, 1fr); }
+  .scene-ledger article:not(:nth-child(3n + 1)) { padding-left: 0; border-left: 0; }
+  .scene-ledger article:nth-child(even) { padding-left: 20px; border-left: 1px solid rgba(255,255,255,.18); }
   .fact-ribbon { grid-template-columns: 1fr 1fr; }
   .fact-ribbon div:nth-child(3) { border-left: 0; }
   .fact-ribbon div:nth-child(n+3) { border-top: 1px solid var(--line); }
@@ -131,6 +206,20 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   .pending-section { min-height: 440px; grid-template-columns: 1fr; gap: 10px; padding-block: 72px; }
   .pending-section:nth-of-type(even) { padding-inline: 16px; }
   .section-number { font-size: 54px; }
+  .calendar-strip { grid-template-columns: repeat(2, 1fr); }
+  .calendar-strip button { min-height: 175px; }
+  .calendar-strip button:nth-child(odd) { border-left: 0; }
+  .day-roadbook { width: calc(100% - 32px); grid-template-columns: 1fr; padding: 70px 0; }
+  .day-rail { flex-direction: row; align-items: baseline; gap: 8px; padding: 0 0 28px; }
+  .day-rail strong { font-size: 48px; }
+  .day-rail i { width: 70px; height: 1px; margin: 0 10px; }
+  .day-metrics { grid-template-columns: 1fr; }
+  .day-metrics span, .day-metrics span:first-child { min-height: 58px; flex-direction: row; align-items: center; justify-content: space-between; border-left: 0; border-top: 1px solid var(--line); }
+  .day-metrics span:first-child { border-top: 0; }
+  .photo-callout { padding: 28px 22px; }
+  .day-reminders { grid-template-columns: 1fr; }
+  .scene-ledger { grid-template-columns: 1fr; }
+  .scene-ledger article, .scene-ledger article:nth-child(even) { min-height: 210px; padding-left: 0; border-left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -141,4 +230,3 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
     transition-duration: .01ms !important;
   }
 }
-
