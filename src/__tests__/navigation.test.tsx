@@ -7,7 +7,7 @@ describe('page shell', () => {
 
   it('renders title, facts, and navigation anchors', () => {
     render(<App />);
-    expect(screen.getByRole('heading', { level: 1, name: /出发控制台/ })).toBeVisible();
+    expect(screen.getByRole('heading', { level: 1, name: /伊犁自驾路书/ })).toBeVisible();
     expect(screen.getByText(/7 人/)).toBeVisible();
     expect(screen.getByText(/2 辆车/)).toBeVisible();
 
@@ -20,7 +20,8 @@ describe('page shell', () => {
   it('uses dashboard tabs to jump between key travel tools', () => {
     render(<App />);
 
-    expect(screen.getByRole('heading', { name: '出发控制台' })).toBeVisible();
+    expect(screen.getByRole('heading', { name: '伊犁自驾路书' })).toBeVisible();
+    expect(screen.queryByRole('heading', { name: /向天山深处/ })).not.toBeInTheDocument();
     expect(screen.getAllByText('独库北段预约')[0]).toBeVisible();
     expect(screen.getAllByText('最晚 7 月 20 日 20:00 前')[0]).toBeVisible();
 
@@ -30,9 +31,11 @@ describe('page shell', () => {
     expect(screen.getAllByText(/提前 1-7 天/)[0]).toBeVisible();
 
     fireEvent.click(within(nav).getByRole('button', { name: '路线图' }));
-    expect(screen.getByRole('heading', { name: '交互路线图' })).toBeVisible();
+    expect(screen.getByRole('heading', { name: '路线图' })).toBeVisible();
+    expect(screen.getByLabelText('可点击路线示意图')).toBeVisible();
     fireEvent.click(screen.getByRole('button', { name: /DAY 06/ }));
-    expect(screen.getByText(/那拉提入口/)).toBeVisible();
+    expect(screen.getAllByText(/那拉提入口/)[0]).toBeVisible();
+    expect(screen.getAllByText(/08:00-10:00/)[0]).toBeVisible();
   });
 });
 

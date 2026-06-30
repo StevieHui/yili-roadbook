@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { TripDay } from '../types';
 import { AmapRouteMap } from '../map/AmapRouteMap';
 
@@ -15,13 +16,20 @@ function formatHours(minutes: number) {
 
 export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplorerProps) {
   const selectedDay = days.find((day) => day.id === selectedDayId) ?? days[0];
+  const [selectedStopIndex, setSelectedStopIndex] = useState(0);
+  const selectedStop = selectedDay.route[Math.min(selectedStopIndex, selectedDay.route.length - 1)];
+
+  const handleSelectDay = (id: TripDay['id']) => {
+    setSelectedStopIndex(0);
+    onSelectDay(id);
+  };
 
   return (
     <section className="tool-page route-explorer" aria-labelledby="route-explorer-title">
       <header className="tool-heading">
-        <p className="section-kicker">ROUTE MAP / DAILY SWITCHER</p>
-        <h1 id="route-explorer-title">交互路线图</h1>
-        <p>先用下方示意图快速决策；高德加载成功后，可继续查看真实道路轨迹。</p>
+        <p className="section-kicker">路线查询</p>
+        <h1 id="route-explorer-title">路线图</h1>
+        <p>左侧选日期，中间点停靠点，右侧看里程、耗时、预约和风险。高德地图在下方作为辅助。</p>
       </header>
 
       <div className="route-workbench">
@@ -30,7 +38,7 @@ export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplore
             <button
               type="button"
               className={day.id === selectedDay.id ? 'is-active' : ''}
-              onClick={() => onSelectDay(day.id)}
+              onClick={() => handleSelectDay(day.id)}
               key={day.id}
             >
               <span>DAY {String(index + 1).padStart(2, '0')}</span>
@@ -40,12 +48,17 @@ export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplore
           ))}
         </nav>
 
-        <div className="schematic-map" aria-label={`${selectedDay.title}路线示意`}>
+        <div className="schematic-map" aria-label="可点击路线示意图">
           {selectedDay.route.map((stop, index) => (
-            <div className={`schematic-stop stop-${stop.kind}`} key={`${selectedDay.id}-${stop.id}-${index}`}>
+            <button
+              type="button"
+              className={`schematic-stop stop-${stop.kind} ${index === selectedStopIndex ? 'is-active' : ''}`}
+              key={`${selectedDay.id}-${stop.id}-${index}`}
+              onClick={() => setSelectedStopIndex(index)}
+            >
               <i>{index + 1}</i>
               <span>{stop.name}</span>
-            </div>
+            </button>
           ))}
         </div>
 
@@ -58,6 +71,17 @@ export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplore
             <strong>{formatHours(selectedDay.driveMinutes)}</strong>
             <strong>{selectedDay.intensity}</strong>
           </div>
+          <div className="stop-detail">
+            <span>当前停靠点</span>
+            <strong>{selectedStop.name}</strong>
+            <p>{selectedStop.kind === 'warning' ? '管制/风险点，按现场交通指令执行。' : '点击中间停靠点可切换查看。'}</p>
+          </div>
+          {selectedDay.id === 'day-6' ? (
+            <div className="duku-notice">
+              <strong>独库预约</strong>
+              <p>那拉提入口 · 建议 08:00-10:00 或 10:00-12:00 · 19:00 前驶离受控路段。</p>
+            </div>
+          ) : null}
           <h3>关键提醒</h3>
           <ul>
             {selectedDay.reminders.map((item) => <li key={item}>{item}</li>)}
@@ -71,7 +95,13 @@ export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplore
         </aside>
       </div>
 
-      <AmapRouteMap days={days} selectedDayId={selectedDay.id} />
+      <section className="amap-secondary" aria-label="高德地图辅助">
+        <header>
+          <h2>高德地图（辅助）</h2>
+          <p>如果域名、密钥或安全码限制导致加载失败，上方可点击路线图仍可正常使用。</p>
+        </header>
+        <AmapRouteMap days={days} selectedDayId={selectedDay.id} />
+      </section>
     </section>
   );
 }

@@ -1,8 +1,8 @@
 import type { ReservationTask, Stop, TripDay } from '../types';
 
 export const tripMeta = {
-  title: '向天山深处',
-  subtitle: '伊犁七日公路旅行',
+  title: '伊犁自驾路书',
+  subtitle: '7人2车 · 伊宁往返 · 七日环线',
   dateRange: '2026.07.15 — 07.22/23',
   returnWindow: '7 月 22 日晚航班可直返；7 月 23 日返航则把伊宁留作洗车、补觉和伊犁河日落机动。',
   people: 7,

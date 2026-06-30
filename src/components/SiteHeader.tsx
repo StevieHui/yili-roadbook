@@ -18,7 +18,7 @@ export function SiteHeader({ activeView, onSelectView }: SiteHeaderProps) {
     <header className="site-header">
       <button type="button" className="brand" onClick={() => onSelectView('home')} aria-label="返回首页">
         <span className="brand-mark">N43°</span>
-        <span>向天山深处</span>
+        <span>伊犁路书</span>
       </button>
       <nav aria-label="路书导航">
         {navItems.map(([label, view]) => (

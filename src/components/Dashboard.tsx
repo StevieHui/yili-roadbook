@@ -14,22 +14,22 @@ export function Dashboard({ days, onOpenView, onSelectDay }: DashboardProps) {
   return (
     <section className="dashboard" aria-labelledby="dashboard-title">
       <div className="dashboard-hero">
-        <p className="section-kicker">TRIP COMMAND CENTER</p>
-        <h1 id="dashboard-title">出发控制台</h1>
+        <p className="section-kicker">行程总览</p>
+        <h1 id="dashboard-title">{tripMeta.title}</h1>
         <p>{tripMeta.dateRange} · {tripMeta.people} 人 · {tripMeta.cars} 辆车 · 约 {tripMeta.distanceKm.toLocaleString()} km</p>
       </div>
 
       <div className="command-grid">
         <article className="priority-card">
-          <span>最高优先级</span>
+          <span>必须确认</span>
           <h2>独库北段预约</h2>
           <strong>最晚 7 月 20 日 20:00 前</strong>
-          <p>Day 6 从那拉提入口进入，两辆车分别预约同一入口，优先选上午时段。</p>
+          <p>Day 6 从那拉提入口进入，两辆车分别预约，优先选 08:00-10:00 或 10:00-12:00。</p>
           <button type="button" onClick={() => onOpenView('bookings')}>查看预约节点</button>
         </article>
 
         <article>
-          <span>返航判断</span>
+          <span>返航/还车</span>
           <h2>7 月 22 / 23</h2>
           <p>{tripMeta.returnWindow}</p>
           <button type="button" onClick={() => onOpenView('roadbook')}>看 Day 7 安排</button>
@@ -38,7 +38,7 @@ export function Dashboard({ days, onOpenView, onSelectDay }: DashboardProps) {
         <article>
           <span>风险日</span>
           <h2>{highRiskDay.title}</h2>
-          <p>{highRiskDay.summary}</p>
+          <p>全程最长、管制最多的一天。先看路线、预约时段和备用方案，再决定是否执行。</p>
           <button
             type="button"
             onClick={() => {
@@ -68,7 +68,7 @@ export function Dashboard({ days, onOpenView, onSelectDay }: DashboardProps) {
 
       <div className="deadline-board">
         <header>
-          <p className="section-kicker">DO BEFORE DEPARTURE</p>
+          <p className="section-kicker">出发前</p>
           <h2>必须先确认</h2>
         </header>
         <div>
@@ -87,11 +87,11 @@ export function Dashboard({ days, onOpenView, onSelectDay }: DashboardProps) {
           <li key={day.id}>
             <button
               type="button"
-              onClick={() => {
-                onSelectDay(day.id);
-                onOpenView('roadbook');
-              }}
-            >
+            onClick={() => {
+              onSelectDay(day.id);
+              onOpenView('route');
+            }}
+          >
               <span>DAY {String(index + 1).padStart(2, '0')}</span>
               <strong>{day.title}</strong>
               <small>{day.distanceKm} km · {Math.round(day.driveMinutes / 60 * 10) / 10} h · {day.stay}</small>

@@ -12,7 +12,7 @@ describe('calendar interaction', () => {
     expect(daySix).toHaveAttribute('aria-pressed', 'true');
     fireEvent.click(within(nav).getByRole('button', { name: '路线图' }));
     expect(screen.getByRole('heading', { name: /那拉提 → 独库北段/ })).toBeVisible();
-    expect(screen.getByText(/那拉提入口/)).toBeVisible();
+    expect(screen.getAllByText(/那拉提入口/)[0]).toBeVisible();
     expect(screen.getByText('高强度')).toBeVisible();
   });
 });
