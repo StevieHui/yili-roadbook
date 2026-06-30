@@ -1,104 +1,29 @@
-import { reservationTasks, tripMeta } from '../data/itinerary';
+import { tripMeta } from '../data/itinerary';
 import type { TripDay } from '../types';
 
 interface DashboardProps {
   days: readonly TripDay[];
-  onOpenView: (view: string) => void;
-  onSelectDay: (id: TripDay['id']) => void;
+  onOpenView?: (view: string) => void;
+  onSelectDay?: (id: TripDay['id']) => void;
 }
 
-export function Dashboard({ days, onOpenView, onSelectDay }: DashboardProps) {
-  const mustDo = reservationTasks.filter((task) => task.status === '必须');
-  const highRiskDay = days.find((day) => day.intensity === '高强度') ?? days[0];
-
+export function Dashboard({ days }: DashboardProps) {
   return (
     <section className="dashboard" aria-labelledby="dashboard-title">
-      <div className="dashboard-hero">
-        <p className="section-kicker">行程总览</p>
-        <h1 id="dashboard-title">{tripMeta.title}</h1>
-        <p>{tripMeta.dateRange} · {tripMeta.people} 人 · {tripMeta.cars} 辆车 · 约 {tripMeta.distanceKm.toLocaleString()} km</p>
-      </div>
-
-      <div className="command-grid">
-        <article className="priority-card">
-          <span>必须确认</span>
-          <h2>独库北段预约</h2>
-          <strong>最晚 7 月 20 日 20:00 前</strong>
-          <p>Day 6 从那拉提入口进入，两辆车分别预约，优先选 08:00-10:00 或 10:00-12:00。</p>
-          <button type="button" onClick={() => onOpenView('bookings')}>查看预约节点</button>
-        </article>
-
-        <article>
-          <span>返航/还车</span>
-          <h2>7 月 22 / 23</h2>
-          <p>{tripMeta.returnWindow}</p>
-          <button type="button" onClick={() => onOpenView('roadbook')}>看 Day 7 安排</button>
-        </article>
-
-        <article>
-          <span>风险日</span>
-          <h2>{highRiskDay.title}</h2>
-          <p>全程最长、管制最多的一天。先看路线、预约时段和备用方案，再决定是否执行。</p>
-          <button
-            type="button"
-            onClick={() => {
-              onSelectDay(highRiskDay.id);
-              onOpenView('route');
-            }}
-          >
-            打开路线图
-          </button>
-        </article>
-      </div>
-
-      <div className="quick-tools" aria-label="快速入口">
-        {[
-          ['路线图', 'route'],
-          ['日历行程', 'calendar'],
-          ['每日路书', 'roadbook'],
-          ['预约节点', 'bookings'],
-          ['出片地点', 'photo'],
-          ['必带清单', 'checklist'],
-        ].map(([label, view]) => (
-          <button type="button" key={view} onClick={() => onOpenView(view)}>
-            {label}
-          </button>
-        ))}
-      </div>
-
-      <div className="deadline-board">
-        <header>
-          <p className="section-kicker">出发前</p>
-          <h2>必须先确认</h2>
-        </header>
+      <div className="dashboard-cover">
         <div>
-          {mustDo.map((task) => (
-            <article key={task.id}>
-              <span>{task.deadline}</span>
-              <h3>{task.title}</h3>
-              <p>{task.action}</p>
-            </article>
-          ))}
+          <p className="section-kicker">北疆伊犁环线</p>
+          <h1 id="dashboard-title">{tripMeta.title}</h1>
         </div>
       </div>
 
-      <ol className="day-launcher" aria-label="七天路线入口">
-        {days.map((day, index) => (
-          <li key={day.id}>
-            <button
-              type="button"
-            onClick={() => {
-              onSelectDay(day.id);
-              onOpenView('route');
-            }}
-          >
-              <span>DAY {String(index + 1).padStart(2, '0')}</span>
-              <strong>{day.title}</strong>
-              <small>{day.distanceKm} km · {Math.round(day.driveMinutes / 60 * 10) / 10} h · {day.stay}</small>
-            </button>
-          </li>
-        ))}
-      </ol>
+      <dl className="dashboard-summary-strip" aria-label="行程概览">
+        <div><dt>时间</dt><dd>{tripMeta.dateRange}</dd></div>
+        <div><dt>人数/车辆</dt><dd>{tripMeta.people} 人 · {tripMeta.cars} 辆车</dd></div>
+        <div><dt>路线</dt><dd>伊宁往返 · {tripMeta.drivingDays} 天</dd></div>
+        <div><dt>全长</dt><dd>约 {tripMeta.distanceKm.toLocaleString()} km</dd></div>
+        <div><dt>住宿点</dt><dd>{days.map((day) => day.stay.split('（')[0]).join(' / ')}</dd></div>
+      </dl>
     </section>
   );
 }

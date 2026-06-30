@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { BookingsPanel } from './components/BookingsPanel';
-import { CalendarStrip } from './components/CalendarStrip';
 import { Checklist } from './components/Checklist';
 import { CriticalAlerts } from './components/CriticalAlerts';
 import { Dashboard } from './components/Dashboard';
@@ -12,7 +11,7 @@ import { TripOverview } from './components/TripOverview';
 import { tripDays } from './data/itinerary';
 import type { TripDay } from './types';
 
-type ViewId = 'home' | 'overview' | 'route' | 'calendar' | 'roadbook' | 'bookings' | 'photo' | 'checklist' | 'alerts';
+type ViewId = 'home' | 'overview' | 'route' | 'roadbook' | 'bookings' | 'photo' | 'checklist' | 'alerts';
 
 export default function App() {
   const [activeView, setActiveView] = useState<ViewId>('home');
@@ -31,9 +30,8 @@ export default function App() {
         {activeView === 'home' && <Dashboard days={tripDays} onOpenView={selectView} onSelectDay={selectDay} />}
         {activeView === 'overview' && <TripOverview />}
         {activeView === 'route' && <RouteExplorer days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}
-        {activeView === 'calendar' && <CalendarStrip days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}
         {activeView === 'roadbook' && <DayRoadbook days={tripDays} selectedDayId={selectedDayId} />}
-        {activeView === 'bookings' && <BookingsPanel />}
+        {activeView === 'bookings' && <BookingsPanel days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}
         {activeView === 'photo' && <PhotoGuide days={tripDays} />}
         {activeView === 'checklist' && <Checklist />}
         {activeView === 'alerts' && <CriticalAlerts />}

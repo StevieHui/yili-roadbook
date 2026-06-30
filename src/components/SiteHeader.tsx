@@ -1,9 +1,8 @@
 const navItems = [
   ['首页', 'home'],
   ['路线图', 'route'],
-  ['日历行程', 'calendar'],
+  ['预约行程', 'bookings'],
   ['每日路书', 'roadbook'],
-  ['预约节点', 'bookings'],
   ['必带清单', 'checklist'],
   ['关键提醒', 'alerts'],
 ] as const;

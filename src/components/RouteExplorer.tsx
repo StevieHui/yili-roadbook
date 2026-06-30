@@ -48,18 +48,8 @@ export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplore
           ))}
         </nav>
 
-        <div className="schematic-map" aria-label="可点击路线示意图">
-          {selectedDay.route.map((stop, index) => (
-            <button
-              type="button"
-              className={`schematic-stop stop-${stop.kind} ${index === selectedStopIndex ? 'is-active' : ''}`}
-              key={`${selectedDay.id}-${stop.id}-${index}`}
-              onClick={() => setSelectedStopIndex(index)}
-            >
-              <i>{index + 1}</i>
-              <span>{stop.name}</span>
-            </button>
-          ))}
+        <div className="route-map-center" aria-label="路线地图区域">
+          <AmapRouteMap days={days} selectedDayId={selectedDay.id} />
         </div>
 
         <aside className="route-detail">
@@ -75,6 +65,19 @@ export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplore
             <span>当前停靠点</span>
             <strong>{selectedStop.name}</strong>
             <p>{selectedStop.kind === 'warning' ? '管制/风险点，按现场交通指令执行。' : '点击中间停靠点可切换查看。'}</p>
+          </div>
+          <div className="stop-picker" aria-label="停靠点列表">
+            {selectedDay.route.map((stop, index) => (
+              <button
+                type="button"
+                className={index === selectedStopIndex ? 'is-active' : ''}
+                key={`${selectedDay.id}-${stop.id}-${index}`}
+                onClick={() => setSelectedStopIndex(index)}
+              >
+                <span>{index + 1}</span>
+                <strong>{stop.name}</strong>
+              </button>
+            ))}
           </div>
           {selectedDay.id === 'day-6' ? (
             <div className="duku-notice">
@@ -95,13 +98,6 @@ export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplore
         </aside>
       </div>
 
-      <section className="amap-secondary" aria-label="高德地图辅助">
-        <header>
-          <h2>高德地图（辅助）</h2>
-          <p>如果域名、密钥或安全码限制导致加载失败，上方可点击路线图仍可正常使用。</p>
-        </header>
-        <AmapRouteMap days={days} selectedDayId={selectedDay.id} />
-      </section>
     </section>
   );
 }
