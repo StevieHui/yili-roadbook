@@ -8,10 +8,13 @@ describe('page shell', () => {
   it('renders title, facts, and navigation anchors', () => {
     render(<App />);
     expect(screen.getByRole('heading', { level: 1, name: /伊犁自驾路书/ })).toBeVisible();
+    expect(screen.getByText(/7人2车 · 伊宁往返 · 七日环线/)).toBeVisible();
+    expect(screen.getByLabelText('封面行程信息')).toBeVisible();
     expect(screen.getByText(/7 人/)).toBeVisible();
     expect(screen.getByText(/2 辆车/)).toBeVisible();
     expect(screen.queryByText('必须先确认')).not.toBeInTheDocument();
     expect(screen.queryByText('查看预约行程')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('行程概览')).not.toBeInTheDocument();
 
     const nav = screen.getByRole('navigation', { name: '路书导航' });
     for (const label of ['首页', '路线图', '预约行程', '每日路书', '必带清单', '关键提醒']) {
