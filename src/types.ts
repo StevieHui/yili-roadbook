@@ -37,3 +37,13 @@ export interface TripDay {
   reminders: readonly string[];
 }
 
+export interface ReservationTask {
+  id: string;
+  title: string;
+  deadline: string;
+  when: string;
+  status: '必须' | '建议' | '备选';
+  detail: string;
+  action: string;
+}
+

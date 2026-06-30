@@ -24,6 +24,7 @@ export function TripOverview() {
           <p className="eyebrow">PROLOGUE</p>
           <h3>{arrivalDay.title}</h3>
           <p>{arrivalDay.tasks.join(' · ')}</p>
+          <p className="return-window">{tripMeta.returnWindow}</p>
         </div>
       </div>
 

@@ -1,36 +1,42 @@
 import { useState } from 'react';
+import { BookingsPanel } from './components/BookingsPanel';
 import { CalendarStrip } from './components/CalendarStrip';
 import { Checklist } from './components/Checklist';
 import { CriticalAlerts } from './components/CriticalAlerts';
+import { Dashboard } from './components/Dashboard';
 import { DayRoadbook } from './components/DayRoadbook';
-import { Hero } from './components/Hero';
 import { PhotoGuide } from './components/PhotoGuide';
+import { RouteExplorer } from './components/RouteExplorer';
 import { SiteHeader } from './components/SiteHeader';
 import { TripOverview } from './components/TripOverview';
 import { tripDays } from './data/itinerary';
-import { AmapRouteMap } from './map/AmapRouteMap';
 import type { TripDay } from './types';
 
+type ViewId = 'home' | 'overview' | 'route' | 'calendar' | 'roadbook' | 'bookings' | 'photo' | 'checklist' | 'alerts';
+
 export default function App() {
+  const [activeView, setActiveView] = useState<ViewId>('home');
   const [selectedDayId, setSelectedDayId] = useState<TripDay['id']>('day-1');
 
   const selectDay = (id: TripDay['id']) => {
     setSelectedDayId(id);
-    document.getElementById(`roadbook-${id}`)?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
   };
+
+  const selectView = (view: string) => setActiveView(view as ViewId);
 
   return (
     <>
-      <SiteHeader />
-      <main>
-        <Hero />
-        <TripOverview />
-        <AmapRouteMap days={tripDays} selectedDayId={selectedDayId} />
-        <CalendarStrip days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />
-        <DayRoadbook days={tripDays} selectedDayId={selectedDayId} />
-        <PhotoGuide days={tripDays} />
-        <Checklist />
-        <CriticalAlerts />
+      <SiteHeader activeView={activeView} onSelectView={selectView} />
+      <main className="app-shell">
+        {activeView === 'home' && <Dashboard days={tripDays} onOpenView={selectView} onSelectDay={selectDay} />}
+        {activeView === 'overview' && <TripOverview />}
+        {activeView === 'route' && <RouteExplorer days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}
+        {activeView === 'calendar' && <CalendarStrip days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}
+        {activeView === 'roadbook' && <DayRoadbook days={tripDays} selectedDayId={selectedDayId} />}
+        {activeView === 'bookings' && <BookingsPanel />}
+        {activeView === 'photo' && <PhotoGuide days={tripDays} />}
+        {activeView === 'checklist' && <Checklist />}
+        {activeView === 'alerts' && <CriticalAlerts />}
       </main>
       <footer>
         <span>43°N · 81°E</span>

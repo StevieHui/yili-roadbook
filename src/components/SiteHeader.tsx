@@ -1,22 +1,35 @@
 const navItems = [
-  ['方案', '#overview'],
-  ['路线图', '#map'],
-  ['日历行程', '#calendar'],
-  ['分段路书', '#roadbook'],
-  ['必带清单', '#checklist'],
-  ['关键提醒', '#alerts'],
+  ['首页', 'home'],
+  ['路线图', 'route'],
+  ['日历行程', 'calendar'],
+  ['每日路书', 'roadbook'],
+  ['预约节点', 'bookings'],
+  ['必带清单', 'checklist'],
+  ['关键提醒', 'alerts'],
 ] as const;
 
-export function SiteHeader() {
+interface SiteHeaderProps {
+  activeView: string;
+  onSelectView: (view: string) => void;
+}
+
+export function SiteHeader({ activeView, onSelectView }: SiteHeaderProps) {
   return (
     <header className="site-header">
-      <a className="brand" href="#top" aria-label="返回首页">
+      <button type="button" className="brand" onClick={() => onSelectView('home')} aria-label="返回首页">
         <span className="brand-mark">N43°</span>
         <span>向天山深处</span>
-      </a>
+      </button>
       <nav aria-label="路书导航">
-        {navItems.map(([label, href]) => (
-          <a href={href} key={href}>{label}</a>
+        {navItems.map(([label, view]) => (
+          <button
+            type="button"
+            className={activeView === view ? 'is-active' : ''}
+            onClick={() => onSelectView(view)}
+            key={view}
+          >
+            {label}
+          </button>
         ))}
       </nav>
     </header>

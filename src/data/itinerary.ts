@@ -1,9 +1,10 @@
-import type { Stop, TripDay } from '../types';
+import type { ReservationTask, Stop, TripDay } from '../types';
 
 export const tripMeta = {
   title: '向天山深处',
   subtitle: '伊犁七日公路旅行',
-  dateRange: '2026.07.15 — 07.22',
+  dateRange: '2026.07.15 — 07.22/23',
+  returnWindow: '7 月 22 日晚航班可直返；7 月 23 日返航则把伊宁留作洗车、补觉和伊犁河日落机动。',
   people: 7,
   cars: 2,
   distanceKm: 1198,
@@ -16,6 +17,54 @@ export const arrivalDay = {
   stay: '伊宁市区',
   tasks: ['核对租车保险与随车证件', '检查轮胎、备胎、刹车与随车工具', '采购饮水、路餐和常用药', '下载高德离线地图'],
 } as const;
+
+export const reservationTasks: readonly ReservationTask[] = [
+  {
+    id: 'duku',
+    title: '独库北段预约',
+    deadline: '最晚 7 月 20 日 20:00 前',
+    when: 'Day 6 · 7 月 21 日 · 那拉提入口',
+    status: '必须',
+    detail: '提前 1-7 天为两辆车分别预约同一入口，优先选 08:00-10:00 或 10:00-12:00；进入后 19:00 前驶离受控路段。',
+    action: '准备两车车牌、驾驶员信息、预约码截图',
+  },
+  {
+    id: 'sayram',
+    title: '赛里木湖自驾票',
+    deadline: '建议 7 月 13 日前',
+    when: 'Day 1-2 · 7 月 16-17 日',
+    status: '必须',
+    detail: '旺季自驾入园和景区内住宿名额紧张。若只买门票不含自驾服务，现场可能需要改乘区间车。',
+    action: '确认 24/48 小时票、车辆入园规则和住宿停车',
+  },
+  {
+    id: 'grassland',
+    title: '草原景区门票',
+    deadline: '建议 7 月 14 日前',
+    when: '喀拉峻 / 库尔德宁 / 那拉提',
+    status: '建议',
+    detail: '喀拉峻体量大，建议只选核心草原线；那拉提自驾或区间车规则以当天官方渠道为准。',
+    action: '提前确认开放线路、区间车末班和退改规则',
+  },
+  {
+    id: 'return',
+    title: '航班与还车倒排',
+    deadline: '订票后立即确认',
+    when: 'Day 7 · 7 月 22/23 日',
+    status: '必须',
+    detail: '7 月 22 日返航则 Day 7 不加景点；抵达伊宁后先洗车、加油、整理行李和还车。',
+    action: '按还车时间倒推至少 4 小时进伊宁',
+  },
+  {
+    id: 'backup',
+    title: '独库封路备选',
+    deadline: '7 月 20 日睡前',
+    when: 'Day 6 备用方案',
+    status: '备选',
+    detail: '遇暴雨、落石、封路或预约失败，取消独库和唐布拉长线，改走那拉提周边慢游后返伊宁方向。',
+    action: '收藏 G218 / S315 方向备选路线和加油点',
+  },
+] as const;
 
 const stops = {
   yining: { id: 'yining', name: '伊宁市', coordinates: [81.277715, 43.908021], kind: 'start' },
@@ -141,7 +190,7 @@ export const tripDays: readonly TripDay[] = [
       { name: '独库正式停车区', bestTime: '上午', shot: 'S 弯 + 雪线 + 车队', note: '绝不站在道路中央或弯道外侧。' },
       { name: '唐布拉河谷', bestTime: '傍晚', shot: '河流 + 云杉 + 草地', note: '只选可安全驶入驶出的停车带。' },
     ],
-    reminders: ['2026 独库北段 08:00–19:00 分时预约，两辆车分别预约', '当日不安排仙女湖徒步', '任何落石、暴雨或封路提示都优先执行现场管制'],
+    reminders: ['2026 独库北段 08:00–19:00 分时预约，两辆车分别按那拉提入口预约', '当日不安排仙女湖徒步', '任何落石、暴雨或封路提示都优先执行现场管制'],
   },
   {
     id: 'day-7', date: '2026-07-22', weekday: '周三', title: '尼勒克 → 伊宁',

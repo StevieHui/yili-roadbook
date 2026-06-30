@@ -34,12 +34,97 @@ a { color: inherit; }
   backdrop-filter: blur(3px);
 }
 
-.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; }
+.brand { display: inline-flex; align-items: center; gap: 12px; border: 0; color: inherit; background: transparent; text-decoration: none; font-weight: 700; cursor: pointer; }
 .brand-mark { border: 1px solid rgba(255,255,255,.55); padding: 5px 8px; font-size: 11px; letter-spacing: .12em; }
 .site-header nav { display: flex; gap: clamp(12px, 2vw, 30px); }
-.site-header nav a { position: relative; padding: 10px 0; text-decoration: none; font-size: 13px; letter-spacing: .08em; }
-.site-header nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 4px; height: 1px; background: white; transition: right .25s ease; }
-.site-header nav a:hover::after { right: 0; }
+.site-header nav button { position: relative; min-height: 40px; padding: 10px 0; border: 0; color: inherit; background: transparent; font-size: 13px; letter-spacing: .08em; cursor: pointer; }
+.site-header nav button::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 4px; height: 1px; background: white; transition: right .25s ease; }
+.site-header nav button:hover::after, .site-header nav button.is-active::after { right: 0; }
+
+.app-shell { min-height: calc(100vh - 82px); background: var(--paper); }
+.dashboard {
+  min-height: 100vh;
+  padding: 108px clamp(18px, 4vw, 64px) 64px;
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(7, 25, 22, .92), rgba(7, 25, 22, .62) 46%, rgba(7, 25, 22, .2)),
+    url('/images/yili-hero.webp') center / cover no-repeat,
+    var(--pine);
+}
+.dashboard-hero { max-width: 880px; margin-bottom: 34px; }
+.dashboard-hero h1 { margin: 0; font: clamp(48px, 7vw, 108px)/.94 "Songti SC", serif; letter-spacing: -.05em; }
+.dashboard-hero p:last-child { max-width: 720px; color: rgba(255,255,255,.72); line-height: 1.8; }
+.command-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 14px; }
+.command-grid article, .deadline-board, .day-launcher button, .booking-card, .route-workbench {
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(10, 31, 28, .72);
+  backdrop-filter: blur(14px);
+}
+.command-grid article { min-height: 230px; display: flex; flex-direction: column; align-items: flex-start; padding: 22px; }
+.command-grid span, .deadline-board span, .day-launcher span, .booking-card span, .route-detail > span { color: #8ec2ca; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.command-grid h2 { margin: 24px 0 8px; font: clamp(28px, 3vw, 44px)/1 "Songti SC", serif; }
+.command-grid strong { color: var(--sunset); font-size: clamp(18px, 2vw, 28px); }
+.command-grid p { color: rgba(255,255,255,.68); line-height: 1.7; }
+.command-grid button, .quick-tools button, .day-launcher button, .booking-card button {
+  min-height: 42px;
+  margin-top: auto;
+  padding: 0 16px;
+  border: 1px solid rgba(255,255,255,.4);
+  color: white;
+  background: rgba(255,255,255,.08);
+  cursor: pointer;
+}
+.priority-card { border-color: rgba(228,111,58,.72) !important; box-shadow: inset 0 0 0 1px rgba(228,111,58,.18); }
+.quick-tools { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 14px 0; }
+.quick-tools button { min-height: 58px; margin: 0; font-weight: 700; }
+.deadline-board { display: grid; grid-template-columns: 260px 1fr; gap: 22px; padding: 22px; }
+.deadline-board h2 { margin: 0; font: 36px "Songti SC", serif; }
+.deadline-board > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.deadline-board article { padding: 14px; border-left: 2px solid var(--sunset); background: rgba(255,255,255,.07); }
+.deadline-board h3 { margin: 10px 0 8px; font-size: 17px; }
+.deadline-board p { margin: 0; color: rgba(255,255,255,.62); font-size: 12px; line-height: 1.6; }
+.day-launcher { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; }
+.day-launcher button { width: 100%; min-height: 128px; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; margin: 0; text-align: left; }
+.day-launcher strong { font: 22px/1.15 "Songti SC", serif; }
+.day-launcher small { color: rgba(255,255,255,.6); line-height: 1.45; }
+
+.tool-page { min-height: 100vh; padding: 108px clamp(18px, 4vw, 64px) 72px; }
+.tool-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .55fr); gap: 40px; align-items: end; margin-bottom: 34px; }
+.tool-heading .section-kicker { grid-column: 1 / -1; color: var(--sunset); }
+.tool-heading h1 { margin: 0; font: clamp(42px, 6vw, 88px)/.95 "Songti SC", serif; letter-spacing: -.05em; }
+.tool-heading p:last-child { color: rgba(23,32,29,.66); line-height: 1.8; }
+
+.booking-list { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.booking-card { min-height: 300px; display: flex; flex-direction: column; gap: 18px; padding: 20px; color: white; }
+.booking-card h2 { margin: 8px 0; font: 30px/1.1 "Songti SC", serif; }
+.booking-card strong { color: var(--sunset); font-size: 20px; }
+.booking-card p { margin: 0; color: rgba(255,255,255,.64); line-height: 1.7; }
+.booking-card em { margin-top: auto; font-style: normal; color: white; }
+.booking-必须 { border-color: rgba(228,111,58,.7); }
+.booking-source { margin-top: 18px; padding: 18px 20px; border: 1px solid var(--line); background: white; }
+.booking-source p { margin: 8px 0 0; color: rgba(23,32,29,.68); }
+
+.route-workbench { display: grid; grid-template-columns: 280px minmax(320px, 1fr) 360px; gap: 18px; margin-bottom: 22px; padding: 18px; color: white; background: #0d2925; }
+.route-day-list { display: grid; gap: 8px; align-content: start; }
+.route-day-list button { min-height: 82px; padding: 12px; border: 1px solid rgba(255,255,255,.16); color: white; background: rgba(255,255,255,.05); text-align: left; cursor: pointer; }
+.route-day-list button.is-active { border-color: var(--sunset); background: rgba(228,111,58,.18); }
+.route-day-list strong { display: block; margin: 6px 0; font: 20px "Songti SC", serif; }
+.route-day-list small { color: rgba(255,255,255,.6); }
+.schematic-map { min-height: 520px; display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border: 1px solid rgba(255,255,255,.14); background: linear-gradient(135deg, rgba(220,231,213,.16), rgba(61,141,158,.22)); }
+.schematic-stop { position: relative; display: flex; align-items: center; gap: 12px; }
+.schematic-stop:not(:last-child)::after { content: ""; position: absolute; left: 15px; top: 36px; width: 2px; height: calc(100% + 34px); background: rgba(255,255,255,.3); }
+.schematic-stop i { position: relative; z-index: 1; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--sunset); font-style: normal; font: 13px Georgia, serif; }
+.schematic-stop span { font: 24px "Songti SC", serif; }
+.stop-warning i { background: #b83827; }
+.stop-photo i { background: var(--lake); }
+.stop-stay i { background: #6f9464; }
+.route-detail { padding: 6px 6px 6px 14px; }
+.route-detail h2 { margin: 14px 0; font: 36px/1.15 "Songti SC", serif; }
+.route-detail p, .route-detail li { color: rgba(255,255,255,.66); line-height: 1.7; }
+.route-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 22px 0; }
+.route-metrics strong { padding: 12px 8px; border: 1px solid rgba(255,255,255,.16); text-align: center; }
+.route-detail h3 { margin: 24px 0 8px; color: #8ec2ca; font-size: 13px; letter-spacing: .12em; }
+.route-detail ul { margin: 0; padding-left: 18px; }
 
 .hero {
   position: relative;
@@ -87,6 +172,7 @@ a { color: inherit; }
 .arrival-date { font-family: Georgia, serif; font-size: clamp(36px, 5vw, 64px); color: var(--sunset); }
 .arrival-note h3 { margin: 0 0 10px; font-family: "Songti SC", serif; font-size: 30px; }
 .arrival-note p:last-child { margin: 0; color: rgba(255,255,255,.68); line-height: 1.8; }
+.arrival-note p.return-window { margin: 14px 0 0; color: rgba(255,255,255,.82); }
 .stay-line { display: grid; grid-template-columns: 160px 1fr; gap: 40px; margin-top: 40px; align-items: center; }
 .stay-line > span { font-size: 12px; font-weight: 700; letter-spacing: .13em; }
 .stay-line ol { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 0; padding: 0; list-style: none; counter-reset: stay; }
@@ -223,6 +309,12 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
 @media (max-width: 860px) {
   .site-header nav { max-width: 68vw; overflow-x: auto; scrollbar-width: none; }
   .brand span:last-child { display: none; }
+  .command-grid, .deadline-board, .tool-heading, .route-workbench { grid-template-columns: 1fr; }
+  .quick-tools { grid-template-columns: repeat(3, 1fr); }
+  .deadline-board > div, .booking-list { grid-template-columns: repeat(2, 1fr); }
+  .day-launcher { grid-template-columns: repeat(2, 1fr); }
+  .route-day-list { grid-template-columns: repeat(2, 1fr); }
+  .schematic-map { min-height: 430px; }
   .hero { min-height: 780px; grid-template-columns: 1fr; }
   .hero-index { display: none; }
   .hero-caption { display: none; }
@@ -248,7 +340,15 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   html { scroll-padding-top: 62px; }
   .site-header { min-height: 58px; padding-inline: 18px; }
   .site-header nav { gap: 18px; }
-  .site-header nav a { min-height: 44px; display: inline-flex; align-items: center; white-space: nowrap; }
+  .site-header nav button { min-height: 44px; display: inline-flex; align-items: center; white-space: nowrap; }
+  .dashboard, .tool-page { padding-top: 88px; }
+  .dashboard-hero h1 { font-size: clamp(44px, 17vw, 72px); }
+  .quick-tools, .deadline-board > div, .booking-list, .route-day-list { grid-template-columns: 1fr; }
+  .day-launcher { grid-template-columns: 1fr; }
+  .command-grid article { min-height: 190px; }
+  .booking-card { min-height: 240px; }
+  .route-workbench { padding: 12px; }
+  .schematic-stop span { font-size: 20px; }
   .hero { min-height: 720px; padding: 110px 24px 56px; background-position: 62% center; }
   .hero h1 { font-size: clamp(58px, 21vw, 90px); }
   .hero-subtitle { letter-spacing: .08em; }
