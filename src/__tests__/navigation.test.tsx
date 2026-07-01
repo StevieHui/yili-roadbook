@@ -33,9 +33,8 @@ describe('page shell', () => {
     const nav = screen.getByRole('navigation', { name: '路书导航' });
     fireEvent.click(within(nav).getByRole('button', { name: '预约行程' }));
     expect(screen.getByRole('heading', { name: '预约行程' })).toBeVisible();
-    expect(screen.getAllByText(/独库北段预约/)[0]).toBeVisible();
+    expect(screen.getByText(/赛里木湖自驾票/)).toBeVisible();
     expect(screen.getByRole('article', { name: /DAY 06/ })).toHaveTextContent('必须预约');
-    expect(screen.getByRole('article', { name: /DAY 06/ })).toHaveTextContent('独库北段预约');
 
     fireEvent.click(within(nav).getByRole('button', { name: '路线图' }));
     expect(screen.getByRole('heading', { name: '路线图' })).toBeVisible();

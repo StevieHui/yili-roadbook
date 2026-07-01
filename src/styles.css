@@ -778,7 +778,7 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
 }
 .booking-day-card {
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr) 118px minmax(220px, .7fr);
+  grid-template-columns: 92px minmax(0, 1fr) 118px;
   gap: 12px;
   align-items: stretch;
   padding: 10px;
@@ -912,6 +912,7 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
 .booking-detail-card strong {
   color: #b4471e;
   font-size: 15px;
+  font-weight: 800;
 }
 .booking-detail-card p {
   margin: 0;
@@ -923,6 +924,7 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   color: var(--ink);
   font-size: 13px;
   font-style: normal;
+  font-weight: 700;
 }
 .booking-key-points {
   margin: 14px 0;
@@ -1201,6 +1203,7 @@ body,
     grid-template-columns: 1fr;
   }
   .booking-day-card { grid-template-columns: 92px minmax(0, 1fr); }
+  .booking-status { justify-self: start; }
   .booking-status { justify-self: start; }
   .booking-detail { position: static; }
   .day-launcher { grid-template-columns: repeat(2, minmax(0, 1fr)); }

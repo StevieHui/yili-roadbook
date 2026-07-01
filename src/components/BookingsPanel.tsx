@@ -68,14 +68,6 @@ export function BookingsPanel({ days, selectedDayId, onSelectDay }: BookingsPane
                   <p>{day.route.map((stop) => stop.name).join(' → ')}</p>
                 </div>
                 <strong className={`booking-status status-${statusText}`}>{statusText}</strong>
-                <ul>
-                  {tasks.map((task) => (
-                    <li key={task.id}>
-                      <b>{task.title}</b>
-                      <span>{task.deadline}</span>
-                    </li>
-                  ))}
-                </ul>
               </article>
             );
           })}
