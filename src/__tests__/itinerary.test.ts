@@ -1,18 +1,30 @@
+import { render, screen } from '@testing-library/react';
+import { jsx } from 'react/jsx-runtime';
 import { describe, expect, it } from 'vitest';
+import { TripOverview } from '../components/TripOverview';
 import { arrivalDay, tripDays, tripMeta } from '../data/itinerary';
 import { getDayById, getTripDistance } from '../lib/itinerary';
 
 describe('itinerary data', () => {
   it('covers arrival plus seven driving days in order', () => {
-    expect(arrivalDay.date).toBe('2026-07-15');
+    expect(arrivalDay.date).toBe('2026-07-14');
     expect(tripDays.map((day) => day.date)).toEqual([
+      '2026-07-15',
       '2026-07-16',
       '2026-07-17',
       '2026-07-18',
       '2026-07-19',
       '2026-07-20',
       '2026-07-21',
-      '2026-07-22',
+    ]);
+    expect(tripDays.map((day) => day.weekday)).toEqual([
+      '周三',
+      '周四',
+      '周五',
+      '周六',
+      '周日',
+      '周一',
+      '周二',
     ]);
   });
 
@@ -29,6 +41,32 @@ describe('itinerary data', () => {
       expect(day.photoSpots.length).toBeGreaterThan(0);
     }
     expect(getDayById('day-6')?.title).toContain('独库');
+  });
+
+  it('shows the revised rental metadata in the overview', () => {
+    render(jsx(TripOverview, {}));
+
+    expect(screen.getByText('15:30')).toBeVisible();
+    expect(screen.getByText('问界 M7')).toBeVisible();
+    expect(screen.getByText('陈熠辉')).toBeVisible();
+    expect(screen.getByText('理想 L6')).toBeVisible();
+    expect(screen.getByText('赵禹砚')).toBeVisible();
+    expect(screen.getByText('伊宁机场服务点')).toBeVisible();
+  });
+
+  it('ends day 7 at the airport service location by 15:00 for the return deadline', () => {
+    const day7 = getDayById('day-7');
+
+    expect(day7?.timeline).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          time: '15:00',
+          activity: '伊宁机场服务点',
+        }),
+      ]),
+    );
+    expect(day7?.route.map((stop) => stop.name)).toContain('伊宁机场服务点');
+    expect(tripMeta.returnWindow).toContain('15:30');
   });
 });
 
