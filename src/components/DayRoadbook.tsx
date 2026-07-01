@@ -91,10 +91,6 @@ export function DayRoadbook({ days, selectedDayId, onSelectDay }: DayRoadbookPro
 
           <footer className="day-footer">
             <p><span>今晚住</span>{selectedDay.stay}</p>
-            <ul>{selectedDay.highlights.map((item) => <li key={item}>{item}</li>)}</ul>
-            <div className="day-reminders">
-              {selectedDay.reminders.map((item) => <p key={item}>注意 · {item}</p>)}
-            </div>
           </footer>
         </div>
       </article>

@@ -286,10 +286,6 @@ a { color: inherit; }
 .day-footer { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 24px; }
 .day-footer > p { font: 22px "Songti SC", serif; white-space: nowrap; }
 .day-footer > p span { margin-right: 14px; color: var(--sunset); font: 10px sans-serif; letter-spacing: .14em; }
-.day-footer ul { display: flex; flex-wrap: nowrap; gap: 8px; margin: 20px 0; padding: 0; list-style: none; overflow-x: auto; }
-.day-footer li { flex-shrink: 0; padding: 6px 12px; border: 1px solid var(--line); font-size: 12px; border-radius: 2px; white-space: nowrap; }
-.day-reminders { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 28px; color: rgba(23,32,29,.6); font-size: 12px; }
-.day-reminders p { margin: 0; }
 .dashboard-lede { max-width: 660px; margin: 20px 0 32px; color: rgba(23,32,29,.7); font-size: 15px; line-height: 1.9; }
 
 .photo-guide { padding: clamp(100px, 12vw, 170px) 0; color: var(--paper); background: #0d2925; }
@@ -414,7 +410,6 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   .day-metrics span, .day-metrics span:first-child { min-height: 50px; flex-direction: row; align-items: center; justify-content: space-between; border-left: 0; border-top: 1px solid var(--line); }
   .day-metrics span:first-child { border-top: 0; }
   .photo-callout { padding: 28px 22px; }
-  .day-reminders { grid-template-columns: 1fr; }
   .scene-ledger { grid-template-columns: 1fr; }
   .scene-ledger article, .scene-ledger article:nth-child(even) { min-height: 210px; padding-left: 0; border-left: 0; }
   .checklist-heading, .alerts-heading { grid-template-columns: 1fr; }
@@ -454,6 +449,11 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
     linear-gradient(180deg, rgba(7,25,22,.04) 0%, rgba(7,25,22,.08) 44%, rgba(255,255,255,.96) 86%, #fff 100%),
     url('/images/yili-hero.webp') center / cover no-repeat,
     var(--pine);
+  animation: bg-breathe 20s ease-in-out infinite alternate;
+}
+@keyframes bg-breathe {
+  0% { background-size: auto, 105% auto, auto; }
+  100% { background-size: auto, 115% auto, auto; }
 }
 .dashboard-cover::before {
   content: "";
@@ -480,15 +480,19 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   color: rgba(23,32,29,.62);
   font-size: 12px;
   letter-spacing: .18em;
+  opacity: 0;
+  animation: fade-up .8s .15s ease-out forwards;
 }
 .dashboard-cover h1 {
   margin: 0;
   max-width: 760px;
-  font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Noto Serif SC", "Songti SC", serif;
   font-size: clamp(52px, 8vw, 104px);
-  font-weight: 800;
+  font-weight: 900;
   line-height: .96;
-  letter-spacing: 0;
+  letter-spacing: -.02em;
+  opacity: 0;
+  animation: fade-up .8s .3s ease-out forwards;
 }
 .dashboard-subtitle {
   max-width: 620px;
@@ -497,6 +501,21 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   font-size: clamp(18px, 2.2vw, 26px);
   font-weight: 600;
   line-height: 1.35;
+  opacity: 0;
+  animation: fade-up .8s .45s ease-out forwards;
+}
+.dashboard-lede {
+  max-width: 660px;
+  margin: 20px 0 32px;
+  color: rgba(23,32,29,.7);
+  font-size: 15px;
+  line-height: 1.9;
+  opacity: 0;
+  animation: fade-up .8s .6s ease-out forwards;
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .dashboard-glass-grid {
   display: grid;
@@ -511,6 +530,17 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   background: rgba(255,255,255,.46);
   box-shadow: 0 16px 48px rgba(23,32,29,.12);
   backdrop-filter: blur(16px) saturate(1.12);
+  opacity: 0;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.dashboard-glass-grid article:nth-child(1) { animation: fade-up .7s .75s ease-out forwards; }
+.dashboard-glass-grid article:nth-child(2) { animation: fade-up .7s .85s ease-out forwards; }
+.dashboard-glass-grid article:nth-child(3) { animation: fade-up .7s .95s ease-out forwards; }
+.dashboard-glass-grid article:nth-child(4) { animation: fade-up .7s 1.05s ease-out forwards; }
+.dashboard-glass-grid article:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 56px rgba(23,32,29,.18);
+  border-color: rgba(255,255,255,.8);
 }
 .dashboard-glass-grid span {
   display: block;
