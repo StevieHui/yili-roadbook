@@ -12,7 +12,7 @@ const dayTaskIds: Record<TripDay['id'], readonly ReservationTask['id'][]> = {
   'day-2': ['sayram'],
   'day-3': ['kalajun'],
   'day-4': ['kuerdening'],
-  'day-5': ['nalati', 'duku'],
+  'day-5': ['nalati'],
   'day-6': ['duku', 'backup'],
   'day-7': ['return'],
 };
