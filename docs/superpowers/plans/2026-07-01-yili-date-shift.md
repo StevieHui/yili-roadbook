@@ -11,9 +11,9 @@
 ## Global Constraints
 
 - Arrival is 2026-07-14 at 14:30; pickup is 15:30.
-- Rental is two AITO M7 vehicles from 2026-07-14 15:30 through 2026-07-21 15:30 at the Yining Airport service location.
+- Rental is one AITO M7 reserved by 陈熠辉 and one Li Auto L6 reserved by 赵禹砚, from 2026-07-14 15:30 through 2026-07-21 15:30 at the Yining Airport service location.
 - Day 1 through Day 7 run from 2026-07-15 through 2026-07-21.
-- Day 7 must reach the airport service location and finish return by 15:30.
+- Day 7 must reach the airport service location by 15:00 and finish return by 15:30.
 - July 22 is an early departure day with no sightseeing.
 - Preserve route order, attractions, overnight destinations, and intra-day times except where Day 7 must change to meet the return deadline.
 
@@ -31,7 +31,7 @@
 
 - [ ] **Step 1: Write the failing data assertions**
 
-Update the first itinerary test to expect arrival on `2026-07-14`, driving dates `2026-07-15` through `2026-07-21`, and weekdays Tuesday through Monday. Add assertions that visible metadata contains `15:30`, `两台问界 M7`, and `伊宁机场服务点`, and that Day 7 contains a 15:30 return deadline.
+Update the first itinerary test to expect arrival on `2026-07-14`, driving dates `2026-07-15` through `2026-07-21`, and weekdays Tuesday through Monday. Add assertions that visible metadata contains `15:30`, `问界 M7`, `陈熠辉`, `理想 L6`, `赵禹砚`, and `伊宁机场服务点`, and that Day 7 reaches the airport service location by 15:00 for a 15:30 return deadline.
 
 - [ ] **Step 2: Update the calendar expectation**
 
@@ -61,11 +61,11 @@ Set the range to July 14-22, arrival to `2026-07-14`, and Day 1-7 to July 15-21 
 
 - [ ] **Step 2: Add exact rental content**
 
-State that arrival is 14:30 and pickup is 15:30, the rental contains two AITO M7 vehicles, pickup/return is at the Yining Airport service location, and the rental ends July 21 at 15:30. Update reservation dates for Day 1-2, Day 6, and Day 7.
+State that arrival is 14:30 and pickup is 15:30. Record one AITO M7 reserved by 陈熠辉 and one Li Auto L6 reserved by 赵禹砚; pickup/return is at the Yining Airport service location, and the rental ends July 21 at 15:30. Update reservation dates for Day 1-2, Day 6, and Day 7.
 
 - [ ] **Step 3: Make Day 7 executable**
 
-Replace the old 09:30 departure and 18:00 optional return with an earlier departure, pre-return refueling/cleaning, and a hard `15:30` airport return. Remove July 23 lodging and sunset alternatives.
+Replace the old 09:30 departure and 18:00 optional return with a schedule that enters Yining around noon, completes refueling/cleaning, reaches the airport service location by `15:00`, and finishes return by `15:30`. Remove July 23 lodging and sunset alternatives.
 
 - [ ] **Step 4: Replace stale alert copy**
 
