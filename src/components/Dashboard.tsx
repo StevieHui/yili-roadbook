@@ -1,5 +1,6 @@
 import { tripMeta } from '../data/itinerary';
 
+const teamNames = ['柳意轩', '夏执', '陈熠辉', '辛励佳', '赵禹砚', '袁畅', '齐天下'];
 
 export function Dashboard() {
   return (
@@ -18,15 +19,15 @@ export function Dashboard() {
             </article>
             <article>
               <span>主要景观</span>
-              <strong>赛里木湖 · 果子沟 · 喀拉峻 · 库尔德宁 · 那拉提 · 独库 · 唐布拉</strong>
+              <strong>赛里木湖 · 果子沟 · 喀拉峻 · 库尔德宁<br />那拉提 · 独库 · 唐布拉</strong>
             </article>
             <article>
               <span>时间</span>
               <strong>{tripMeta.dateRange}</strong>
             </article>
             <article>
-              <span>队伍</span>
-              <strong>赛里木湖车神</strong>
+              <span>赛里木湖车神</span>
+              <strong>{teamNames.join('、')}</strong>
             </article>
           </div>
         </div>
