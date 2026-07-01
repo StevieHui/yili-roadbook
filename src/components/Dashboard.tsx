@@ -27,7 +27,7 @@ export function Dashboard() {
             </article>
             <article>
               <span>队伍</span>
-              <strong>{teamNames.join('、')} 等 {tripMeta.people} 人</strong>
+              <strong>{teamNames.join('、')}</strong>
             </article>
           </div>
         </div>
