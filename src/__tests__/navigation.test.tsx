@@ -8,10 +8,10 @@ describe('page shell', () => {
   it('renders title, facts, and navigation anchors', () => {
     render(<App />);
     expect(screen.getByRole('heading', { level: 1, name: /向天山深处/ })).toBeVisible();
-    expect(screen.getByText(/8人2车 · 伊宁往返 · 七日环线/)).toBeVisible();
+    expect(screen.getByText(/从伊犁河谷启程/)).toBeVisible();
     expect(screen.getByLabelText('封面行程信息')).toBeVisible();
-    expect(screen.getByText(/8 人/)).toBeVisible();
-    expect(screen.getByText(/2 辆车/)).toBeVisible();
+    expect(screen.getByText(/柳意轩/)).toBeVisible();
+    expect(screen.getByText(/赛里木湖/)).toBeVisible();
     expect(screen.queryByText('必须先确认')).not.toBeInTheDocument();
     expect(screen.queryByText('查看预约行程')).not.toBeInTheDocument();
     expect(screen.queryByLabelText('行程概览')).not.toBeInTheDocument();

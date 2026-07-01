@@ -27,7 +27,7 @@ export default function App() {
     <>
       <SiteHeader activeView={activeView} onSelectView={selectView} />
       <main className="app-shell">
-        {activeView === 'home' && <Dashboard days={tripDays} onOpenView={selectView} onSelectDay={selectDay} />}
+        {activeView === 'home' && <Dashboard />}
         {activeView === 'overview' && <TripOverview />}
         {activeView === 'route' && <RouteExplorer days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}
         {activeView === 'roadbook' && <DayRoadbook days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}

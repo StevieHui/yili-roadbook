@@ -485,33 +485,27 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
 }
 .dashboard-cover h1 {
   margin: 0;
-  max-width: 760px;
+  max-width: 900px;
   font-family: "Noto Serif SC", "Songti SC", serif;
-  font-size: clamp(52px, 8vw, 104px);
+  font-size: clamp(60px, 9vw, 120px);
   font-weight: 900;
-  line-height: .96;
-  letter-spacing: -.02em;
+  line-height: .94;
+  letter-spacing: .04em;
   opacity: 0;
   animation: fade-up .8s .3s ease-out forwards;
 }
 .dashboard-subtitle {
-  max-width: 620px;
-  margin: 16px 0 26px;
-  color: rgba(23,32,29,.74);
-  font-size: clamp(18px, 2.2vw, 26px);
-  font-weight: 600;
-  line-height: 1.35;
+  max-width: 680px;
+  margin: 18px 0 30px;
+  color: rgba(23,32,29,.72);
+  font-size: clamp(17px, 2vw, 24px);
+  font-weight: 400;
+  line-height: 1.55;
   opacity: 0;
   animation: fade-up .8s .45s ease-out forwards;
 }
 .dashboard-lede {
-  max-width: 660px;
-  margin: 20px 0 32px;
-  color: rgba(23,32,29,.7);
-  font-size: 15px;
-  line-height: 1.9;
-  opacity: 0;
-  animation: fade-up .8s .6s ease-out forwards;
+  display: none;
 }
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(18px); }
@@ -519,12 +513,12 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
 }
 .dashboard-glass-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(130px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  width: min(880px, 100%);
+  width: min(960px, 100%);
 }
 .dashboard-glass-grid article {
-  min-height: 86px;
+  min-height: 90px;
   padding: 14px 16px;
   border: 1px solid rgba(255,255,255,.55);
   background: rgba(255,255,255,.46);
@@ -544,14 +538,16 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
 }
 .dashboard-glass-grid span {
   display: block;
-  margin-bottom: 12px;
-  color: rgba(23,32,29,.55);
+  margin-bottom: 10px;
+  color: rgba(23,32,29,.5);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: .14em;
 }
 .dashboard-glass-grid strong {
   display: block;
+  font-size: 14px;
+  line-height: 1.4;
   color: rgba(23,32,29,.86);
   font-size: 15px;
   line-height: 1.35;
@@ -1253,8 +1249,7 @@ body,
     padding: 28px 18px;
   }
   .dashboard-cover h1 { font-size: 46px; }
-  .dashboard-subtitle { font-size: 17px; }
-  .dashboard-lede { font-size: 14px; margin-bottom: 24px; }
+  .dashboard-subtitle { font-size: 16px; }
   .dashboard-glass-grid { grid-template-columns: 1fr; }
   .dashboard-glass-grid article { min-height: 70px; }
   .dashboard-hero h1 { font-size: 30px; }
