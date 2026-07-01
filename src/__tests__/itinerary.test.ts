@@ -46,12 +46,21 @@ describe('itinerary data', () => {
   it('shows the revised rental metadata in the overview', () => {
     render(jsx(TripOverview, {}));
 
+    expect(arrivalDay.rental.pickupTime).toBe('15:30');
+    expect(arrivalDay.rental.vehicles).toEqual([
+      { model: '问界 M7', reservationName: '陈熠辉' },
+      { model: '理想 L6', reservationName: '赵禹砚' },
+    ]);
     expect(screen.getByText('15:30')).toBeVisible();
     expect(screen.getByText('问界 M7')).toBeVisible();
     expect(screen.getByText('陈熠辉')).toBeVisible();
     expect(screen.getByText('理想 L6')).toBeVisible();
     expect(screen.getByText('赵禹砚')).toBeVisible();
     expect(screen.getByText('伊宁机场服务点')).toBeVisible();
+    expect(screen.getByText(/核对订单、保险与随车证件/)).toBeVisible();
+    for (const task of arrivalDay.tasks) {
+      expect(screen.getByText(task)).toBeVisible();
+    }
   });
 
   it('ends day 7 at the airport service location by 15:00 for the return deadline', () => {

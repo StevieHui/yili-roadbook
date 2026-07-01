@@ -15,23 +15,20 @@ export const arrivalDay = {
   date: '2026-07-14',
   title: '抵达伊宁 · 取车与休整',
   stay: '伊宁市区',
+  rental: {
+    arrivalTime: '14:30',
+    pickupTime: '15:30',
+    serviceLocation: '伊宁机场服务点',
+    vehicles: [
+      { model: '问界 M7', reservationName: '陈熠辉' },
+      { model: '理想 L6', reservationName: '赵禹砚' },
+    ],
+  },
   tasks: [
-    '14:30 抵达伊宁',
-    '15:30 在伊宁机场服务点取车',
-    '问界 M7（陈熠辉预订）与理想 L6（赵禹砚预订）核对订单、保险与随车证件',
+    '核对订单、保险与随车证件',
     '检查轮胎、备胎、刹车与随车工具',
     '采购饮水、路餐和常用药',
     '下载高德离线地图',
-  ],
-} as const;
-
-export const rentalMeta = {
-  arrivalTime: '14:30',
-  pickupTime: '15:30',
-  serviceLocation: '伊宁机场服务点',
-  vehicles: [
-    { model: '问界 M7', reservationName: '陈熠辉' },
-    { model: '理想 L6', reservationName: '赵禹砚' },
   ],
 } as const;
 

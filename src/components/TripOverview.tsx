@@ -1,10 +1,10 @@
-import { arrivalDay, rentalMeta, tripMeta } from '../data/itinerary';
+import { arrivalDay, tripMeta } from '../data/itinerary';
 
 const stays = ['伊宁', '赛里木湖', '伊宁', '特克斯', '库尔德宁', '那拉提', '尼勒克'];
 
 export function TripOverview() {
   const [, arrivalMonth, arrivalDate] = arrivalDay.date.split('-');
-  const arrivalChecklist = arrivalDay.tasks.slice(3);
+  const { rental } = arrivalDay;
 
   return (
     <section className="overview section-shell" id="overview" aria-labelledby="overview-title">
@@ -26,9 +26,13 @@ export function TripOverview() {
         <div>
           <p className="eyebrow">PROLOGUE</p>
           <h3>{arrivalDay.title}</h3>
-          <p><strong>{rentalMeta.arrivalTime}</strong> 抵达伊宁，<strong>{rentalMeta.pickupTime}</strong> 在 <strong>{rentalMeta.serviceLocation}</strong> 取车。</p>
-          <p><strong>{rentalMeta.vehicles[0].model}</strong>（<span>{rentalMeta.vehicles[0].reservationName}</span>）与 <strong>{rentalMeta.vehicles[1].model}</strong>（<span>{rentalMeta.vehicles[1].reservationName}</span>）同点取还。</p>
-          <p>{arrivalChecklist.join(' · ')}</p>
+          <p><strong>{rental.arrivalTime}</strong> 抵达伊宁，<strong>{rental.pickupTime}</strong> 在 <strong>{rental.serviceLocation}</strong> 取车。</p>
+          {rental.vehicles.map((vehicle) => (
+            <p key={vehicle.model}>
+              <strong>{vehicle.model}</strong>（<span>{vehicle.reservationName}</span>）同点取还。
+            </p>
+          ))}
+          {arrivalDay.tasks.map((task) => <p key={task}>{task}</p>)}
           <p className="return-window">{tripMeta.returnWindow}</p>
         </div>
       </div>
