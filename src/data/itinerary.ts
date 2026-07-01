@@ -140,7 +140,7 @@ export const tripDays: readonly TripDay[] = [
     distanceKm: 148, driveMinutes: 183, stay: '特克斯八卦城', intensity: '较满',
     route: [stops.yining, stops.kalajun, stops.tekes],
     timeline: [
-      { time: '07:30', activity: '伊宁出发', detail: '周末提前出城，车上解决简餐。' },
+      { time: '07:30', activity: '伊宁出发', detail: '周五尽早出城，车上解决简餐。' },
       { time: '10:30', activity: '喀拉峻入园', detail: '主走草原线，不硬塞全部阔克苏项目。' },
       { time: '17:30', activity: '侧光拍摄', detail: '鲜花台或猎鹰台按天气择一守光。' },
       { time: '21:00', activity: '入住特克斯', detail: '晚餐后只做短距离城市散步。' },

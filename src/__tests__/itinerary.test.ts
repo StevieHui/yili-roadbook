@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { jsx } from 'react/jsx-runtime';
 import { describe, expect, it } from 'vitest';
 import { TripOverview } from '../components/TripOverview';
@@ -46,11 +46,13 @@ describe('itinerary data', () => {
   it('shows the revised rental metadata in the overview', () => {
     render(jsx(TripOverview, {}));
 
+    expect(arrivalDay.rental.arrivalTime).toBe('14:30');
     expect(arrivalDay.rental.pickupTime).toBe('15:30');
     expect(arrivalDay.rental.vehicles).toEqual([
       { model: '问界 M7', reservationName: '陈熠辉' },
       { model: '理想 L6', reservationName: '赵禹砚' },
     ]);
+    expect(screen.getByText('14:30')).toBeVisible();
     expect(screen.getByText('15:30')).toBeVisible();
     expect(screen.getByText('问界 M7')).toBeVisible();
     expect(screen.getByText('陈熠辉')).toBeVisible();
@@ -63,11 +65,37 @@ describe('itinerary data', () => {
     }
   });
 
-  it('ends day 7 at the airport service location by 15:00 for the return deadline', () => {
+  it('shows the full stay relay through the July 21 airport-area overnight stop', () => {
+    const { container } = render(jsx(TripOverview, {}));
+    const stayLine = within(container).getByLabelText('住宿点');
+
+    const stayItems = within(stayLine)
+      .getAllByRole('listitem')
+      .map((item) => item.textContent);
+
+    expect(stayItems).toEqual(['伊宁', '赛里木湖', '伊宁', '特克斯', '库尔德宁', '那拉提', '尼勒克', '伊宁机场']);
+  });
+
+  it('keeps the friday departure copy and day 7 return completion exact', () => {
+    const day3 = getDayById('day-3');
     const day7 = getDayById('day-7');
 
+    expect(day3?.timeline).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          time: '07:30',
+          activity: '伊宁出发',
+          detail: '周五尽早出城，车上解决简餐。',
+        }),
+      ]),
+    );
     expect(day7?.timeline).toEqual(
       expect.arrayContaining([
+        expect.objectContaining({
+          time: '15:30',
+          activity: '完成还车',
+          detail: '机场服务点办结交车，次日按早班机节奏出发。',
+        }),
         expect.objectContaining({
           time: '15:00',
           activity: '伊宁机场服务点',
@@ -75,7 +103,7 @@ describe('itinerary data', () => {
       ]),
     );
     expect(day7?.route.map((stop) => stop.name)).toContain('伊宁机场服务点');
-    expect(tripMeta.returnWindow).toContain('15:30');
+    expect(tripMeta.returnWindow).toBe('7 月 21 日 15:00 前到达伊宁机场服务点，15:30 前完成还车；7 月 22 日按早班机节奏直接出发。');
   });
 });
 

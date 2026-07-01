@@ -1,10 +1,23 @@
-import { arrivalDay, tripMeta } from '../data/itinerary';
+import { arrivalDay, tripDays, tripMeta } from '../data/itinerary';
 
-const stays = ['伊宁', '赛里木湖', '伊宁', '特克斯', '库尔德宁', '那拉提', '尼勒克'];
+const stayLabels = [
+  ['赛里木湖', '赛里木湖'],
+  ['特克斯', '特克斯'],
+  ['库尔德宁', '库尔德宁'],
+  ['那拉提', '那拉提'],
+  ['尼勒克', '尼勒克'],
+  ['机场', '伊宁机场'],
+  ['伊宁', '伊宁'],
+] as const;
+
+function getStayLabel(stay: string) {
+  return stayLabels.find(([pattern]) => stay.includes(pattern))?.[1] ?? stay;
+}
 
 export function TripOverview() {
   const [, arrivalMonth, arrivalDate] = arrivalDay.date.split('-');
   const { rental } = arrivalDay;
+  const stays = [arrivalDay.stay, ...tripDays.map((day) => day.stay)].map(getStayLabel);
 
   return (
     <section className="overview section-shell" id="overview" aria-labelledby="overview-title">
