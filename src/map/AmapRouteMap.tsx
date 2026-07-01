@@ -19,16 +19,24 @@ interface DayOverlay {
 }
 
 function stopToAttraction(stop: Stop): MapAttraction {
-  const category = stop.kind === 'warning' ? '风险提醒' : stop.kind === 'photo' ? '摄影点' : '行程精选';
+  const kindMap: Record<Stop['kind'], { category: string; markerClass: string; stayMinutes: number; advice: string; safetyNote: string }> = {
+    start: { category: '出发点', markerClass: 'marker-start', stayMinutes: 0, advice: '今日行程起点。', safetyNote: '检查车辆状态后出发。' },
+    scenic: { category: '景区', markerClass: 'marker-scenic', stayMinutes: 60, advice: '该点已纳入当日路书，按时间表安排停留。', safetyNote: '只在正式停车区或合规观景点下车。' },
+    photo: { category: '摄影点', markerClass: 'marker-photo', stayMinutes: 45, advice: '根据当日光线和安全停车条件选择机位。', safetyNote: '只在正式停车区或合规观景点下车。' },
+    stay: { category: '住宿/休整', markerClass: 'marker-stay', stayMinutes: 30, advice: '该点已纳入当日路书，按时间表安排停留。', safetyNote: '只在正式停车区或合规观景点下车。' },
+    warning: { category: '风险提醒', markerClass: 'marker-warning', stayMinutes: 15, advice: '该点已纳入当日路书，按时间表安排停留。', safetyNote: '以现场交通管制与天气预警为准。' },
+  };
+  const mapped = kindMap[stop.kind];
   return {
     id: `curated-${stop.id}`,
     name: stop.name,
     coordinates: stop.coordinates,
-    category,
+    category: mapped.category,
     source: 'curated',
-    stayMinutes: stop.kind === 'stay' ? 30 : 45,
-    advice: stop.kind === 'photo' ? '根据当日光线和安全停车条件选择机位。' : '该点已纳入当日路书，按时间表安排停留。',
-    safetyNote: stop.kind === 'warning' ? '以现场交通管制与天气预警为准。' : '只在正式停车区或合规观景点下车。',
+    stayMinutes: mapped.stayMinutes,
+    advice: mapped.advice,
+    safetyNote: mapped.safetyNote,
+    markerClass: mapped.markerClass,
   };
 }
 
@@ -86,10 +94,18 @@ function amapNavigationUrl(day: TripDay) {
   return `https://uri.amap.com/navigation?from=${start.coordinates.join(',')},${encodeURIComponent(start.name)}&to=${end.coordinates.join(',')},${encodeURIComponent(end.name)}&mode=car&policy=1&src=yili-roadbook&callnative=0`;
 }
 
+function buildInfoContent(attraction: MapAttraction): string {
+  const badge = attraction.source === 'curated' ? '行程精选' : '高德周边';
+  const stay = attraction.stayMinutes ? ` · 建议停留 ${attraction.stayMinutes} 分钟` : '';
+  const safety = attraction.safetyNote ? `<small>${attraction.safetyNote}</small>` : '';
+  return `<div class="amap-info-window"><strong>${badge}</strong><h4>${attraction.name}</h4><p>${attraction.category}${stay}</p><p>${attraction.advice}</p>${safety}</div>`;
+}
+
 export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRouteMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
   const amapRef = useRef<AMapNamespace | null>(null);
+  const infoWindowRef = useRef<any>(null);
   const overlaysRef = useRef<DayOverlay[]>([]);
   const nearbyMarkersRef = useRef<any[]>([]);
   const selectedDayIdRef = useRef(selectedDayId);
@@ -122,6 +138,8 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
         });
         map.addControl(new AMap.Scale());
         map.addControl(new AMap.ToolBar({ position: { right: '18px', top: '70px' } }));
+        const infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -32), closeWhenClickMap: true });
+        infoWindowRef.current = infoWindow;
         mapRef.current = map;
 
         const prioritizedDays = [...days].sort((a, b) => Number(b.id === selectedDayIdRef.current) - Number(a.id === selectedDayIdRef.current));
@@ -163,10 +181,17 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
               position: attraction.coordinates,
               anchor: 'center',
               zIndex: 36,
-              content: '<span class="amap-attraction-marker curated">●</span>',
+              content: `<span class="amap-attraction-marker ${attraction.markerClass}"></span>`,
               title: attraction.name,
             });
-            marker.on?.('click', () => onSelectAttraction?.(attraction));
+            marker.on?.('click', () => {
+              onSelectAttraction?.(attraction);
+              const iw = infoWindowRef.current;
+              if (iw) {
+                iw.setContent(buildInfoContent(attraction));
+                iw.open(map, attraction.coordinates);
+              }
+            });
             map.add(marker);
             if (day.id !== selectedDayIdRef.current || !showCurated) marker.hide?.();
             return marker;
@@ -203,6 +228,7 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
 
   useEffect(() => {
     onSelectAttraction?.(null);
+    infoWindowRef.current?.close?.();
     const selected = overlaysRef.current.find((overlay) => overlay.id === selectedDayId);
     for (const overlay of overlaysRef.current) {
       const active = overlay.id === selectedDayId;
@@ -240,10 +266,18 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
           position: attraction.coordinates,
           anchor: 'center',
           zIndex: 35,
-          content: '<span class="amap-attraction-marker nearby">●</span>',
+          content: '<span class="amap-attraction-marker nearby"></span>',
           title: attraction.name,
         });
-        marker.on?.('click', () => onSelectAttraction?.(attraction));
+        marker.on?.('click', () => {
+          onSelectAttraction?.(attraction);
+          const iw = infoWindowRef.current;
+          const mapInst = mapRef.current;
+          if (iw && mapInst) {
+            iw.setContent(buildInfoContent(attraction));
+            iw.open(mapInst, attraction.coordinates);
+          }
+        });
         map.add(marker);
         return marker;
       });

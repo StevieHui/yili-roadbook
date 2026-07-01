@@ -11,8 +11,10 @@ vi.mock('../map/amapLoader', () => ({
         callback('complete', { routes: [{ steps: [{ path: [[81, 43], [82, 44]] }] }] });
       }
     },
+    InfoWindow: class { setContent() {} open() {} close() {} },
     Map: class { add() {} addControl() {} destroy() {} setFitView() {} },
     Marker: class { on() {} setOpacity() {} show() {} hide() {} },
+    Pixel: class { constructor(_x: number, _y: number) {} },
     Polyline: class { setOptions() {} },
     Scale: class {},
     ToolBar: class {},

@@ -13,6 +13,11 @@ vi.mock('../map/amapLoader', () => ({
         callback('error', { info: 'CUQPS_HAS_EXCEEDED_THE_LIMIT' });
       }
     },
+    InfoWindow: class {
+      setContent() {}
+      open() {}
+      close() {}
+    },
     Map: class {
       add() {}
       addControl() {}
@@ -20,7 +25,13 @@ vi.mock('../map/amapLoader', () => ({
       setFitView() {}
     },
     Marker: class {
+      on() {}
       setOpacity() {}
+      show() {}
+      hide() {}
+    },
+    Pixel: class {
+      constructor(_x: number, _y: number) {}
     },
     Polyline: class {
       constructor(options: unknown) { polylineSpy(options); }

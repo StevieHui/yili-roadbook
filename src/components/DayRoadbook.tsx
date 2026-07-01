@@ -34,8 +34,8 @@ export function DayRoadbook({ days, selectedDayId }: DayRoadbookProps) {
           <div className="day-main">
             <header>
               <div>
-                <p className="route-string">{day.route.map((stop) => stop.name).join(' → ')}</p>
                 <h3 id={`${day.id}-title`}>{day.title}</h3>
+                <p className="route-string">{day.route.map((stop) => stop.name).join(' → ')}</p>
                 <p className="day-summary">{day.summary}</p>
               </div>
               <div className="day-metrics">

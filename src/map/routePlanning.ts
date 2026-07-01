@@ -9,6 +9,7 @@ export interface MapAttraction {
   stayMinutes?: number;
   advice: string;
   safetyNote?: string;
+  markerClass: string;
 }
 
 export function extractDrivingPath(result: any): Coordinates[] | null {
@@ -35,6 +36,7 @@ export function normalizeNearbyPlaces(places: readonly any[], limit = 8): MapAtt
       category: String(place.type ?? '沿线看点').split(';')[0],
       source: 'amap',
       advice: place.address ? String(place.address) : '高德地图沿线搜索结果',
+      markerClass: 'nearby',
     });
     if (normalized.length >= limit) break;
   }

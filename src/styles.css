@@ -204,9 +204,19 @@ a { color: inherit; }
 .map-fallback > p { color: rgba(255,255,255,.64); }
 .map-fallback ol { margin: 24px 0 0; padding-left: 22px; color: rgba(255,255,255,.78); line-height: 1.9; }
 .amap-trip-marker { width: 28px; height: 28px; display: grid; place-items: center; border: 2px solid white; border-radius: 50%; color: white; background: var(--marker-color); box-shadow: 0 3px 12px rgba(0,0,0,.26); font: 10px Georgia, serif; }
-.amap-attraction-marker { width: 22px; height: 22px; display: grid; place-items: center; border: 3px solid white; border-radius: 50%; box-shadow: 0 3px 12px rgba(0,0,0,.28); font-size: 0; }
-.amap-attraction-marker.curated { background: #d9ad39; }
-.amap-attraction-marker.nearby { background: #318276; }
+.amap-attraction-marker { width: 24px; height: 24px; display: grid; place-items: center; border: 3px solid white; border-radius: 50%; box-shadow: 0 3px 12px rgba(0,0,0,.28); font-size: 0; cursor: pointer; transition: transform .12s ease; }
+.amap-attraction-marker:hover { transform: scale(1.25); }
+.amap-attraction-marker.marker-photo { background: #d9ad39; }      /* gold — 摄影点 */
+.amap-attraction-marker.marker-scenic { background: #3d8d9e; }     /* teal — 景区 */
+.amap-attraction-marker.marker-stay { background: #6f9464; }       /* green — 住宿 */
+.amap-attraction-marker.marker-warning { background: #d65a59; }    /* red — 风险 */
+.amap-attraction-marker.marker-start { background: #7a8b94; }      /* grey — 出发点 */
+.amap-attraction-marker.nearby { background: #318276; }            /* dark teal — 高德周边 */
+.amap-info-window { min-width: 220px; max-width: 320px; padding: 4px 8px; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+.amap-info-window strong { display: inline-block; margin-bottom: 6px; padding: 2px 8px; border-radius: 2px; color: white; background: var(--sunset); font-size: 10px; letter-spacing: .08em; }
+.amap-info-window h4 { margin: 8px 0 6px; font: 16px "Songti SC", serif; color: var(--ink); }
+.amap-info-window p { margin: 4px 0; color: rgba(23,32,29,.7); font-size: 12px; line-height: 1.55; }
+.amap-info-window small { display: block; margin-top: 8px; color: #9b4b2f; font-size: 11px; line-height: 1.5; }
 .map-layer-controls { position: absolute; z-index: 4; top: 16px; left: 16px; display: flex; gap: 8px; padding: 8px; border: 1px solid rgba(24,50,45,.18); background: rgba(255,254,248,.94); box-shadow: 0 5px 18px rgba(24,50,45,.14); }
 .map-layer-controls label { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 8px; color: #18322d; font-size: 12px; cursor: pointer; }
 .map-layer-controls input { accent-color: #1f6f63; }
@@ -238,9 +248,9 @@ a { color: inherit; }
 .day-rail i { width: 1px; height: 100px; margin: 24px 0; background: var(--ink); opacity: .24; }
 .day-main { min-width: 0; }
 .day-main > header { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 6vw; align-items: end; }
-.route-string { margin: 0 0 12px; color: var(--lake); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
-.day-main h3 { margin: 0; font: clamp(38px, 5vw, 72px)/1.08 "Songti SC", serif; letter-spacing: -.04em; }
-.day-summary { max-width: 700px; margin: 20px 0 0; color: rgba(23,32,29,.68); line-height: 1.9; }
+.route-string { margin: 8px 0 0; color: var(--lake); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+.day-main h3 { margin: 0; font: clamp(28px, 3.5vw, 48px)/1.15 "Songti SC", serif; letter-spacing: -.03em; }
+.day-summary { max-width: 700px; margin: 18px 0 0; color: rgba(23,32,29,.68); line-height: 1.9; }
 .day-metrics { display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--ink); }
 .day-metrics span { min-width: 0; display: flex; flex-direction: column; padding: 12px 10px; border-left: 1px solid var(--line); }
 .day-metrics span:first-child { border-left: 0; }
@@ -259,10 +269,10 @@ a { color: inherit; }
 .timeline p { margin: 7px 0 0; color: rgba(23,32,29,.62); line-height: 1.7; }
 .photo-callout { padding: 36px; color: var(--paper); background: var(--pine); }
 .photo-note + .photo-note { margin-top: 30px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.2); }
-.photo-note span { color: #8ec2ca; font-size: 10px; letter-spacing: .12em; }
-.photo-note h4 { margin: 8px 0; font: 26px "Songti SC", serif; }
-.photo-note p { margin: 0 0 8px; }
-.photo-note small { color: rgba(255,255,255,.55); line-height: 1.6; }
+.photo-note span { color: #8ec2ca; font-size: 11px; letter-spacing: .12em; }
+.photo-note h4 { margin: 6px 0; font: 22px "Songti SC", serif; }
+.photo-note p { margin: 0 0 6px; font-size: 14px; }
+.photo-note small { color: rgba(255,255,255,.8); font-size: 12px; line-height: 1.7; }
 .day-footer { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 28px; }
 .day-footer > p { font: 24px "Songti SC", serif; }
 .day-footer > p span { margin-right: 14px; color: var(--sunset); font: 10px sans-serif; letter-spacing: .14em; }
@@ -905,6 +915,39 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   color: var(--ink);
   font-size: 13px;
   font-style: normal;
+}
+.booking-key-points {
+  margin: 14px 0;
+  padding: 0 0 0 18px;
+  list-style: none;
+}
+.booking-key-points li {
+  position: relative;
+  margin: 6px 0;
+  padding: 0;
+  border: 0;
+  color: rgba(23,32,29,.72);
+  font-size: 13px;
+  line-height: 1.65;
+  display: list-item;
+}
+.booking-key-points li::marker {
+  content: "— ";
+  color: var(--sunset);
+}
+.booking-channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0;
+}
+.booking-channels span {
+  padding: 3px 10px;
+  border: 1px solid rgba(23,32,29,.18);
+  border-radius: 3px;
+  color: var(--lake);
+  font-size: 11px;
+  background: rgba(127,169,173,.08);
 }
 
 /* Cover-matched visual system: pine shadow, lake mist, snow white, sunset gold. */

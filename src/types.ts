@@ -45,5 +45,7 @@ export interface ReservationTask {
   status: '必须' | '建议' | '备选';
   detail: string;
   action: string;
+  keyPoints: readonly string[];
+  channels: readonly string[];
 }
 
