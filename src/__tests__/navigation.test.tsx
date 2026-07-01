@@ -7,7 +7,7 @@ describe('page shell', () => {
 
   it('renders title, facts, and navigation anchors', () => {
     render(<App />);
-    expect(screen.getByRole('heading', { level: 1, name: /伊犁自驾路书/ })).toBeVisible();
+    expect(screen.getByRole('heading', { level: 1, name: /向天山深处/ })).toBeVisible();
     expect(screen.getByText(/8人2车 · 伊宁往返 · 七日环线/)).toBeVisible();
     expect(screen.getByLabelText('封面行程信息')).toBeVisible();
     expect(screen.getByText(/8 人/)).toBeVisible();
@@ -27,8 +27,7 @@ describe('page shell', () => {
   it('uses dashboard tabs to jump between key travel tools', () => {
     render(<App />);
 
-    expect(screen.getByRole('heading', { name: '伊犁自驾路书' })).toBeVisible();
-    expect(screen.queryByRole('heading', { name: /向天山深处/ })).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /向天山深处/ })).toBeVisible();
 
     const nav = screen.getByRole('navigation', { name: '路书导航' });
     fireEvent.click(within(nav).getByRole('button', { name: '预约行程' }));

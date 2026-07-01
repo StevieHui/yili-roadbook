@@ -151,6 +151,7 @@ a { color: inherit; }
 .eyebrow, .section-kicker { margin: 0 0 14px; text-transform: uppercase; letter-spacing: .22em; font-size: 11px; font-weight: 700; }
 .hero h1 { margin: 0; font-family: "Songti SC", "STSong", serif; font-size: clamp(64px, 10.5vw, 164px); font-weight: 700; line-height: .92; letter-spacing: -.055em; text-shadow: 0 7px 35px rgba(0,0,0,.25); }
 .hero-subtitle { margin: 24px 0 30px; font-family: "Songti SC", serif; font-size: clamp(20px, 2.2vw, 34px); letter-spacing: .16em; }
+.hero-lede { max-width: 600px; margin: 0 0 36px; color: rgba(255,255,255,.72); font-size: 15px; line-height: 1.9; }
 .hero-route { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; max-width: 720px; font-size: 12px; letter-spacing: .1em; color: rgba(255,255,255,.78); }
 .hero-route i { width: clamp(14px, 2vw, 30px); height: 1px; background: rgba(255,255,255,.45); }
 .hero-index { position: relative; z-index: 1; display: flex; align-items: flex-end; gap: 12px; margin-bottom: 4px; }
@@ -275,19 +276,21 @@ a { color: inherit; }
 .timeline li > div { padding-left: 14px; }
 .timeline li > div strong { font-size: 13px; }
 .timeline p { margin: 4px 0 0; color: rgba(23,32,29,.58); font-size: 12px; line-height: 1.6; }
-.photo-callout { padding: 32px; color: #fff; background: #142622; }
-.photo-note + .photo-note { margin-top: 24px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.22); }
-.photo-note span { display: inline-block; padding: 3px 8px; margin-bottom: 8px; color: #e8c77a; font-size: 11px; font-weight: 700; letter-spacing: .08em; border: 1px solid rgba(255,255,255,.2); }
-.photo-note h4 { margin: 6px 0; font: 20px "Songti SC", serif; color: #fff; }
-.photo-note p { margin: 0 0 4px; font-size: 14px; color: #fff; line-height: 1.5; }
-.photo-note small { display: block; color: rgba(255,255,255,.85); font-size: 12.5px; line-height: 1.65; }
+.photo-callout { padding: 32px; background: #faf7ef; border: 1px solid rgba(23,32,29,.1); }
+.photo-callout > .section-kicker { color: #b4471e; }
+.photo-note + .photo-note { margin-top: 22px; padding-top: 20px; border-top: 1px solid rgba(23,32,29,.12); }
+.photo-note span { display: inline-block; padding: 3px 10px; margin-bottom: 10px; color: #b4471e; font-size: 11px; font-weight: 700; letter-spacing: .06em; border: 1px solid rgba(180,71,30,.35); border-radius: 2px; }
+.photo-note h4 { margin: 6px 0; font: 20px "Songti SC", serif; color: #16211d; }
+.photo-note p { margin: 0 0 4px; font-size: 14px; color: rgba(22,33,29,.8); line-height: 1.5; }
+.photo-note small { display: block; color: #9b4b2f; font-size: 13px; line-height: 1.7; }
 .day-footer { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 24px; }
 .day-footer > p { font: 22px "Songti SC", serif; white-space: nowrap; }
 .day-footer > p span { margin-right: 14px; color: var(--sunset); font: 10px sans-serif; letter-spacing: .14em; }
-.day-footer ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; padding: 0; list-style: none; }
-.day-footer li { padding: 6px 12px; border: 1px solid var(--line); font-size: 12px; border-radius: 2px; }
+.day-footer ul { display: flex; flex-wrap: nowrap; gap: 8px; margin: 20px 0; padding: 0; list-style: none; overflow-x: auto; }
+.day-footer li { flex-shrink: 0; padding: 6px 12px; border: 1px solid var(--line); font-size: 12px; border-radius: 2px; white-space: nowrap; }
 .day-reminders { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 28px; color: rgba(23,32,29,.6); font-size: 12px; }
 .day-reminders p { margin: 0; }
+.dashboard-lede { max-width: 660px; margin: 20px 0 32px; color: rgba(23,32,29,.7); font-size: 15px; line-height: 1.9; }
 
 .photo-guide { padding: clamp(100px, 12vw, 170px) 0; color: var(--paper); background: #0d2925; }
 .photo-guide-heading { display: grid; grid-template-columns: 1fr .7fr; gap: 8vw; align-items: end; }
@@ -1221,6 +1224,7 @@ body,
   }
   .dashboard-cover h1 { font-size: 46px; }
   .dashboard-subtitle { font-size: 17px; }
+  .dashboard-lede { font-size: 14px; margin-bottom: 24px; }
   .dashboard-glass-grid { grid-template-columns: 1fr; }
   .dashboard-glass-grid article { min-height: 70px; }
   .dashboard-hero h1 { font-size: 30px; }
