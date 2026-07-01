@@ -30,7 +30,7 @@ export default function App() {
         {activeView === 'home' && <Dashboard days={tripDays} onOpenView={selectView} onSelectDay={selectDay} />}
         {activeView === 'overview' && <TripOverview />}
         {activeView === 'route' && <RouteExplorer days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}
-        {activeView === 'roadbook' && <DayRoadbook days={tripDays} selectedDayId={selectedDayId} />}
+        {activeView === 'roadbook' && <DayRoadbook days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}
         {activeView === 'bookings' && <BookingsPanel days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}
         {activeView === 'photo' && <PhotoGuide days={tripDays} />}
         {activeView === 'checklist' && <Checklist />}
