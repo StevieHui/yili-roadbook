@@ -1,6 +1,5 @@
 import { tripMeta } from '../data/itinerary';
 
-const teamNames = ['柳意轩', '夏执', '陈熠辉', '辛励佳', '赵禹砚', '袁畅', '齐天下'];
 
 export function Dashboard() {
   return (
@@ -27,7 +26,7 @@ export function Dashboard() {
             </article>
             <article>
               <span>队伍</span>
-              <strong>{teamNames.join('、')}</strong>
+              <strong>赛里木湖车神</strong>
             </article>
           </div>
         </div>
