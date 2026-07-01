@@ -204,6 +204,17 @@ a { color: inherit; }
 .map-fallback > p { color: rgba(255,255,255,.64); }
 .map-fallback ol { margin: 24px 0 0; padding-left: 22px; color: rgba(255,255,255,.78); line-height: 1.9; }
 .amap-trip-marker { width: 28px; height: 28px; display: grid; place-items: center; border: 2px solid white; border-radius: 50%; color: white; background: var(--marker-color); box-shadow: 0 3px 12px rgba(0,0,0,.26); font: 10px Georgia, serif; }
+.amap-attraction-marker { width: 22px; height: 22px; display: grid; place-items: center; border: 3px solid white; border-radius: 50%; box-shadow: 0 3px 12px rgba(0,0,0,.28); font-size: 0; }
+.amap-attraction-marker.curated { background: #d9ad39; }
+.amap-attraction-marker.nearby { background: #318276; }
+.map-layer-controls { position: absolute; z-index: 4; top: 16px; left: 16px; display: flex; gap: 8px; padding: 8px; border: 1px solid rgba(24,50,45,.18); background: rgba(255,254,248,.94); box-shadow: 0 5px 18px rgba(24,50,45,.14); }
+.map-layer-controls label { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 8px; color: #18322d; font-size: 12px; cursor: pointer; }
+.map-layer-controls input { accent-color: #1f6f63; }
+.map-layer-controls span { align-self: center; color: rgba(24,50,45,.58); font-size: 11px; }
+.map-route-error { position: absolute; z-index: 4; right: 18px; bottom: 18px; left: 18px; display: flex; align-items: center; gap: 12px; padding: 12px 14px; color: #18322d; border: 1px solid #d8c59c; background: rgba(255,250,240,.96); box-shadow: 0 5px 18px rgba(24,50,45,.16); }
+.map-route-error span { flex: 1; font-size: 12px; }
+.map-route-error button, .map-route-error a { min-height: 34px; padding: 8px 11px; color: inherit; border: 1px solid rgba(24,50,45,.26); background: white; font: inherit; text-decoration: none; cursor: pointer; }
+.stop-detail small { display: block; margin-top: 8px; color: #9b4b2f; line-height: 1.5; }
 
 .calendar-section { padding: clamp(90px, 11vw, 150px) 0; color: var(--paper); background: var(--pine); }
 .compact-heading { margin-bottom: 54px; }
@@ -1171,6 +1182,9 @@ body,
   .booking-day-card li { grid-template-columns: 1fr; }
   .booking-day-card li span { white-space: normal; }
   .route-map-center .map-frame { min-height: 420px; }
+  .map-layer-controls { right: 10px; left: 10px; flex-wrap: wrap; }
+  .map-route-error { align-items: stretch; flex-direction: column; }
+  .map-route-error span { flex: none; }
   .schematic-map { min-height: auto; }
   .amap-secondary > header { display: block; }
 }

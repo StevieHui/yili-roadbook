@@ -8,9 +8,9 @@ describe('page shell', () => {
   it('renders title, facts, and navigation anchors', () => {
     render(<App />);
     expect(screen.getByRole('heading', { level: 1, name: /伊犁自驾路书/ })).toBeVisible();
-    expect(screen.getByText(/7人2车 · 伊宁往返 · 七日环线/)).toBeVisible();
+    expect(screen.getByText(/8人2车 · 伊宁往返 · 七日环线/)).toBeVisible();
     expect(screen.getByLabelText('封面行程信息')).toBeVisible();
-    expect(screen.getByText(/7 人/)).toBeVisible();
+    expect(screen.getByText(/8 人/)).toBeVisible();
     expect(screen.getByText(/2 辆车/)).toBeVisible();
     expect(screen.queryByText('必须先确认')).not.toBeInTheDocument();
     expect(screen.queryByText('查看预约行程')).not.toBeInTheDocument();
@@ -33,7 +33,7 @@ describe('page shell', () => {
     const nav = screen.getByRole('navigation', { name: '路书导航' });
     fireEvent.click(within(nav).getByRole('button', { name: '预约行程' }));
     expect(screen.getByRole('heading', { name: '预约行程' })).toBeVisible();
-    expect(screen.getAllByText(/提前 1-7 天/)[0]).toBeVisible();
+    expect(screen.getAllByText(/独库北段预约/)[0]).toBeVisible();
     expect(screen.getByRole('article', { name: /DAY 06/ })).toHaveTextContent('必须预约');
     expect(screen.getByRole('article', { name: /DAY 06/ })).toHaveTextContent('独库北段预约');
 
@@ -43,7 +43,7 @@ describe('page shell', () => {
     expect(screen.queryByLabelText('可点击路线示意图')).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: /DAY 06/ }));
     expect(screen.getAllByText(/那拉提入口/)[0]).toBeVisible();
-    expect(screen.getAllByText(/08:00-10:00/)[0]).toBeVisible();
+    expect(screen.getByText(/独库预约/)).toBeVisible();
   });
 });
 

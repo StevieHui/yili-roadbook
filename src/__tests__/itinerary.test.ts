@@ -28,10 +28,10 @@ describe('itinerary data', () => {
     ]);
   });
 
-  it('keeps the route near 1200 kilometres for seven people', () => {
+  it('keeps the route near 1200 kilometres for eight people', () => {
     expect(getTripDistance(tripDays)).toBeGreaterThanOrEqual(1150);
     expect(getTripDistance(tripDays)).toBeLessThanOrEqual(1250);
-    expect(tripMeta).toMatchObject({ people: 7, cars: 2 });
+    expect(tripMeta).toMatchObject({ people: 8, cars: 2 });
   });
 
   it('gives every day a stay, route, and photo spot', () => {

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { TripDay } from '../types';
 import { AmapRouteMap } from '../map/AmapRouteMap';
+import type { MapAttraction } from '../map/routePlanning';
 
 interface RouteExplorerProps {
   days: readonly TripDay[];
@@ -17,10 +18,12 @@ function formatHours(minutes: number) {
 export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplorerProps) {
   const selectedDay = days.find((day) => day.id === selectedDayId) ?? days[0];
   const [selectedStopIndex, setSelectedStopIndex] = useState(0);
+  const [selectedAttraction, setSelectedAttraction] = useState<MapAttraction | null>(null);
   const selectedStop = selectedDay.route[Math.min(selectedStopIndex, selectedDay.route.length - 1)];
 
   const handleSelectDay = (id: TripDay['id']) => {
     setSelectedStopIndex(0);
+    setSelectedAttraction(null);
     onSelectDay(id);
   };
 
@@ -49,7 +52,7 @@ export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplore
         </nav>
 
         <div className="route-map-center" aria-label="路线地图区域">
-          <AmapRouteMap days={days} selectedDayId={selectedDay.id} />
+          <AmapRouteMap days={days} selectedDayId={selectedDay.id} onSelectAttraction={setSelectedAttraction} />
         </div>
 
         <aside className="route-detail">
@@ -62,9 +65,17 @@ export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplore
             <strong>{selectedDay.intensity}</strong>
           </div>
           <div className="stop-detail">
-            <span>当前停靠点</span>
-            <strong>{selectedStop.name}</strong>
-            <p>{selectedStop.kind === 'warning' ? '管制/风险点，按现场交通指令执行。' : '点击中间停靠点可切换查看。'}</p>
+            <span>{selectedAttraction ? (selectedAttraction.source === 'curated' ? '行程精选' : '高德周边') : '当前停靠点'}</span>
+            <strong>{selectedAttraction?.name ?? selectedStop.name}</strong>
+            {selectedAttraction ? (
+              <>
+                <p>{selectedAttraction.category}{selectedAttraction.stayMinutes ? ` · 建议停留 ${selectedAttraction.stayMinutes} 分钟` : ''}</p>
+                <p>{selectedAttraction.advice}</p>
+                {selectedAttraction.safetyNote && <small>{selectedAttraction.safetyNote}</small>}
+              </>
+            ) : (
+              <p>{selectedStop.kind === 'warning' ? '管制/风险点，按现场交通指令执行。' : '点击地图看点或下方停靠点查看。'}</p>
+            )}
           </div>
           <div className="stop-picker" aria-label="停靠点列表">
             {selectedDay.route.map((stop, index) => (
@@ -72,7 +83,7 @@ export function RouteExplorer({ days, selectedDayId, onSelectDay }: RouteExplore
                 type="button"
                 className={index === selectedStopIndex ? 'is-active' : ''}
                 key={`${selectedDay.id}-${stop.id}-${index}`}
-                onClick={() => setSelectedStopIndex(index)}
+                onClick={() => { setSelectedStopIndex(index); setSelectedAttraction(null); }}
               >
                 <span>{index + 1}</span>
                 <strong>{stop.name}</strong>

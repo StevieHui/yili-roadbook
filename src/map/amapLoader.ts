@@ -37,7 +37,7 @@ export function loadAmap(): Promise<AMapNamespace> {
       pendingLoad = null;
       reject(new Error('高德地图脚本加载失败'));
     };
-    script.src = `https://webapi.amap.com/maps?v=2.0&key=${encodeURIComponent(key)}&plugin=AMap.Driving,AMap.ToolBar,AMap.Scale&callback=__yiliAmapReady`;
+    script.src = `https://webapi.amap.com/maps?v=2.0&key=${encodeURIComponent(key)}&plugin=AMap.Driving,AMap.PlaceSearch,AMap.ToolBar,AMap.Scale&callback=__yiliAmapReady`;
     document.head.appendChild(script);
   });
 
