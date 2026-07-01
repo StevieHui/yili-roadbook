@@ -3,8 +3,8 @@ import type { ReservationTask, Stop, TripDay } from '../types';
 export const tripMeta = {
   title: '伊犁自驾路书',
   subtitle: '7人2车 · 伊宁往返 · 七日环线',
-  dateRange: '2026.07.15 — 07.22/23',
-  returnWindow: '7 月 22 日晚航班可直返；7 月 23 日返航则把伊宁留作洗车、补觉和伊犁河日落机动。',
+  dateRange: '2026.07.14 — 07.22',
+  returnWindow: '7 月 21 日 15:00 前到达伊宁机场服务点，15:30 前完成还车；7 月 22 日按早班机节奏直接出发。',
   people: 7,
   cars: 2,
   distanceKm: 1198,
@@ -12,18 +12,35 @@ export const tripMeta = {
 } as const;
 
 export const arrivalDay = {
-  date: '2026-07-15',
+  date: '2026-07-14',
   title: '抵达伊宁 · 取车与休整',
   stay: '伊宁市区',
-  tasks: ['核对租车保险与随车证件', '检查轮胎、备胎、刹车与随车工具', '采购饮水、路餐和常用药', '下载高德离线地图'],
+  tasks: [
+    '14:30 抵达伊宁',
+    '15:30 在伊宁机场服务点取车',
+    '问界 M7（陈熠辉预订）与理想 L6（赵禹砚预订）核对订单、保险与随车证件',
+    '检查轮胎、备胎、刹车与随车工具',
+    '采购饮水、路餐和常用药',
+    '下载高德离线地图',
+  ],
+} as const;
+
+export const rentalMeta = {
+  arrivalTime: '14:30',
+  pickupTime: '15:30',
+  serviceLocation: '伊宁机场服务点',
+  vehicles: [
+    { model: '问界 M7', reservationName: '陈熠辉' },
+    { model: '理想 L6', reservationName: '赵禹砚' },
+  ],
 } as const;
 
 export const reservationTasks: readonly ReservationTask[] = [
   {
     id: 'duku',
     title: '独库北段预约',
-    deadline: '最晚 7 月 20 日 20:00 前',
-    when: 'Day 6 · 7 月 21 日 · 那拉提入口',
+    deadline: '最晚 7 月 19 日 20:00 前',
+    when: 'Day 6 · 7 月 20 日 · 那拉提入口',
     status: '必须',
     detail: '提前 1-7 天为两辆车分别预约同一入口，优先选 08:00-10:00 或 10:00-12:00；进入后 19:00 前驶离受控路段。',
     action: '准备两车车牌、驾驶员信息、预约码截图',
@@ -31,8 +48,8 @@ export const reservationTasks: readonly ReservationTask[] = [
   {
     id: 'sayram',
     title: '赛里木湖自驾票',
-    deadline: '建议 7 月 13 日前',
-    when: 'Day 1-2 · 7 月 16-17 日',
+    deadline: '建议 7 月 12 日前',
+    when: 'Day 1-2 · 7 月 15-16 日',
     status: '必须',
     detail: '旺季自驾入园和景区内住宿名额紧张。若只买门票不含自驾服务，现场可能需要改乘区间车。',
     action: '确认 24/48 小时票、车辆入园规则和住宿停车',
@@ -40,7 +57,7 @@ export const reservationTasks: readonly ReservationTask[] = [
   {
     id: 'grassland',
     title: '草原景区门票',
-    deadline: '建议 7 月 14 日前',
+    deadline: '建议 7 月 13 日前',
     when: '喀拉峻 / 库尔德宁 / 那拉提',
     status: '建议',
     detail: '喀拉峻体量大，建议只选核心草原线；那拉提自驾或区间车规则以当天官方渠道为准。',
@@ -50,15 +67,15 @@ export const reservationTasks: readonly ReservationTask[] = [
     id: 'return',
     title: '航班与还车倒排',
     deadline: '订票后立即确认',
-    when: 'Day 7 · 7 月 22/23 日',
+    when: 'Day 7 · 7 月 21 日 15:30 还车 / 7 月 22 日早班机',
     status: '必须',
-    detail: '7 月 22 日返航则 Day 7 不加景点；抵达伊宁后先洗车、加油、整理行李和还车。',
-    action: '按还车时间倒推至少 4 小时进伊宁',
+    detail: 'Day 7 中午前进入伊宁，先加油、洗车、整理行李，再于 15:00 抵达伊宁机场服务点并在 15:30 前完成两车还车。',
+    action: '按 15:30 完成还车倒推 Day 7 节奏，7 月 22 日不再预留市区机动',
   },
   {
     id: 'backup',
     title: '独库封路备选',
-    deadline: '7 月 20 日睡前',
+    deadline: '7 月 19 日睡前',
     when: 'Day 6 备用方案',
     status: '备选',
     detail: '遇暴雨、落石、封路或预约失败，取消独库和唐布拉长线，改走那拉提周边慢游后返伊宁方向。',
@@ -80,11 +97,12 @@ const stops = {
   jorma: { id: 'jorma', name: '乔尔玛烈士陵园', coordinates: [84.358403, 43.652044], kind: 'scenic' },
   tangbula: { id: 'tangbula', name: '唐布拉百里画廊', coordinates: [83.720523, 43.678158], kind: 'photo' },
   nilka: { id: 'nilka', name: '尼勒克县', coordinates: [82.511884, 43.798627], kind: 'stay' },
+  airportService: { id: 'airport-service', name: '伊宁机场服务点', coordinates: [81.321945, 43.956744], kind: 'stay' },
 } satisfies Record<string, Stop>;
 
 export const tripDays: readonly TripDay[] = [
   {
-    id: 'day-1', date: '2026-07-16', weekday: '周四', title: '伊宁 → 赛里木湖',
+    id: 'day-1', date: '2026-07-15', weekday: '周三', title: '伊宁 → 赛里木湖',
     summary: '从河谷城市驶向大西洋最后一滴眼泪，把半天和日落完整留给湖。',
     distanceKm: 153, driveMinutes: 142, stay: '赛里木湖景区内或东门附近', intensity: '适中',
     route: [stops.yining, stops.sayramEast, stops.sayramMoon, stops.sayramSouth],
@@ -102,7 +120,7 @@ export const tripDays: readonly TripDay[] = [
     reminders: ['赛湖自驾名额与住宿提前预约', '湖区风大温差高，冲锋衣放在手边'],
   },
   {
-    id: 'day-2', date: '2026-07-17', weekday: '周五', title: '赛里木湖 → 果子沟 → 霍城 → 伊宁',
+    id: 'day-2', date: '2026-07-16', weekday: '周四', title: '赛里木湖 → 果子沟 → 霍城 → 伊宁',
     summary: '清晨湖光、峡谷桥梁与伊犁人文同框；薰衣草根据当天花况弹性处理。',
     distanceKm: 238, driveMinutes: 258, stay: '伊宁市区', intensity: '较满',
     route: [stops.sayramSouth, stops.guozigou, stops.lavender, stops.yining],
@@ -120,7 +138,7 @@ export const tripDays: readonly TripDay[] = [
     reminders: ['7 月中旬大田可能已收割，准备漫心忘忧谷或惠远古城备选', '当天驾驶较长，下午安排换驾'],
   },
   {
-    id: 'day-3', date: '2026-07-18', weekday: '周六', title: '伊宁 → 喀拉峻 → 特克斯',
+    id: 'day-3', date: '2026-07-17', weekday: '周五', title: '伊宁 → 喀拉峻 → 特克斯',
     summary: '进入立体草原，把时间留给鲜花台、猎鹰台与侧光下的草坡肌理。',
     distanceKm: 148, driveMinutes: 183, stay: '特克斯八卦城', intensity: '较满',
     route: [stops.yining, stops.kalajun, stops.tekes],
@@ -138,7 +156,7 @@ export const tripDays: readonly TripDay[] = [
     reminders: ['喀拉峻自驾或区间车提前预约', '草原风强，帽子需要防风绳'],
   },
   {
-    id: 'day-4', date: '2026-07-19', weekday: '周日', title: '特克斯 → 库尔德宁',
+    id: 'day-4', date: '2026-07-18', weekday: '周六', title: '特克斯 → 库尔德宁',
     summary: '从开阔草原切换到雪岭云杉，用溪流和森林光束做一天的主角。',
     distanceKm: 92, driveMinutes: 116, stay: '库尔德宁镇或景区周边', intensity: '轻松',
     route: [stops.tekes, stops.kuerdening],
@@ -156,7 +174,7 @@ export const tripDays: readonly TripDay[] = [
     reminders: ['林区天气变化快，雨具和擦镜布随身', '住宿条件较分散，提前确认热水与停车'],
   },
   {
-    id: 'day-5', date: '2026-07-20', weekday: '周一', title: '库尔德宁 → 那拉提',
+    id: 'day-5', date: '2026-07-19', weekday: '周日', title: '库尔德宁 → 那拉提',
     summary: '穿越伊犁河谷抵达空中草原，用下午侧光拍草坡、毡房与雪山。',
     distanceKm: 159, driveMinutes: 194, stay: '那拉提镇', intensity: '适中',
     route: [stops.kuerdening, stops.nalati],
@@ -174,7 +192,7 @@ export const tripDays: readonly TripDay[] = [
     reminders: ['独库预约、天气和车辆名单当晚二次确认', '只购买当天能完成的景区线路'],
   },
   {
-    id: 'day-6', date: '2026-07-21', weekday: '周二', title: '那拉提 → 独库北段 → 乔尔玛 → 唐布拉 → 尼勒克',
+    id: 'day-6', date: '2026-07-20', weekday: '周一', title: '那拉提 → 独库北段 → 乔尔玛 → 唐布拉 → 尼勒克',
     summary: '全程最重的一天：高山垭口、盘山公路与百里画廊连续切换。',
     distanceKm: 290, driveMinutes: 420, stay: '尼勒克县城', intensity: '高强度',
     route: [stops.nalati, { ...stops.jorma, kind: 'warning' }, stops.tangbula, stops.nilka],
@@ -193,22 +211,22 @@ export const tripDays: readonly TripDay[] = [
     reminders: ['2026 独库北段 08:00–19:00 分时预约，两辆车分别按那拉提入口预约', '当日不安排仙女湖徒步', '任何落石、暴雨或封路提示都优先执行现场管制'],
   },
   {
-    id: 'day-7', date: '2026-07-22', weekday: '周三', title: '尼勒克 → 伊宁',
-    summary: '沿喀什河谷收束旅程，为洗车、还车和航班留出完整机动时间。',
-    distanceKm: 118, driveMinutes: 106, stay: '伊宁市区（仅 7 月 23 日返航时）', intensity: '轻松',
-    route: [stops.nilka, stops.yining],
+    id: 'day-7', date: '2026-07-21', weekday: '周二', title: '尼勒克 → 伊宁机场服务点',
+    summary: '沿喀什河谷收束旅程，中午进伊宁完成加油洗车，按 15:30 还车节点结束车行部分。',
+    distanceKm: 118, driveMinutes: 106, stay: '伊宁机场附近', intensity: '轻松',
+    route: [stops.nilka, stops.yining, stops.airportService],
     timeline: [
-      { time: '09:30', activity: '尼勒克出发', detail: '睡足后返程，不额外绕远。' },
-      { time: '12:00', activity: '河谷短停', detail: '在合规观景点完成车队合影。' },
-      { time: '15:00', activity: '抵达伊宁', detail: '洗车、整理行李、检查遗落物。' },
-      { time: '18:00', activity: '还车或自由活动', detail: '当天航班以还车时间为硬节点。' },
+      { time: '08:30', activity: '尼勒克出发', detail: '早餐后直接返程，不再增加绕远或补拍。' },
+      { time: '11:30', activity: '进入伊宁', detail: '在合规观景点完成最后一组车队照片后进城。' },
+      { time: '12:30', activity: '加油洗车', detail: '补满油、清洁车厢并整理全部托运行李。' },
+      { time: '15:00', activity: '伊宁机场服务点', detail: '两车、证件、油表和车况照片全部对齐，准备交接。' },
+      { time: '15:30', activity: '完成还车', detail: '机场服务点办结交车，次日按早班机节奏出发。' },
     ],
-    highlights: ['喀什河谷', '车队合影', '伊犁河', '旅程收束'],
+    highlights: ['喀什河谷', '车队合影', '机场还车', '旅程收束'],
     photoSpots: [
       { name: '喀什河谷合规观景点', bestTime: '上午', shot: '两车 + 河谷公路', note: '相机放路外，拍摄者不站车道。' },
-      { name: '伊犁河', bestTime: '日落', shot: '桥影 + 河面晚霞', note: '仅 23 日返航时安排。' },
     ],
-    reminders: ['当天返航则取消伊犁河日落', '还车前拍摄车况、油表和里程'],
+    reminders: ['13:00 前完成加油与洗车，15:00 前必须到达伊宁机场服务点', '还车前拍摄车况、油表和里程'],
   },
 ] as const;
 
