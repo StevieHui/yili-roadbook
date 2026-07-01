@@ -50,7 +50,6 @@ export function CriticalAlerts() {
         <header className="alerts-heading">
           <p className="section-kicker">READ BEFORE DEPARTURE</p>
           <h2 id="alerts-title">关键提醒</h2>
-          <p>好看的计划必须先是安全、可执行的计划。</p>
         </header>
         <div className="alerts-list">
           {alerts.map((alert) => (
