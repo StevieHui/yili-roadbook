@@ -1388,8 +1388,9 @@ body,
 .immersive-roadbook .timeline li.is-departure > div { padding: 18px 22px; margin-top: -18px; background: color-mix(in srgb, var(--day-accent) 12%, white); border-left: 2px solid var(--day-accent); }
 .immersive-roadbook .photo-callout { padding: 34px; background: #12231f; color: #f6f2e7; border: 0; }
 .immersive-roadbook .photo-callout > .section-kicker,
-.immersive-roadbook .photo-note span { color: var(--day-accent); }
-.immersive-roadbook .photo-note span { border-color: color-mix(in srgb, var(--day-accent) 55%, transparent); }
+.immersive-roadbook .photo-note span { color: var(--day-accent); border-color: color-mix(in srgb, var(--day-accent) 55%, transparent); }
+.immersive-roadbook .photo-note h4 { color: #f6f2e7; }
+.immersive-roadbook .photo-note p { color: rgba(255,255,255,.78); }
 .immersive-roadbook .photo-note small { color: rgba(255,255,255,.58); }
 .immersive-roadbook .photo-note + .photo-note { border-color: rgba(255,255,255,.14); }
 .immersive-roadbook .day-footer { margin-top: 58px; border-color: rgba(23,32,29,.16); }
