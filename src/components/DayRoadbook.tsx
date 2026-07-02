@@ -43,7 +43,6 @@ export function DayRoadbook({ days, selectedDayId, onSelectDay }: DayRoadbookPro
         id={`roadbook-${selectedDay.id}`}
         aria-labelledby={`${selectedDay.id}-title`}
         key={selectedDay.id}
-        style={selectedDay.heroImage ? { backgroundImage: `url(${import.meta.env.BASE_URL}${selectedDay.heroImage.replace(/^\//, '')})` } : undefined}
       >
         <div className="day-rail">
           <span>DAY</span>

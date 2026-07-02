@@ -30,7 +30,6 @@ export interface TripDay {
   driveMinutes: number;
   stay: string;
   intensity: '轻松' | '适中' | '较满' | '高强度';
-  heroImage?: string;
   route: readonly Stop[];
   timeline: readonly TimelineItem[];
   highlights: readonly string[];
