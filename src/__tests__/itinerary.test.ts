@@ -56,6 +56,23 @@ describe('itinerary data', () => {
     ]);
   });
 
+  it('continues the counter-clockwise loop from Nalati town onto G218 and G217', () => {
+    const day5 = getDayById('day-5');
+    const day6 = getDayById('day-6');
+
+    expect(day5?.route.map((stop) => stop.name)).toEqual([
+      '库尔德宁景区',
+      '那拉提旅游风景区',
+      '那拉提镇（G218 出发点）',
+    ]);
+    expect(day6?.route[0]).toMatchObject({
+      name: '那拉提镇（G218 出发点）',
+      coordinates: [84.003814, 43.328244],
+    });
+    expect(day6?.route[0].coordinates[0]).toBeLessThan(day6?.routeControlPoints?.[0][0] ?? 0);
+    expect(day6?.route.map((stop) => stop.name)).not.toContain('那拉提旅游风景区');
+  });
+
   it('gives every day a unique, usable visual identity', () => {
     const imagePaths = tripDays.map((day) => day.visual.image);
 

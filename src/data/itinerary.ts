@@ -7,7 +7,7 @@ export const tripMeta = {
   returnWindow: '7 月 21 日 15:00 前到达伊宁机场服务点，15:30 前完成还车，随后前往缘居阁民宿；7 月 22 日按早班机节奏出发。',
   people: 8,
   cars: 2,
-  distanceKm: 1289,
+  distanceKm: 1304,
   drivingDays: 7,
 } as const;
 
@@ -161,6 +161,7 @@ const stops = {
   changqiaojun: { id: 'changqiaojun', name: '长桥郡', coordinates: [81.842606, 43.204965], kind: 'stay' },
   kuerdening: { id: 'kuerdening', name: '库尔德宁景区', coordinates: [82.663906, 43.283534], kind: 'stay' },
   nalati: { id: 'nalati', name: '那拉提旅游风景区', coordinates: [84.023757, 43.239725], kind: 'stay' },
+  nalatiTown: { id: 'nalati-town', name: '那拉提镇（G218 出发点）', coordinates: [84.003814, 43.328244], kind: 'stay' },
   jormaJunction: { id: 'jorma-junction', name: '乔尔玛路口（独库北段）', coordinates: [84.358403, 43.652044], kind: 'scenic' },
   tangbula: { id: 'tangbula', name: '唐布拉百里画廊', coordinates: [83.720523, 43.678158], kind: 'photo' },
   nilka: { id: 'nilka', name: '尼勒克县', coordinates: [82.511884, 43.798627], kind: 'stay' },
@@ -250,16 +251,16 @@ export const tripDays: readonly TripDay[] = [
     reminders: ['林区天气变化快，雨具和擦镜布随身', '住宿条件较分散，提前确认热水与停车'],
   },
   {
-    id: 'day-5', date: '2026-07-19', weekday: '周日', title: '库尔德宁 → 那拉提',
+    id: 'day-5', date: '2026-07-19', weekday: '周日', title: '库尔德宁 → 那拉提景区 → 那拉提镇',
     summary: '穿越伊犁河谷抵达空中草原，用下午侧光拍草坡、毡房与雪山。',
     visual: { image: '/images/roadbook/day-05-nalati.webp', alt: '那拉提空中草原、毡房与夕阳下的雪山', focalPoint: '64% 46%', accent: '#D2A361', landscape: '空中草原' },
-    distanceKm: 159, driveMinutes: 194, stay: '那拉提镇', intensity: '适中',
-    route: [stops.kuerdening, stops.nalati],
+    distanceKm: 174, driveMinutes: 215, stay: '那拉提镇', intensity: '适中',
+    route: [stops.kuerdening, stops.nalati, stops.nalatiTown],
     timeline: [
       { time: '08:30', activity: '库尔德宁出发', detail: '早餐后沿河谷向新源、那拉提。' },
       { time: '13:30', activity: '那拉提入园', detail: '主选空中草原，不重复购买多条线路。' },
       { time: '17:30', activity: '天界台', detail: '等侧光勾勒草坡与道路。' },
-      { time: '21:00', activity: '加油补给', detail: '为独库日加满油、备好早餐和水。' },
+      { time: '21:00', activity: '返回那拉提镇', detail: '离开景区后回镇区住宿，为独库日加满油、备好早餐和水。' },
     ],
     highlights: ['空中草原', '毡房牧场', '雪山草坡', '河谷日落'],
     photoSpots: [
@@ -273,11 +274,11 @@ export const tripDays: readonly TripDay[] = [
     summary: '全程最重的一天：高山垭口、盘山公路与百里画廊连续切换。',
     visual: { image: '/images/roadbook/day-06-duku.webp', alt: '独库公路盘旋穿越高山峡谷与阴晴云层', focalPoint: '56% 47%', accent: '#8FA7B2', landscape: '高山峡谷' },
     distanceKm: 290, driveMinutes: 420, stay: '尼勒克县城', intensity: '高强度',
-    route: [stops.nalati, stops.jormaJunction, stops.tangbula, stops.nilka],
+    route: [stops.nalatiTown, stops.jormaJunction, stops.tangbula, stops.nilka],
     routeControlPoints: [[84.340261, 43.308788], [84.310378, 43.638115]],
     timeline: [
       { time: '07:00', activity: '加油早餐', detail: '两车对讲、油量、预约码和路况全部确认。' },
-      { time: '08:00', activity: '进入独库', detail: '按预约入口和时段进入，不抢行。' },
+      { time: '08:00', activity: '向东接入 G217', detail: '从那拉提镇沿 G218 向东，接入 G217 后直接北上，按预约要求通行。' },
       { time: '12:00', activity: '乔尔玛路口', detail: '驶出独库北段后转向唐布拉方向，途中择安全地点午餐并轮换驾驶员。' },
       { time: '15:00', activity: '百里画廊', detail: '只在正式停车带选择 2–3 个机位。' },
       { time: '20:30', activity: '抵达尼勒克', detail: '不增加仙女湖徒步或夜间山路。' },
