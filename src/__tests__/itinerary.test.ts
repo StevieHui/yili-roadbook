@@ -43,6 +43,15 @@ describe('itinerary data', () => {
     expect(getDayById('day-6')?.title).toContain('独库');
   });
 
+  it('keeps day 6 on the Duku north section without routing to the martyrs cemetery', () => {
+    const day6 = getDayById('day-6');
+    const routeNames = day6?.route.map((stop) => stop.name) ?? [];
+    const day6Copy = JSON.stringify(day6);
+
+    expect(routeNames).toContain('乔尔玛路口（独库北段）');
+    expect(day6Copy).not.toMatch(/烈士|陵园|纪念地/);
+  });
+
   it('gives every day a unique, usable visual identity', () => {
     const imagePaths = tripDays.map((day) => day.visual.image);
 
@@ -86,7 +95,26 @@ describe('itinerary data', () => {
       .getAllByRole('listitem')
       .map((item) => item.textContent);
 
-    expect(stayItems).toEqual(['伊宁', '伊宁', '特克斯', '特克斯', '库尔德宁', '那拉提', '尼勒克', '伊宁机场']);
+    expect(stayItems).toEqual(['伊宁', '伊宁', '特克斯', '特克斯', '库尔德宁', '那拉提', '尼勒克', '伊宁']);
+  });
+
+  it('uses the confirmed lodgings on July 14, 15, 16, 17, and 21', () => {
+    const [day1, day2, day3, day4, , , day7] = tripDays;
+
+    expect(arrivalDay.stay).toBe('缘居阁民宿');
+    expect(day1.stay).toBe('缘居阁民宿');
+    expect(day1.route[0].name).toBe('缘居阁民宿');
+    expect(day1.route.at(-1)?.name).toBe('缘居阁民宿');
+    expect(day2.route[0].name).toBe('缘居阁民宿');
+    expect(day2.stay).toBe('长桥郡');
+    expect(day2.route.at(-1)?.name).toBe('长桥郡');
+    expect(day3.stay).toBe('长桥郡');
+    expect(day3.route[0].name).toBe('长桥郡');
+    expect(day3.route.at(-1)?.name).toBe('长桥郡');
+    expect(day4.route[0].name).toBe('长桥郡');
+    expect(day7.stay).toBe('缘居阁民宿');
+    expect(day7.route.at(-1)?.name).toBe('伊宁机场服务点');
+    expect(day7.mapOnlyStops?.map((stop) => stop.name)).toEqual(['缘居阁民宿']);
   });
 
   it('keeps the friday departure copy and day 7 return completion exact', () => {
@@ -97,8 +125,8 @@ describe('itinerary data', () => {
       expect.arrayContaining([
         expect.objectContaining({
           time: '09:00',
-          activity: '特克斯出发',
-          detail: '睡足后从容出发，车程仅半小时。连住两晚不用搬行李。',
+          activity: '长桥郡出发',
+          detail: '睡足后从长桥郡从容出发，车程仅半小时。连住两晚不用搬行李。',
         }),
       ]),
     );
@@ -107,7 +135,7 @@ describe('itinerary data', () => {
         expect.objectContaining({
           time: '15:30',
           activity: '完成还车',
-          detail: '机场服务点办结交车，次日按早班机节奏出发。',
+          detail: '机场服务点办结交车后前往天津北路 148 号缘居阁民宿入住，次日按早班机节奏出发。',
         }),
         expect.objectContaining({
           time: '15:00',
@@ -116,7 +144,7 @@ describe('itinerary data', () => {
       ]),
     );
     expect(day7?.route.map((stop) => stop.name)).toContain('伊宁机场服务点');
-    expect(tripMeta.returnWindow).toBe('7 月 21 日 15:00 前到达伊宁机场服务点，15:30 前完成还车；7 月 22 日按早班机节奏直接出发。');
+    expect(tripMeta.returnWindow).toBe('7 月 21 日 15:00 前到达伊宁机场服务点，15:30 前完成还车，随后前往缘居阁民宿；7 月 22 日按早班机节奏出发。');
   });
 });
 

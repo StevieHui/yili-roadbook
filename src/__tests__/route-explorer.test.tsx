@@ -36,7 +36,7 @@ describe('RouteExplorer', () => {
   it('shows the stop detail label and first stop name by default', () => {
     render(<RouteExplorer days={[tripDays[0]]} selectedDayId="day-1" onSelectDay={vi.fn()} />);
     expect(within(getDetailPanel()).getByText('当前停靠点')).toBeVisible();
-    expect(within(getDetailPanel()).getByText('伊宁市')).toBeVisible();
+    expect(within(getDetailPanel()).getByText('缘居阁民宿')).toBeVisible();
   });
 
   it('renders the day title, summary, distance, and intensity in the detail aside', () => {

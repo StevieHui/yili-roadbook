@@ -1,6 +1,8 @@
 import { arrivalDay, tripDays, tripMeta } from '../data/itinerary';
 
 const stayLabels = [
+  ['缘居阁', '伊宁'],
+  ['长桥郡', '特克斯'],
   ['赛里木湖', '赛里木湖'],
   ['特克斯', '特克斯'],
   ['库尔德宁', '库尔德宁'],

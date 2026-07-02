@@ -168,7 +168,7 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
           if (line) map.add(line);
           else setRouteErrors((current) => ({ ...current, [day.id]: true }));
 
-          const markers = day.route.map((stop, stopIndex) => {
+          const routeMarkers = day.route.map((stop, stopIndex) => {
             const marker = new AMap.Marker({
               position: stop.coordinates,
               anchor: 'center',
@@ -179,8 +179,21 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
             map.add(marker);
             return marker;
           });
+          const mapOnlyMarkers = (day.mapOnlyStops ?? []).map((stop) => {
+            const marker = new AMap.Marker({
+              position: stop.coordinates,
+              anchor: 'center',
+              zIndex: day.id === selectedDayIdRef.current ? 30 : 12,
+              content: `<span class="amap-trip-marker marker-stay" style="--marker-color:${color}">住</span>`,
+              title: stop.name,
+            });
+            map.add(marker);
+            return marker;
+          });
+          const markers = [...routeMarkers, ...mapOnlyMarkers];
 
-          const attractionMarkers = day.route.slice(1).map((stop) => {
+          const attractionStops = [...day.route.slice(1), ...(day.mapOnlyStops ?? [])];
+          const attractionMarkers = attractionStops.map((stop) => {
             const attraction = stopToAttraction(stop);
             const marker = new AMap.Marker({
               position: attraction.coordinates,
@@ -336,7 +349,12 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
           <div className="map-fallback" role="status">
             <strong>地图暂时无法加载</strong>
             <p>{error}。上方可点击路线图仍可正常使用。</p>
-            <ol>{days.map((day) => <li key={day.id}>{day.route.map((stop) => stop.name).join(' → ')}</li>)}</ol>
+            <ol>{days.map((day) => (
+              <li key={day.id}>
+                {day.route.map((stop) => stop.name).join(' → ')}
+                {day.mapOnlyStops?.length ? `（住宿标记：${day.mapOnlyStops.map((stop) => stop.name).join('、')}）` : ''}
+              </li>
+            ))}</ol>
           </div>
         )}
       </div>
