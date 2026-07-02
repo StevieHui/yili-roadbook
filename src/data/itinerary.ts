@@ -274,6 +274,7 @@ export const tripDays: readonly TripDay[] = [
     visual: { image: '/images/roadbook/day-06-duku.webp', alt: '独库公路盘旋穿越高山峡谷与阴晴云层', focalPoint: '56% 47%', accent: '#8FA7B2', landscape: '高山峡谷' },
     distanceKm: 290, driveMinutes: 420, stay: '尼勒克县城', intensity: '高强度',
     route: [stops.nalati, stops.jormaJunction, stops.tangbula, stops.nilka],
+    routeControlPoints: [[84.340261, 43.308788], [84.310378, 43.638115]],
     timeline: [
       { time: '07:00', activity: '加油早餐', detail: '两车对讲、油量、预约码和路况全部确认。' },
       { time: '08:00', activity: '进入独库', detail: '按预约入口和时段进入，不抢行。' },

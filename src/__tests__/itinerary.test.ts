@@ -50,6 +50,10 @@ describe('itinerary data', () => {
 
     expect(routeNames).toContain('乔尔玛路口（独库北段）');
     expect(day6Copy).not.toMatch(/烈士|陵园|纪念地/);
+    expect(day6?.routeControlPoints).toEqual([
+      [84.340261, 43.308788],
+      [84.310378, 43.638115],
+    ]);
   });
 
   it('gives every day a unique, usable visual identity', () => {

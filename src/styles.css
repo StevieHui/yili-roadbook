@@ -1386,6 +1386,15 @@ body,
 .immersive-roadbook .timeline li > div strong { font-size: 16px; }
 .immersive-roadbook .timeline p { max-width: 580px; margin-top: 8px; font-size: 14px; line-height: 1.75; }
 .immersive-roadbook .timeline li.is-departure > div { padding: 18px 22px; margin-top: -18px; background: color-mix(in srgb, var(--day-accent) 12%, white); border-left: 2px solid var(--day-accent); }
+.daily-route-snapshot { position: relative; aspect-ratio: 16 / 9; margin: 42px 0 0; overflow: hidden; border-radius: 4px; background: #17201d; box-shadow: 0 22px 55px rgba(23,32,29,.18); }
+.daily-route-block { margin-top: clamp(64px, 8vw, 96px); }
+.daily-route-block .day-section-heading { margin-bottom: 0; }
+.daily-route-snapshot-canvas { width: 100%; height: 100%; pointer-events: none; }
+.daily-route-snapshot-status { position: absolute; inset: 0; display: grid; place-content: center; gap: 8px; padding: 24px; text-align: center; color: rgba(255,255,255,.82); background: rgba(12,24,22,.72); font-size: 13px; }
+.daily-route-snapshot-status.is-error strong { color: white; font-size: 16px; }
+.daily-route-snapshot-status.is-error span { max-width: 640px; line-height: 1.7; }
+.daily-route-marker { display: grid; width: 28px; height: 28px; place-items: center; border: 2px solid white; border-radius: 50%; color: white; background: #d65a3a; box-shadow: 0 3px 12px rgba(0,0,0,.45); font: 700 12px/1 sans-serif; }
+.daily-route-marker.is-lodging { background: #315f8c; }
 .immersive-roadbook .photo-callout { padding: 34px; background: #12231f; color: #f6f2e7; border: 0; }
 .immersive-roadbook .photo-callout > .section-kicker,
 .immersive-roadbook .photo-note span { color: var(--day-accent); border-color: color-mix(in srgb, var(--day-accent) 55%, transparent); }
@@ -1426,6 +1435,7 @@ body,
   .immersive-roadbook .timeline li::before { left: 48px; }
   .immersive-roadbook .timeline li::after { left: 52px; }
   .immersive-roadbook .timeline li > div { padding-left: 16px; }
+  .daily-route-snapshot { aspect-ratio: 4 / 3; margin-top: 30px; }
   .immersive-roadbook .photo-callout { padding: 28px 24px; }
 }
 

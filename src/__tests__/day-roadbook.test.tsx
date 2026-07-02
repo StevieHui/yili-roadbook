@@ -3,6 +3,12 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { DayRoadbook } from '../components/DayRoadbook';
 import { tripDays } from '../data/itinerary';
 
+vi.mock('../map/DailyRouteSnapshot', () => ({
+  DailyRouteSnapshot: ({ day }: { day: { id: string } }) => (
+    <div data-testid="daily-route-snapshot" data-day-id={day.id} />
+  ),
+}));
+
 describe('immersive daily roadbook', () => {
   afterEach(() => cleanup());
 
@@ -36,6 +42,18 @@ describe('immersive daily roadbook', () => {
     fireEvent.error(screen.getByRole('img', { name: /赛里木湖湛蓝湖面/ }));
     expect(screen.getByTestId('day-hero')).toHaveClass('is-image-unavailable');
     expect(screen.getByTestId('day-hero')).toHaveTextContent('伊宁 → 赛里木湖');
+  });
+
+  it('renders exactly one satellite snapshot for the selected day', () => {
+    const { rerender } = render(
+      <DayRoadbook days={tripDays} selectedDayId="day-1" onSelectDay={() => undefined} />,
+    );
+
+    expect(screen.getAllByTestId('daily-route-snapshot')).toHaveLength(1);
+    expect(screen.getByTestId('daily-route-snapshot')).toHaveAttribute('data-day-id', 'day-1');
+    rerender(<DayRoadbook days={tripDays} selectedDayId="day-6" onSelectDay={() => undefined} />);
+    expect(screen.getAllByTestId('daily-route-snapshot')).toHaveLength(1);
+    expect(screen.getByTestId('daily-route-snapshot')).toHaveAttribute('data-day-id', 'day-6');
   });
 
   it('keeps destination names together while allowing route-level wrapping', () => {

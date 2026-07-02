@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Coordinates, Stop, TripDay } from '../types';
 import { loadAmap, type AMapNamespace } from './amapLoader';
-import { extractDrivingPath, normalizeNearbyPlaces, type MapAttraction } from './routePlanning';
+import { searchDrivingPathWithRetry } from './drivingRoute';
+import { normalizeNearbyPlaces, type MapAttraction } from './routePlanning';
 
 const dayColors = ['#e46f3a', '#e5b84b', '#3d8d9e', '#6f9464', '#926fa3', '#d65a59', '#315f8c'];
 
@@ -38,30 +39,6 @@ function stopToAttraction(stop: Stop): MapAttraction {
     safetyNote: mapped.safetyNote,
     markerClass: mapped.markerClass,
   };
-}
-
-function searchDrivingPath(AMap: AMapNamespace, day: TripDay): Promise<Coordinates[] | null> {
-  return new Promise((resolve) => {
-    const driving = new AMap.Driving({
-      policy: AMap.DrivingPolicy?.LEAST_TIME,
-      hideMarkers: true,
-      showTraffic: false,
-      autoFitView: false,
-    });
-    const origin = day.route[0].coordinates;
-    const destination = day.route.at(-1)!.coordinates;
-    const waypoints = day.route.slice(1, -1).map((stop) => stop.coordinates);
-    driving.search(origin, destination, { waypoints }, (status: string, result: any) => {
-      resolve(status === 'complete' ? extractDrivingPath(result) : null);
-    });
-  });
-}
-
-async function searchDrivingPathWithRetry(AMap: AMapNamespace, day: TripDay) {
-  const first = await searchDrivingPath(AMap, day);
-  if (first) return first;
-  await new Promise((resolve) => setTimeout(resolve, 600));
-  return searchDrivingPath(AMap, day);
 }
 
 function searchNearbyAt(AMap: AMapNamespace, center: Coordinates): Promise<any[]> {

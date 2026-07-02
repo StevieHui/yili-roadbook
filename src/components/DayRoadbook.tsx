@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { DailyRouteSnapshot } from '../map/DailyRouteSnapshot';
 import type { TripDay } from '../types';
 
 interface DayRoadbookProps {
@@ -145,6 +146,16 @@ export function DayRoadbook({ days, selectedDayId, onSelectDay }: DayRoadbookPro
                 ))}
               </aside>
             </div>
+            <section className="daily-route-block" aria-labelledby={`${selectedDay.id}-map-title`}>
+              <header className="day-section-heading">
+                <div>
+                  <p className="section-kicker">SATELLITE ROUTE</p>
+                  <h3 id={`${selectedDay.id}-map-title`}>今日卫星路线</h3>
+                </div>
+                <p>静态显示当天轨迹与停靠点，不包含实时路况。</p>
+              </header>
+              <DailyRouteSnapshot day={selectedDay} />
+            </section>
             <footer className="day-footer"><p><span>今晚住</span>{selectedDay.stay}</p></footer>
           </div>
         </div>

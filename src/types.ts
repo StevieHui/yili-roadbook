@@ -40,6 +40,7 @@ export interface TripDay {
   stay: string;
   intensity: '轻松' | '适中' | '较满' | '高强度';
   route: readonly Stop[];
+  routeControlPoints?: readonly Coordinates[];
   mapOnlyStops?: readonly Stop[];
   timeline: readonly TimelineItem[];
   highlights: readonly string[];
