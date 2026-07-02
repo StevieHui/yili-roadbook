@@ -248,7 +248,13 @@ a { color: inherit; }
 .roadbook-tabs button span { font-size: 10px; letter-spacing: .14em; }
 .roadbook-tabs button strong { font-size: 18px; font-family: Georgia, serif; }
 .roadbook-tabs button small { font-size: 11px; }
-.day-roadbook { width: min(960px, calc(100% - 48px)); margin: 0 auto; display: grid; grid-template-columns: 100px 1fr; gap: 28px; padding: 48px 0 80px; scroll-margin-top: 70px; }
+.day-hero { width: 100%; height: 340px; background-size: cover; background-position: center; position: relative; margin-bottom: 0; grid-column: 1 / -1; animation: bg-breathe 20s ease-in-out infinite; }
+.day-hero-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(18,53,47,.92) 0%, rgba(18,53,47,.35) 45%, rgba(18,53,47,.08) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 48px 48px 40px; color: #fff; }
+.day-hero-overlay span { font-size: 11px; letter-spacing: .18em; opacity: .7; }
+.day-hero-overlay h3 { margin: 12px 0 8px; font: clamp(28px, 4vw, 48px)/1.12 "Songti SC", serif; letter-spacing: -.02em; color: #fff; max-width: 720px; }
+.day-hero-overlay p { font-size: 13px; opacity: .8; letter-spacing: .04em; max-width: 720px; }
+.day-roadbook { width: min(960px, calc(100% - 48px)); margin: 0 auto; display: grid; grid-template-columns: 100px 1fr; gap: 28px; padding: 0 0 80px; scroll-margin-top: 70px; }
+.day-roadbook:has(.day-hero) { padding-top: 0; }
 .day-rail { display: flex; flex-direction: column; align-items: flex-start; padding-left: 6px; }
 .day-rail span, .day-rail small { font-size: 10px; letter-spacing: .16em; color: rgba(23,32,29,.5); }
 .day-rail strong { margin-top: 4px; font: 64px/.9 Georgia, serif; color: var(--sunset); }
@@ -401,6 +407,8 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   .calendar-strip button { min-height: 175px; }
   .calendar-strip button:nth-child(odd) { border-left: 0; }
   .roadbook-tabs { width: calc(100% - 32px); }
+	  .day-hero { height: 220px; }
+	  .day-hero-overlay { padding: 28px 24px 24px; }
   .day-roadbook { width: calc(100% - 32px); grid-template-columns: 1fr; gap: 0; padding: 36px 0 56px; }
   .day-rail { flex-direction: row; align-items: baseline; gap: 8px; padding: 0 0 20px; }
   .day-rail strong { font-size: 38px; }
@@ -1279,7 +1287,7 @@ body,
 @media print {
   :root { background: white; }
   body { color: #17201d; background: white; font-size: 10pt; }
-  .site-header, .map-status, .map-legend, .checklist-actions, .photo-guide { display: none !important; }
+  .site-header, .map-status, .map-legend, .checklist-actions, .photo-guide, .day-hero { display: none !important; }
   .hero { min-height: auto; padding: 28px 0; color: #17201d; background: none; }
   .hero-grid, .hero-index, .hero-caption { display: none; }
   .hero h1 { font-size: 42pt; text-shadow: none; }

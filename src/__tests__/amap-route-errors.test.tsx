@@ -38,6 +38,7 @@ vi.mock('../map/amapLoader', () => ({
       setOptions() {}
     },
     Scale: class {},
+    TileLayer: { Traffic: class { setOpacity() {} } },
     ToolBar: class {},
   }),
 }));

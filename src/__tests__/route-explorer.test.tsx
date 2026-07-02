@@ -17,6 +17,7 @@ vi.mock('../map/amapLoader', () => ({
     Pixel: class { constructor(_x: number, _y: number) {} },
     Polyline: class { setOptions() {} },
     Scale: class {},
+    TileLayer: { Traffic: class { setOpacity() {} } },
     ToolBar: class {},
   }),
 }));

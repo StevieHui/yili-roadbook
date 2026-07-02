@@ -44,6 +44,19 @@ export function DayRoadbook({ days, selectedDayId, onSelectDay }: DayRoadbookPro
         aria-labelledby={`${selectedDay.id}-title`}
         key={selectedDay.id}
       >
+        {selectedDay.heroImage && (
+          <div
+            className="day-hero"
+            style={{ backgroundImage: `url(${selectedDay.heroImage})` }}
+            aria-hidden="true"
+          >
+            <div className="day-hero-overlay">
+              <span>DAY {String(dayIndex + 1).padStart(2, '0')}</span>
+              <h3>{selectedDay.title}</h3>
+              <p>{selectedDay.route.map((stop) => stop.name).join(' → ')}</p>
+            </div>
+          </div>
+        )}
         <div className="day-rail">
           <span>DAY</span>
           <strong>{String(dayIndex + 1).padStart(2, '0')}</strong>

@@ -108,12 +108,14 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
   const infoWindowRef = useRef<any>(null);
   const overlaysRef = useRef<DayOverlay[]>([]);
   const nearbyMarkersRef = useRef<any[]>([]);
+  const trafficLayerRef = useRef<any>(null);
   const selectedDayIdRef = useRef(selectedDayId);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [routeErrors, setRouteErrors] = useState<Record<string, boolean>>({});
   const [showCurated, setShowCurated] = useState(true);
   const [showNearby, setShowNearby] = useState(false);
+  const [showTraffic, setShowTraffic] = useState(false);
   const [nearbyLoading, setNearbyLoading] = useState(false);
   const [retryVersion, setRetryVersion] = useState(0);
 
@@ -141,6 +143,9 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
         const infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -32), closeWhenClickMap: true });
         infoWindowRef.current = infoWindow;
         mapRef.current = map;
+        const trafficLayer = new AMap.TileLayer.Traffic({ autoRefresh: true, interval: 180 });
+        trafficLayer.setOpacity(0.7);
+        trafficLayerRef.current = trafficLayer;
 
         const prioritizedDays = [...days].sort((a, b) => Number(b.id === selectedDayIdRef.current) - Number(a.id === selectedDayIdRef.current));
         const overlays: DayOverlay[] = [];
@@ -251,6 +256,13 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
   }, [selectedDayId, showCurated]);
 
   useEffect(() => {
+    const layer = trafficLayerRef.current;
+    const map = mapRef.current;
+    if (!layer || !map) return;
+    if (showTraffic) { map.add(layer); } else { map.remove(layer); }
+  }, [showTraffic]);
+
+  useEffect(() => {
     let cancelled = false;
     async function updateNearby() {
       const map = mapRef.current;
@@ -308,6 +320,7 @@ export function AmapRouteMap({ days, selectedDayId, onSelectAttraction }: AmapRo
         <div className="map-layer-controls" aria-label="地图图层">
           <label><input type="checkbox" checked={showCurated} onChange={(event) => setShowCurated(event.target.checked)} />精选看点</label>
           <label><input type="checkbox" checked={showNearby} onChange={(event) => setShowNearby(event.target.checked)} />高德周边</label>
+          <label><input type="checkbox" checked={showTraffic} onChange={(event) => setShowTraffic(event.target.checked)} />实时路况</label>
           {nearbyLoading && <span>搜索中...</span>}
         </div>
         {loading && !error && <div className="map-status">正在加载高德地图...</div>}
