@@ -17,6 +17,15 @@ function assetUrl(path: string) {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 }
 
+function routeTitleSegments(title: string) {
+  const parts = title.split(/\s*(→|·)\s*/).filter(Boolean);
+  const segments = [parts[0]];
+  for (let index = 1; index < parts.length; index += 2) {
+    segments.push(` ${parts[index]} ${parts[index + 1]}`);
+  }
+  return segments;
+}
+
 export function DayRoadbook({ days, selectedDayId, onSelectDay }: DayRoadbookProps) {
   const selectedDay = days.find((day) => day.id === selectedDayId) ?? days[0];
   const dayIndex = days.findIndex((day) => day.id === selectedDay.id);
@@ -93,7 +102,11 @@ export function DayRoadbook({ days, selectedDayId, onSelectDay }: DayRoadbookPro
             </div>
             <div className="day-hero-main">
               <p className="day-landscape">{selectedDay.visual.landscape}</p>
-              <h3 id={`${selectedDay.id}-title`}>{selectedDay.title}</h3>
+              <h3 id={`${selectedDay.id}-title`}>
+                {routeTitleSegments(selectedDay.title).map((segment) => (
+                  <span className="route-title-segment" key={segment}>{segment}</span>
+                ))}
+              </h3>
               <p className="route-string">{selectedDay.route.map((stop) => stop.name).join(' → ')}</p>
               <p className="day-summary">{selectedDay.summary}</p>
             </div>
@@ -102,14 +115,14 @@ export function DayRoadbook({ days, selectedDayId, onSelectDay }: DayRoadbookPro
               <span><small>驾驶</small><strong>{formatMinutes(selectedDay.driveMinutes)}</strong></span>
               <span><small>强度</small><strong>{selectedDay.intensity}</strong></span>
             </div>
-            <a className="day-scroll-cue" href="#day-schedule"><span>查看当天节奏</span><i aria-hidden="true">↓</i></a>
+            <a className="day-scroll-cue" href="#day-schedule"><span>查看行程</span><i aria-hidden="true">↓</i></a>
           </div>
         </div>
 
         <div className="day-roadbook" id="day-schedule">
           <div className="day-main">
             <header className="day-section-heading">
-              <div><p className="section-kicker">ON THE ROAD</p><h3>当天节奏</h3></div>
+              <div><p className="section-kicker">ON THE ROAD</p><h3>行程</h3></div>
               <p>按时间执行，给风景和路况留出余量。</p>
             </header>
             <div className="day-content-grid">

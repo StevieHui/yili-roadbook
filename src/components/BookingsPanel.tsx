@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { reservationTasks } from '../data/itinerary';
 import type { ReservationTask, TripDay } from '../types';
 
@@ -40,22 +41,22 @@ export function BookingsPanel({ days, selectedDayId, onSelectDay }: BookingsPane
         <p>按天查看去哪里、是否要提前预约、最晚确认时间。先处理“必须预约”，再看建议项和备选方案。</p>
       </header>
 
-      <div className="booking-itinerary">
-        <div className="booking-day-grid" role="list" aria-label="每日预约行程">
-          {days.map((day, index) => {
+      <div className="booking-itinerary" aria-label="每日预约行程">
+        {days.map((day, index) => {
             const [, month, date] = day.date.split('-');
             const tasks = getDayTasks(day);
             const statusText = getStatusText(tasks);
+            const isSelected = day.id === selectedDay.id;
 
             return (
+              <Fragment key={day.id}>
               <article
-                className={`booking-day-card ${day.id === selectedDay.id ? 'is-active' : ''}`}
+                className={`booking-day-card ${isSelected ? 'is-active' : ''}`}
                 aria-label={`DAY ${String(index + 1).padStart(2, '0')} ${day.title} ${statusText}`}
-                key={day.id}
               >
                 <button
                   type="button"
-                  aria-pressed={day.id === selectedDay.id}
+                  aria-pressed={isSelected}
                   aria-label={`${Number(month)}月${Number(date)}日 ${day.weekday} ${day.title}`}
                   onClick={() => onSelectDay(day.id)}
                 >
@@ -69,37 +70,34 @@ export function BookingsPanel({ days, selectedDayId, onSelectDay }: BookingsPane
                 </div>
                 <strong className={`booking-status status-${statusText}`}>{statusText}</strong>
               </article>
+              {isSelected && (
+                <aside className="booking-detail" role="region" aria-label="当天预约时间点">
+                    <span>{selectedDay.date} · {selectedDay.weekday}</span>
+                    <h2>{selectedDay.title}</h2>
+                    <p>{selectedDay.stay}</p>
+                    <div className="booking-detail-list">
+                      {selectedTasks.map((task) => (
+                        <article className={`booking-detail-card booking-${task.status}`} key={task.id}>
+                          <div>
+                            <span>{task.status}</span>
+                            <h3>{task.title}</h3>
+                          </div>
+                          <strong>{task.deadline}</strong>
+                          <ul className="booking-key-points">
+                            {task.keyPoints.map((point) => <li key={point}>{point}</li>)}
+                          </ul>
+                          <div className="booking-channels">
+                            {task.channels.map((channel) => <span key={channel}>{channel}</span>)}
+                          </div>
+                          <em>{task.action}</em>
+                        </article>
+                      ))}
+                    </div>
+                </aside>
+              )}
+              </Fragment>
             );
           })}
-        </div>
-
-        <aside className="booking-detail" aria-label={`${selectedDay.title}预约详情`}>
-          <span>{selectedDay.date} · {selectedDay.weekday}</span>
-          <h2>{selectedDay.title}</h2>
-          <p>{selectedDay.stay}</p>
-          <div className="booking-detail-list">
-            {selectedTasks.map((task) => (
-              <article className={`booking-detail-card booking-${task.status}`} key={task.id}>
-                <div>
-                  <span>{task.status}</span>
-                  <h3>{task.title}</h3>
-                </div>
-                <strong>{task.deadline}</strong>
-                <ul className="booking-key-points">
-                  {task.keyPoints.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-                <div className="booking-channels">
-                  {task.channels.map((ch) => (
-                    <span key={ch}>{ch}</span>
-                  ))}
-                </div>
-                <em>{task.action}</em>
-              </article>
-            ))}
-          </div>
-        </aside>
       </div>
     </section>
   );

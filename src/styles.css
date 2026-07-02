@@ -804,6 +804,7 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   grid-template-columns: minmax(0, 1fr) 360px;
   gap: 14px;
 }
+.booking-itinerary > .booking-day-card { grid-column: 1; }
 .booking-day-grid {
   display: grid;
   gap: 8px;
@@ -893,6 +894,8 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   white-space: nowrap;
 }
 .booking-detail {
+  grid-column: 2;
+  grid-row: 1 / span 7;
   align-self: start;
   position: sticky;
   top: 88px;
@@ -1238,6 +1241,7 @@ body,
   .booking-status { justify-self: start; }
   .booking-status { justify-self: start; }
   .booking-detail { position: static; }
+  .booking-detail { grid-column: 1; grid-row: auto; }
   .day-launcher { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -1358,6 +1362,7 @@ body,
 .day-hero-index small { margin-top: 16px; color: rgba(255,255,255,.72); font-size: 11px; letter-spacing: .16em; }
 .day-landscape { margin: 0 0 16px; color: var(--day-accent); font-size: 12px; font-weight: 700; letter-spacing: .22em; }
 .day-hero-main h3 { max-width: 820px; margin: 0; font: clamp(42px, 6.6vw, 92px)/.98 "Songti SC", "STSong", Georgia, serif; letter-spacing: -.055em; text-wrap: balance; }
+.route-title-segment { display: inline-block; white-space: nowrap; }
 .day-hero-main .route-string { margin: 24px 0 0; color: rgba(255,255,255,.8); font-size: 12px; letter-spacing: .04em; }
 .day-hero-main .day-summary { max-width: 650px; margin: 18px 0 0; color: rgba(255,255,255,.74); font-size: 15px; line-height: 1.8; }
 .day-hero .day-metrics { grid-column: 2; width: min(620px, 100%); padding-top: 24px; justify-content: flex-start; gap: 0; border-top: 1px solid rgba(255,255,255,.28); }
