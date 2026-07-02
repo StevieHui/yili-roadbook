@@ -20,12 +20,21 @@ export interface TimelineItem {
   detail: string;
 }
 
+export interface DayVisual {
+  image: string;
+  alt: string;
+  focalPoint: string;
+  accent: `#${string}`;
+  landscape: string;
+}
+
 export interface TripDay {
   id: `day-${1 | 2 | 3 | 4 | 5 | 6 | 7}`;
   date: string;
   weekday: string;
   title: string;
   summary: string;
+  visual: DayVisual;
   distanceKm: number;
   driveMinutes: number;
   stay: string;

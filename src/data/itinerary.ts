@@ -168,6 +168,7 @@ export const tripDays: readonly TripDay[] = [
   {
     id: 'day-1', date: '2026-07-15', weekday: '周三', title: '伊宁 → 赛里木湖 · 当日往返',
     summary: '把一天完整交给大西洋最后一滴眼泪，环湖、拍照、看果子沟大桥，天黑前返回伊宁。',
+    visual: { image: '/images/roadbook/day-01-sayram.webp', alt: '赛里木湖湛蓝湖面、雪山与湖岸公路', focalPoint: '62% 46%', accent: '#72B9C7', landscape: '高山湖泊' },
     distanceKm: 360, driveMinutes: 300, stay: '伊宁市区', intensity: '较满',
     route: [stops.yining, stops.sayramEast, stops.sayramMoon, stops.sayramSouth, stops.guozigou, stops.yining],
     timeline: [
@@ -188,6 +189,7 @@ export const tripDays: readonly TripDay[] = [
   {
     id: 'day-2', date: '2026-07-16', weekday: '周四', title: '伊宁 → 伊昭公路 → 昭苏 → 特克斯',
     summary: '翻越乌孙山，从白石峰到安格列特达坂，穿越"小独库"后进入广袤昭苏草原，傍晚抵达八卦城。',
+    visual: { image: '/images/roadbook/day-02-yizhao.webp', alt: '伊昭公路穿过昭苏草原并伸向远处雪山', focalPoint: '55% 52%', accent: '#A7B66C', landscape: '雪山公路' },
     distanceKm: 210, driveMinutes: 270, stay: '特克斯八卦城', intensity: '较满',
     route: [stops.yining, stops.baishifeng, stops.angellet, stops.zhaosu, stops.tekes],
     timeline: [
@@ -208,6 +210,7 @@ export const tripDays: readonly TripDay[] = [
   {
     id: 'day-3', date: '2026-07-17', weekday: '周五', title: '特克斯 → 喀拉峻草原',
     summary: '从八卦城轻松出发，把一整天留给鲜花台、猎鹰台和立体草原的侧光草坡。',
+    visual: { image: '/images/roadbook/day-03-kalajun.webp', alt: '喀拉峻起伏草原、牧群与傍晚侧光', focalPoint: '58% 42%', accent: '#C7A85F', landscape: '立体草原' },
     distanceKm: 60, driveMinutes: 60, stay: '特克斯八卦城', intensity: '轻松',
     route: [stops.tekes, stops.kalajun, stops.tekes],
     timeline: [
@@ -227,6 +230,7 @@ export const tripDays: readonly TripDay[] = [
   {
     id: 'day-4', date: '2026-07-18', weekday: '周六', title: '特克斯 → 库尔德宁',
     summary: '从开阔草原切换到雪岭云杉，用溪流和森林光束做一天的主角。',
+    visual: { image: '/images/roadbook/day-04-kuerdening.webp', alt: '库尔德宁山谷中的雪岭云杉与薄雾溪流', focalPoint: '60% 45%', accent: '#78A78B', landscape: '雪岭云杉' },
     distanceKm: 92, driveMinutes: 116, stay: '库尔德宁镇或景区周边', intensity: '轻松',
     route: [stops.tekes, stops.kuerdening],
     timeline: [
@@ -245,6 +249,7 @@ export const tripDays: readonly TripDay[] = [
   {
     id: 'day-5', date: '2026-07-19', weekday: '周日', title: '库尔德宁 → 那拉提',
     summary: '穿越伊犁河谷抵达空中草原，用下午侧光拍草坡、毡房与雪山。',
+    visual: { image: '/images/roadbook/day-05-nalati.webp', alt: '那拉提空中草原、毡房与夕阳下的雪山', focalPoint: '64% 46%', accent: '#D2A361', landscape: '空中草原' },
     distanceKm: 159, driveMinutes: 194, stay: '那拉提镇', intensity: '适中',
     route: [stops.kuerdening, stops.nalati],
     timeline: [
@@ -263,6 +268,7 @@ export const tripDays: readonly TripDay[] = [
   {
     id: 'day-6', date: '2026-07-20', weekday: '周一', title: '那拉提 → 独库北段 → 乔尔玛 → 唐布拉 → 尼勒克',
     summary: '全程最重的一天：高山垭口、盘山公路与百里画廊连续切换。',
+    visual: { image: '/images/roadbook/day-06-duku.webp', alt: '独库公路盘旋穿越高山峡谷与阴晴云层', focalPoint: '56% 47%', accent: '#8FA7B2', landscape: '高山峡谷' },
     distanceKm: 290, driveMinutes: 420, stay: '尼勒克县城', intensity: '高强度',
     route: [stops.nalati, { ...stops.jorma, kind: 'warning' }, stops.tangbula, stops.nilka],
     timeline: [
@@ -282,6 +288,7 @@ export const tripDays: readonly TripDay[] = [
   {
     id: 'day-7', date: '2026-07-21', weekday: '周二', title: '尼勒克 → 伊宁机场服务点',
     summary: '沿喀什河谷收束旅程，中午进伊宁完成加油洗车，按 15:30 还车节点结束车行部分。',
+    visual: { image: '/images/roadbook/day-07-yining.webp', alt: '伊宁方向的河谷公路延伸进柔和暮色', focalPoint: '58% 48%', accent: '#C58E72', landscape: '河谷归途' },
     distanceKm: 118, driveMinutes: 106, stay: '伊宁机场附近', intensity: '轻松',
     route: [stops.nilka, stops.yining, stops.airportService],
     timeline: [

@@ -43,6 +43,19 @@ describe('itinerary data', () => {
     expect(getDayById('day-6')?.title).toContain('独库');
   });
 
+  it('gives every day a unique, usable visual identity', () => {
+    const imagePaths = tripDays.map((day) => day.visual.image);
+
+    expect(new Set(imagePaths)).toHaveLength(tripDays.length);
+    for (const day of tripDays) {
+      expect(day.visual.image).toMatch(/^\/images\/roadbook\/day-\d{2}-[a-z-]+\.webp$/);
+      expect(day.visual.alt.trim().length).toBeGreaterThan(8);
+      expect(day.visual.landscape.trim().length).toBeGreaterThan(1);
+      expect(day.visual.focalPoint).toMatch(/^\d+% \d+%$/);
+      expect(day.visual.accent).toMatch(/^#[0-9a-fA-F]{6}$/);
+    }
+  });
+
   it('shows the revised rental metadata in the overview', () => {
     render(jsx(TripOverview, {}));
 
