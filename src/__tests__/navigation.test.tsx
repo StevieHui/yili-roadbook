@@ -11,7 +11,7 @@ describe('page shell', () => {
     expect(screen.getByText(/从伊犁河谷启程/)).toBeVisible();
     expect(screen.getByLabelText('封面行程信息')).toBeVisible();
     expect(screen.getByText(/赛里木湖车神/)).toBeVisible();
-    expect(screen.getByText(/果子沟/)).toBeVisible();
+    expect(screen.getByText(/伊昭公路/)).toBeVisible();
     expect(screen.queryByText('必须先确认')).not.toBeInTheDocument();
     expect(screen.queryByText('查看预约行程')).not.toBeInTheDocument();
     expect(screen.queryByLabelText('行程概览')).not.toBeInTheDocument();

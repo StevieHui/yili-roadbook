@@ -19,7 +19,7 @@ export function Dashboard() {
             </article>
             <article className="span-2">
               <span>主要景观</span>
-              <strong>赛里木湖 &nbsp;·&nbsp; 果子沟 &nbsp;·&nbsp; 喀拉峻 &nbsp;·&nbsp; 库尔德宁 &nbsp;·&nbsp; 那拉提 &nbsp;·&nbsp; 独库 &nbsp;·&nbsp; 唐布拉</strong>
+              <strong>赛里木湖 &nbsp;·&nbsp; 伊昭公路 &nbsp;·&nbsp; 喀拉峻 &nbsp;·&nbsp; 库尔德宁 &nbsp;·&nbsp; 那拉提 &nbsp;·&nbsp; 独库 &nbsp;·&nbsp; 唐布拉</strong>
             </article>
             <article>
               <span>时间</span>

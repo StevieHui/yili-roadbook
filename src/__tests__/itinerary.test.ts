@@ -28,9 +28,9 @@ describe('itinerary data', () => {
     ]);
   });
 
-  it('keeps the route near 1200 kilometres for eight people', () => {
-    expect(getTripDistance(tripDays)).toBeGreaterThanOrEqual(1150);
-    expect(getTripDistance(tripDays)).toBeLessThanOrEqual(1250);
+  it('keeps the route near 1300 kilometres for eight people', () => {
+    expect(getTripDistance(tripDays)).toBeGreaterThanOrEqual(1250);
+    expect(getTripDistance(tripDays)).toBeLessThanOrEqual(1350);
     expect(tripMeta).toMatchObject({ people: 8, cars: 2 });
   });
 
@@ -73,7 +73,7 @@ describe('itinerary data', () => {
       .getAllByRole('listitem')
       .map((item) => item.textContent);
 
-    expect(stayItems).toEqual(['伊宁', '赛里木湖', '伊宁', '特克斯', '库尔德宁', '那拉提', '尼勒克', '伊宁机场']);
+    expect(stayItems).toEqual(['伊宁', '伊宁', '特克斯', '特克斯', '库尔德宁', '那拉提', '尼勒克', '伊宁机场']);
   });
 
   it('keeps the friday departure copy and day 7 return completion exact', () => {
@@ -83,9 +83,9 @@ describe('itinerary data', () => {
     expect(day3?.timeline).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          time: '07:30',
-          activity: '伊宁出发',
-          detail: '周五尽早出城，车上解决简餐。',
+          time: '09:00',
+          activity: '特克斯出发',
+          detail: '睡足后从容出发，车程仅半小时。连住两晚不用搬行李。',
         }),
       ]),
     );
