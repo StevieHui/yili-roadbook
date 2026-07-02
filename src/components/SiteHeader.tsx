@@ -13,18 +13,34 @@ interface SiteHeaderProps {
 }
 
 export function SiteHeader({ activeView, onSelectView }: SiteHeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const selectView = (view: string) => {
+    onSelectView(view);
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className="site-header">
-      <button type="button" className="brand" onClick={() => onSelectView('home')} aria-label="返回首页">
+      <button type="button" className="brand" onClick={() => selectView('home')} aria-label="返回首页">
         <span className="brand-mark">N43°</span>
         <span>伊犁路书</span>
       </button>
-      <nav aria-label="路书导航">
+      <button
+        type="button"
+        className="nav-toggle"
+        aria-label={isMenuOpen ? '关闭导航菜单' : '打开导航菜单'}
+        aria-expanded={isMenuOpen}
+        aria-controls="site-navigation"
+        onClick={() => setIsMenuOpen((open) => !open)}
+      >
+        <span /><span />
+      </button>
+      <nav id="site-navigation" aria-label="路书导航" className={isMenuOpen ? 'is-open' : ''}>
         {navItems.map(([label, view]) => (
           <button
             type="button"
             className={activeView === view ? 'is-active' : ''}
-            onClick={() => onSelectView(view)}
+            onClick={() => selectView(view)}
             key={view}
           >
             {label}
@@ -35,3 +51,4 @@ export function SiteHeader({ activeView, onSelectView }: SiteHeaderProps) {
   );
 }
 
+import { useState } from 'react';

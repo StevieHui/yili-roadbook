@@ -43,5 +43,23 @@ describe('page shell', () => {
     expect(screen.getAllByText(/那拉提入口/)[0]).toBeVisible();
     expect(screen.getByText(/独库预约/)).toBeVisible();
   });
+
+  it('opens the mobile navigation and closes it after choosing a view', () => {
+    render(<App />);
+
+    const menuButton = screen.getByRole('button', { name: '打开导航菜单' });
+    const nav = screen.getByRole('navigation', { name: '路书导航' });
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(nav).not.toHaveClass('is-open');
+
+    fireEvent.click(menuButton);
+    expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+    expect(nav).toHaveClass('is-open');
+
+    fireEvent.click(within(nav).getByRole('button', { name: '每日路书' }));
+    expect(screen.getByRole('heading', { name: '每日路书' })).toBeInTheDocument();
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(nav).not.toHaveClass('is-open');
+  });
 });
 
