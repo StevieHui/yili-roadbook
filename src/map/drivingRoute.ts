@@ -35,6 +35,7 @@ function searchDrivingPath(AMap: AMapNamespace, day: TripDay): Promise<Coordinat
 }
 
 export async function searchDrivingPathWithRetry(AMap: AMapNamespace, day: TripDay) {
+  if (day.plannedTrack?.length) return [...day.plannedTrack];
   const first = await searchDrivingPath(AMap, day);
   if (first) return first;
   await new Promise((resolve) => setTimeout(resolve, 600));

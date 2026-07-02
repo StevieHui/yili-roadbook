@@ -1395,6 +1395,21 @@ body,
 .daily-route-snapshot-status.is-error span { max-width: 640px; line-height: 1.7; }
 .daily-route-marker { display: grid; width: 28px; height: 28px; place-items: center; border: 2px solid white; border-radius: 50%; color: white; background: #d65a3a; box-shadow: 0 3px 12px rgba(0,0,0,.45); font: 700 12px/1 sans-serif; }
 .daily-route-marker.is-lodging { background: #315f8c; }
+.daily-weather-panel { margin-top: 18px; padding: 24px; color: #f6f2e7; background: #12231f; display: grid; grid-template-columns: minmax(190px, .8fr) minmax(0, 2fr); gap: 24px 34px; }
+.daily-weather-panel.is-status { display: block; color: rgba(255,255,255,.7); text-align: center; }
+.daily-weather-live .section-kicker { color: var(--day-accent); }
+.daily-weather-live > div { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
+.daily-weather-live strong { font-size: 20px; }
+.daily-weather-live b { color: var(--day-accent); font: 38px/1 Georgia, serif; }
+.daily-weather-live > p:not(.section-kicker) { margin: 14px 0 8px; color: rgba(255,255,255,.78); font-size: 13px; }
+.daily-weather-live small { color: rgba(255,255,255,.46); }
+.daily-weather-forecast { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.daily-weather-forecast article { min-width: 0; padding: 14px 12px; background: rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 6px; }
+.daily-weather-forecast article.is-trip-day { outline: 1px solid var(--day-accent); background: color-mix(in srgb, var(--day-accent) 16%, transparent); }
+.daily-weather-forecast time, .daily-weather-forecast small { color: rgba(255,255,255,.5); font-size: 11px; }
+.daily-weather-forecast strong { color: white; }
+.daily-weather-forecast span { color: var(--day-accent); font-size: 13px; }
+.daily-weather-window { grid-column: 1 / -1; margin: 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.62); font-size: 12px; }
 .immersive-roadbook .photo-callout { padding: 34px; background: #12231f; color: #f6f2e7; border: 0; }
 .immersive-roadbook .photo-callout > .section-kicker,
 .immersive-roadbook .photo-note span { color: var(--day-accent); border-color: color-mix(in srgb, var(--day-accent) 55%, transparent); }
@@ -1436,6 +1451,8 @@ body,
   .immersive-roadbook .timeline li::after { left: 52px; }
   .immersive-roadbook .timeline li > div { padding-left: 16px; }
   .daily-route-snapshot { aspect-ratio: 4 / 3; margin-top: 30px; }
+  .daily-weather-panel { grid-template-columns: 1fr; padding: 20px; }
+  .daily-weather-forecast { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .immersive-roadbook .photo-callout { padding: 28px 24px; }
 }
 

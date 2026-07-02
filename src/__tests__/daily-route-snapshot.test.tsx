@@ -53,9 +53,7 @@ describe('DailyRouteSnapshot', () => {
       keyboardEnable: false,
       touchZoom: false,
     }));
-    expect(polylineSpy).toHaveBeenCalledWith(expect.objectContaining({
-      path: [[84.02, 43.24], [84.34, 43.31], [84.36, 43.65]],
-    }));
+    expect(polylineSpy).toHaveBeenCalledWith(expect.objectContaining({ path: day6.plannedTrack }));
     expect(markerSpy.mock.calls.map(([options]) => options.title)).toEqual(day6.route.map((stop) => stop.name));
     expect(screen.getByLabelText('Day 6 非交互卫星路线图')).toBeVisible();
   });

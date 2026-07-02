@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { DailyRouteSnapshot } from '../map/DailyRouteSnapshot';
+import { DailyWeatherPanel } from '../map/DailyWeatherPanel';
 import type { TripDay } from '../types';
 
 interface DayRoadbookProps {
@@ -155,6 +156,7 @@ export function DayRoadbook({ days, selectedDayId, onSelectDay }: DayRoadbookPro
                 <p>静态显示当天轨迹与停靠点，不包含实时路况。</p>
               </header>
               <DailyRouteSnapshot day={selectedDay} />
+              <DailyWeatherPanel day={selectedDay} />
             </section>
             <footer className="day-footer"><p><span>今晚住</span>{selectedDay.stay}</p></footer>
           </div>

@@ -9,6 +9,12 @@ vi.mock('../map/DailyRouteSnapshot', () => ({
   ),
 }));
 
+vi.mock('../map/DailyWeatherPanel', () => ({
+  DailyWeatherPanel: ({ day }: { day: { weatherCity: string } }) => (
+    <div data-testid="daily-weather-panel">{day.weatherCity}</div>
+  ),
+}));
+
 describe('immersive daily roadbook', () => {
   afterEach(() => cleanup());
 

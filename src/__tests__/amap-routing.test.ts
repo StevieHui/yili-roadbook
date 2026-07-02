@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { tripDays } from '../data/itinerary';
-import { buildDrivingRequest } from '../map/drivingRoute';
+import { buildDrivingRequest, searchDrivingPathWithRetry } from '../map/drivingRoute';
 import { extractDrivingPath, normalizeNearbyPlaces } from '../map/routePlanning';
 
 describe('AMap route planning helpers', () => {
@@ -28,6 +28,19 @@ describe('AMap route planning helpers', () => {
       ],
     });
     expect(day6.route.map((stop) => stop.coordinates)).not.toContainEqual([84.340261, 43.308788]);
+  });
+
+  it('uses the saved day 6 plan instead of current-time GaoDe routing', async () => {
+    const day6 = tripDays[5];
+    const drivingSpy = vi.fn();
+    const AMap = {
+      DrivingPolicy: { LEAST_TIME: 0 },
+      Driving: class { constructor() { drivingSpy(); } },
+    };
+
+    expect(day6.plannedTrack?.length).toBeGreaterThan(100);
+    await expect(searchDrivingPathWithRetry(AMap, day6)).resolves.toEqual(day6.plannedTrack);
+    expect(drivingSpy).not.toHaveBeenCalled();
   });
 
   it('deduplicates nearby attractions and caps the result at eight', () => {

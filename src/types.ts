@@ -32,6 +32,7 @@ export interface TripDay {
   id: `day-${1 | 2 | 3 | 4 | 5 | 6 | 7}`;
   date: string;
   weekday: string;
+  weatherCity: string;
   title: string;
   summary: string;
   visual: DayVisual;
@@ -41,6 +42,7 @@ export interface TripDay {
   intensity: '轻松' | '适中' | '较满' | '高强度';
   route: readonly Stop[];
   routeControlPoints?: readonly Coordinates[];
+  plannedTrack?: readonly Coordinates[];
   mapOnlyStops?: readonly Stop[];
   timeline: readonly TimelineItem[];
   highlights: readonly string[];

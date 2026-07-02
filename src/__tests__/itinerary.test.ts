@@ -43,6 +43,18 @@ describe('itinerary data', () => {
     expect(getDayById('day-6')?.title).toContain('独库');
   });
 
+  it('assigns a representative GaoDe weather city to every driving day', () => {
+    expect(tripDays.map((day) => day.weatherCity)).toEqual([
+      '博乐市',
+      '特克斯县',
+      '特克斯县',
+      '巩留县',
+      '新源县',
+      '尼勒克县',
+      '伊宁市',
+    ]);
+  });
+
   it('keeps day 6 on the Duku north section without routing to the martyrs cemetery', () => {
     const day6 = getDayById('day-6');
     const routeNames = day6?.route.map((stop) => stop.name) ?? [];
