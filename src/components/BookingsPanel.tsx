@@ -9,7 +9,7 @@ interface BookingsPanelProps {
 
 const dayTaskIds: Record<TripDay['id'], readonly ReservationTask['id'][]> = {
   'day-1': ['sayram'],
-  'day-2': ['sayram'],
+  'day-2': [],
   'day-3': ['kalajun'],
   'day-4': ['kuerdening'],
   'day-5': ['nalati'],
