@@ -46,7 +46,19 @@ describe('immersive daily roadbook', () => {
     expect(Array.from(container.querySelectorAll('.route-title-segment')).map((node) => node.textContent)).toEqual([
       '伊宁',
       ' → 赛里木湖',
-      ' · 当日往返',
+      ' 当日往返',
+    ]);
+
+    rerender(<DayRoadbook days={tripDays} selectedDayId="day-2" onSelectDay={() => undefined} />);
+    expect(Array.from(container.querySelectorAll('.route-title-segment')).map((node) => node.textContent)).toEqual([
+      '伊宁',
+      ' → 特克斯',
+    ]);
+
+    rerender(<DayRoadbook days={tripDays} selectedDayId="day-6" onSelectDay={() => undefined} />);
+    expect(Array.from(container.querySelectorAll('.route-title-segment')).map((node) => node.textContent)).toEqual([
+      '那拉提',
+      ' → 尼勒克',
     ]);
 
     rerender(<DayRoadbook days={tripDays} selectedDayId="day-7" onSelectDay={() => undefined} />);
