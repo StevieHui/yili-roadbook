@@ -302,7 +302,7 @@ a { color: inherit; }
 
 .checklist-section { padding: clamp(100px, 12vw, 170px) 0; }
 .checklist-heading { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; margin-bottom: 70px; }
-.checklist-heading h2, .alerts-heading h2 { margin: 0; font: clamp(48px, 7vw, 96px)/.9 "Songti SC", serif; letter-spacing: -.05em; }
+.checklist-heading h2 { margin: 0; font: clamp(48px, 7vw, 96px)/.9 "Songti SC", serif; letter-spacing: -.05em; }
 .checklist-progress { width: min(280px, 35vw); }
 .checklist-progress strong { font: 48px Georgia, serif; color: var(--sunset); }
 .checklist-progress span { margin-left: 7px; color: rgba(23,32,29,.55); font-size: 12px; }
@@ -324,17 +324,7 @@ a { color: inherit; }
 .checklist-actions button { min-height: 44px; padding: 0 20px; border: 1px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer; }
 .checklist-actions p { color: rgba(23,32,29,.52); font-size: 12px; }
 
-.alerts-section { padding: clamp(100px, 12vw, 170px) 0; color: var(--paper); background: var(--pine); }
-.alerts-heading { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 8vw; align-items: end; margin-bottom: 70px; }
-.alerts-heading .section-kicker { grid-column: 1 / -1; color: var(--sunset); }
-.alerts-heading > p:last-child { color: rgba(255,255,255,.58); }
-.alerts-list { border-top: 1px solid rgba(255,255,255,.28); }
-.alerts-list article { display: grid; grid-template-columns: 170px .8fr 1.1fr; gap: 32px; padding: 36px 0; border-bottom: 1px solid rgba(255,255,255,.22); }
-.alerts-list article > p { margin: 0; color: var(--sunset); font-size: 10px; letter-spacing: .14em; }
-.alerts-list h3 { margin: 0; font: clamp(23px, 2.4vw, 34px)/1.25 "Songti SC", serif; }
-.alerts-list article div > p { margin: 0 0 16px; color: rgba(255,255,255,.62); line-height: 1.8; }
-.alerts-list article strong { font-size: 12px; font-weight: 500; }
-.source-note { margin: 26px 0 0; color: rgba(255,255,255,.42); font-size: 11px; }
+
 footer { display: flex; justify-content: space-between; padding: 34px 4vw; border-top: 1px solid var(--line); font-size: 12px; letter-spacing: .12em; }
 
 @media (max-width: 860px) {
@@ -358,8 +348,6 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   .day-metrics { margin-top: 30px; }
   .day-content-grid { grid-template-columns: 1fr; }
   .scene-ledger { grid-template-columns: repeat(2, 1fr); }
-  .alerts-list article { grid-template-columns: 120px 1fr; }
-  .alerts-list article div { grid-column: 2; }
   .scene-ledger article:not(:nth-child(3n + 1)) { padding-left: 0; border-left: 0; }
   .scene-ledger article:nth-child(even) { padding-left: 20px; border-left: 1px solid rgba(255,255,255,.18); }
   .fact-ribbon { grid-template-columns: 1fr 1fr; }
@@ -412,13 +400,10 @@ footer { display: flex; justify-content: space-between; padding: 34px 4vw; borde
   .photo-callout { padding: 28px 22px; }
   .scene-ledger { grid-template-columns: 1fr; }
   .scene-ledger article, .scene-ledger article:nth-child(even) { min-height: 210px; padding-left: 0; border-left: 0; }
-  .checklist-heading, .alerts-heading { grid-template-columns: 1fr; }
+  .checklist-heading { grid-template-columns: 1fr; }
   .checklist-progress { width: 100%; }
   .checklist-groups { grid-template-columns: 1fr; gap: 48px; }
   .checklist-actions { align-items: flex-start; flex-direction: column; }
-  .alerts-heading .section-kicker { grid-column: 1; }
-  .alerts-list article { grid-template-columns: 1fr; gap: 14px; }
-  .alerts-list article div { grid-column: 1; }
 }
 
 /* Practical roadbook overrides: compact, readable, and map-first. */
@@ -1133,7 +1118,6 @@ body,
 
 .map-section,
 .photo-guide,
-.alerts-section,
 .arrival-note,
 .pending-section:nth-of-type(even) {
   color: var(--paper);
@@ -1155,12 +1139,8 @@ body,
 }
 
 .photo-note span,
-.route-detail h3,
-.alerts-heading .section-kicker {
+.route-detail h3 {
   color: #9ec0bd;
-}
-.alerts-list article > p {
-  color: var(--sunwash);
 }
 .checklist-groups label.is-checked > i {
   border-color: var(--lake);
@@ -1291,13 +1271,13 @@ body,
   .hero-route i { background: #17201d; }
   .section-shell, .day-roadbook { width: 100%; }
   .roadbook-tabs { display: none; }
-  .overview, .checklist-section, .alerts-section { padding: 32px 0; }
+  .overview, .checklist-section { padding: 32px 0; }
   .map-section { display: none; }
   .calendar-section { padding: 28px 0; color: #17201d; background: white; }
   .calendar-strip button { min-height: 100px; color: #17201d; border-color: #aaa; }
   .day-roadbook { break-inside: avoid; padding: 24px 0; }
-  .photo-callout, .alerts-section { color: #17201d; background: white; border: 1px solid #999; }
-  .photo-note small, .alerts-list article div > p, .source-note { color: #333; }
+  .photo-callout { color: #17201d; background: white; border: 1px solid #999; }
+  .photo-note small, .source-note { color: #333; }
   a { color: inherit; text-decoration: none; }
 }
 
@@ -1517,11 +1497,11 @@ img, svg, canvas { max-width: 100%; }
   .site-header nav button::after { display: none; }
   .site-header nav button.is-active { color: #ef9b68; }
 
-  .tool-page, .overview, .checklist-section, .alerts-section, .photo-guide, .bookings-panel { width: 100%; max-width: 100%; }
+  .tool-page, .overview, .checklist-section, .photo-guide, .bookings-panel { width: 100%; max-width: 100%; }
   .section-shell, .tool-shell, .route-workbench, .booking-itinerary { width: calc(100% - 32px); max-width: calc(100% - 32px); margin-inline: auto; }
   .route-map-center .map-frame, .map-frame { min-height: 340px; height: min(52vh, 430px); }
   .map-layer-controls { max-width: calc(100% - 20px); }
-  .quick-tools, .dashboard-glass-grid, .command-grid, .deadline-board, .route-workbench, .booking-itinerary, .checklist-groups, .alerts-list { min-width: 0; }
+  .quick-tools, .dashboard-glass-grid, .command-grid, .deadline-board, .route-workbench, .booking-itinerary, .checklist-groups { min-width: 0; }
   .dashboard-cover { min-height: calc(100svh - 58px); }
   .dashboard-glass-grid article, .command-grid article, .booking-day-card, .booking-detail-card { min-width: 0; overflow-wrap: anywhere; }
   button, a, input, label { touch-action: manipulation; }

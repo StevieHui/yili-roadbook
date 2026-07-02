@@ -17,7 +17,7 @@ describe('page shell', () => {
     expect(screen.queryByLabelText('行程概览')).not.toBeInTheDocument();
 
     const nav = screen.getByRole('navigation', { name: '路书导航' });
-    for (const label of ['首页', '路线图', '预约行程', '每日路书', '必带清单', '关键提醒']) {
+    for (const label of ['首页', '路线图', '预约行程', '每日路书', '必带清单']) {
       expect(within(nav).getByRole('button', { name: label })).toBeVisible();
     }
     expect(within(nav).queryByRole('button', { name: '日历行程' })).not.toBeInTheDocument();

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { BookingsPanel } from './components/BookingsPanel';
 import { Checklist } from './components/Checklist';
-import { CriticalAlerts } from './components/CriticalAlerts';
 import { Dashboard } from './components/Dashboard';
 import { DayRoadbook } from './components/DayRoadbook';
 import { PhotoGuide } from './components/PhotoGuide';
@@ -11,7 +10,7 @@ import { TripOverview } from './components/TripOverview';
 import { tripDays } from './data/itinerary';
 import type { TripDay } from './types';
 
-type ViewId = 'home' | 'overview' | 'route' | 'roadbook' | 'bookings' | 'photo' | 'checklist' | 'alerts';
+type ViewId = 'home' | 'overview' | 'route' | 'roadbook' | 'bookings' | 'photo' | 'checklist';
 
 export default function App() {
   const [activeView, setActiveView] = useState<ViewId>('home');
@@ -34,7 +33,7 @@ export default function App() {
         {activeView === 'bookings' && <BookingsPanel days={tripDays} selectedDayId={selectedDayId} onSelectDay={selectDay} />}
         {activeView === 'photo' && <PhotoGuide days={tripDays} />}
         {activeView === 'checklist' && <Checklist />}
-        {activeView === 'alerts' && <CriticalAlerts />}
+
       </main>
       <footer>
         <span>43°N · 81°E</span>

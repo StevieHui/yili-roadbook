@@ -4,7 +4,6 @@ const navItems = [
   ['预约行程', 'bookings'],
   ['每日路书', 'roadbook'],
   ['必带清单', 'checklist'],
-  ['关键提醒', 'alerts'],
 ] as const;
 
 interface SiteHeaderProps {
