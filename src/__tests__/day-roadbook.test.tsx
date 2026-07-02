@@ -1,0 +1,37 @@
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { DayRoadbook } from '../components/DayRoadbook';
+import { tripDays } from '../data/itinerary';
+
+describe('immersive daily roadbook', () => {
+  afterEach(() => cleanup());
+
+  it('puts the selected destination and driving metrics in the hero', () => {
+    render(<DayRoadbook days={tripDays} selectedDayId="day-1" onSelectDay={() => undefined} />);
+
+    const hero = screen.getByTestId('day-hero');
+    expect(hero).toHaveTextContent('高山湖泊');
+    expect(hero).toHaveTextContent('360 km');
+    expect(hero).toHaveTextContent('5h');
+    expect(hero).toHaveTextContent('较满');
+    expect(screen.getByRole('img', { name: /赛里木湖湛蓝湖面/ })).toHaveAttribute('src', expect.stringContaining('day-01-sayram.webp'));
+  });
+
+  it('exposes day selection as an accessible tablist', () => {
+    const onSelectDay = vi.fn();
+    render(<DayRoadbook days={tripDays} selectedDayId="day-1" onSelectDay={onSelectDay} />);
+
+    const dayTwo = screen.getByRole('tab', { name: /DAY 02/ });
+    expect(dayTwo).toHaveAttribute('aria-selected', 'false');
+    fireEvent.click(dayTwo);
+    expect(onSelectDay).toHaveBeenCalledWith('day-2');
+  });
+
+  it('keeps hero copy visible when the image fails', () => {
+    render(<DayRoadbook days={tripDays} selectedDayId="day-1" onSelectDay={() => undefined} />);
+
+    fireEvent.error(screen.getByRole('img', { name: /赛里木湖湛蓝湖面/ }));
+    expect(screen.getByTestId('day-hero')).toHaveClass('is-image-unavailable');
+    expect(screen.getByTestId('day-hero')).toHaveTextContent('伊宁 → 赛里木湖');
+  });
+});
